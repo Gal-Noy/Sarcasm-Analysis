@@ -1,3 +1,6 @@
+import aws.AWS;
+import aws.AWSConfig;
+
 import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -19,13 +22,13 @@ public class LocalApp {
         Env env = new Env(args);
         AWS aws = AWS.getInstance();
 
-        aws.runManager();
-        aws.createS3Bucket(localAppId);
-        aws.createQueues(localAppId);
+        aws.ec2.runManager(env.numberOfWorkers);
+        aws.s3.createS3Bucket(localAppId);
+        aws.sqs.createQueues(localAppId);
 
         for (String inputFile : env.inputFiles) {
-            aws.uploadFileToS3(inputFile);
-            aws.sendMessage(aws.MANAGER_REQUEST_QUEUE_NAME, inputFile);
+            aws.s3.uploadFileToS3(AWSConfig.BUCKET_NAME + "-" + localAppId, inputFile);
+            aws.sqs.sendMessage(AWSConfig.LOCAL_TO_MANAGER_QUEUE_NAME + "-" + localAppId, inputFile);
         }
 
         // Checks an SQS queue for a message indicating the process is done and the response (the summary files) are available on S3
