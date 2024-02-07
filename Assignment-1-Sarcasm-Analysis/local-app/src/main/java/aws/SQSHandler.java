@@ -80,7 +80,7 @@ public class SQSHandler {
         }
     }
 
-    public void deleteAllQueues() {
+    public void deleteQueues() {
         deleteQueue(AWSConfig.LOCAL_TO_MANAGER_QUEUE_NAME);
         deleteQueue(AWSConfig.MANAGER_TO_WORKER_QUEUE_NAME);
     }

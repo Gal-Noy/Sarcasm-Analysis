@@ -19,7 +19,8 @@ public class EC2Handler {
                         managerActive = true;
                         // Check if the manager is active
                         if (!instance.state().name().equals(InstanceStateName.RUNNING) &&
-                                !instance.state().name().equals(InstanceStateName.PENDING)) {
+                                !instance.state().name().equals(InstanceStateName.PENDING) &&
+                                !instance.state().name().equals(InstanceStateName.STOPPING)) {
                             // Start the manager
                             ec2.startInstances(StartInstancesRequest.builder().instanceIds(instance.instanceId()).build());
                             break;

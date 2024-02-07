@@ -54,8 +54,7 @@ public class SQSHandler {
                 .queueUrl(queueUrl)
                 .maxNumberOfMessages(20)
                 .build();
-        List<Message> receivedMessages = sqs.receiveMessage(request).messages();
-        return receivedMessages.stream().map(Message::body).toList();
+        return sqs.receiveMessage(request).messages();
     }
 
     public void deleteMessages(String queueName, List<Message> messages) {

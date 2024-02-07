@@ -1,6 +1,7 @@
 import aws.AWS;
 import aws.AWSConfig;
 
+import java.io.File;
 import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -22,13 +23,14 @@ public class LocalApp {
         Env env = new Env(args);
         AWS aws = AWS.getInstance();
 
-        aws.ec2.runManager();
+//        aws.ec2.runManager();
         aws.s3.createS3Bucket();
         aws.sqs.createQueues();
 
         for (String inputFile : env.inputFiles) {
-            aws.s3.uploadFileToS3(inputFile);
-            String messageToManager = String.format("local::manager::%s::%s::%s", localAppId, inputFile, env.reviewsPerWorker);
+            File file = new File(inputFile);
+            aws.s3.uploadFileToS3(file);
+            String messageToManager = String.format("local::manager::%s::%s::%s::%s", "input-file", localAppId, file.getName(), env.reviewsPerWorker);
             aws.sqs.sendMessage(AWSConfig.LOCAL_TO_MANAGER_QUEUE_NAME, messageToManager);
         }
 
@@ -43,8 +45,8 @@ public class LocalApp {
         // IMPORTANT: The local application should be able to handle the case where the manager node is not available.
 
 
-//        aws.sqs.deleteQueues();
-//        aws.s3.deleteS3Bucket();
+        aws.sqs.deleteQueues();
+        aws.s3.deleteS3Bucket();
         System.out.println("LocalApp finished");
     }
 

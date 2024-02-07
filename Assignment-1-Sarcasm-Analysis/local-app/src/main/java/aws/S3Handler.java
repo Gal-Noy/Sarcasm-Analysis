@@ -29,12 +29,12 @@ public class S3Handler {
         return "https://" + AWSConfig.BUCKET_NAME + ".s3." + AWSConfig.REGION.id() + ".amazonaws.com/";
     }
 
-    public void uploadFileToS3(String inputFile) {
+    public void uploadFileToS3(File inputFile) {
         PutObjectRequest objectRequest = PutObjectRequest.builder()
                 .bucket(AWSConfig.BUCKET_NAME)
-                .key(inputFile)
+                .key(inputFile.getName())
                 .build();
-        s3.putObject(objectRequest, RequestBody.fromFile(new File(inputFile)));
+        s3.putObject(objectRequest, RequestBody.fromFile(inputFile));
     }
 
     public InputStream downloadFileFromS3(String key) {
