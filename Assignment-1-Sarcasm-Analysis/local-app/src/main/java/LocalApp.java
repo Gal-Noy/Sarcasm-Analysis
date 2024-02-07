@@ -22,13 +22,14 @@ public class LocalApp {
         Env env = new Env(args);
         AWS aws = AWS.getInstance();
 
-        aws.ec2.runManager(env.numberOfWorkers);
-        aws.s3.createS3Bucket(localAppId);
-        aws.sqs.createQueues(localAppId);
+        aws.ec2.runManager();
+        aws.s3.createS3Bucket();
+        aws.sqs.createQueues();
 
         for (String inputFile : env.inputFiles) {
-            aws.s3.uploadFileToS3(AWSConfig.BUCKET_NAME + "-" + localAppId, inputFile);
-            aws.sqs.sendMessage(AWSConfig.LOCAL_TO_MANAGER_QUEUE_NAME + "-" + localAppId, inputFile);
+            aws.s3.uploadFileToS3(inputFile);
+            String messageToManager = String.format("local::manager::%s::%s::%s", localAppId, inputFile, env.reviewsPerWorker);
+            aws.sqs.sendMessage(AWSConfig.LOCAL_TO_MANAGER_QUEUE_NAME, messageToManager);
         }
 
         // Checks an SQS queue for a message indicating the process is done and the response (the summary files) are available on S3
@@ -41,6 +42,9 @@ public class LocalApp {
 
         // IMPORTANT: The local application should be able to handle the case where the manager node is not available.
 
+
+//        aws.sqs.deleteQueues();
+//        aws.s3.deleteS3Bucket();
         System.out.println("LocalApp finished");
     }
 
