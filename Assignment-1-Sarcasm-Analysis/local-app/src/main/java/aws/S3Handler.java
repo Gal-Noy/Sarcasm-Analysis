@@ -25,9 +25,6 @@ public class S3Handler {
         }
     }
 
-    public String getBucketUrl() {
-        return "https://" + AWSConfig.BUCKET_NAME + ".s3.amazonaws.com/";
-    }
 
     public void uploadFileToS3(String bucketName, File inputFile) {
         PutObjectRequest objectRequest = PutObjectRequest.builder()

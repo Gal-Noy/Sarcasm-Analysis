@@ -13,17 +13,14 @@ public class AWSConfig {
     public static final String BUCKET_NAME = "sarcasm-analysis-bucket-test";
     public static final String JARS_BUCKET_NAME = "sarcasm-analysis-jars-bucket";
 
-
     // EC2
     public static final String AMI_ID = "ami-0c231ed88473e8d57";
     public static final InstanceType INSTANCE_TYPE = InstanceType.T2_MICRO;
 
     public static String MANAGER_INSTANCE_SCRIPT = "#!/bin/bash\n" +
             "wget https://" + JARS_BUCKET_NAME + ".s3.amazonaws.com/manager.jar\n" +
-            "java -jar manager.jar\n" +
-            "shutdown -h now\n";
-    public static final String WORKER_INSTANCE_SCRIPT = "a";
-
+            "java -jar manager.jar\n";
+//            + "shutdown -h now\n";
 
     // SQS
     public static final String LOCAL_TO_MANAGER_QUEUE_NAME = "localToManagerQueue";

@@ -24,29 +24,40 @@ public class LocalApp {
         Env env = new Env(args);
         AWS aws = AWS.getInstance();
 
-        aws.ec2.runManager();
-        aws.s3.createS3Bucket(localAppId + "::" + BUCKET_NAME);
-        aws.sqs.createQueue(localAppId + "::" + LOCAL_TO_MANAGER_QUEUE_NAME);
-        aws.sqs.createQueue(localAppId + "::" + MANAGER_TO_LOCAL_QUEUE_NAME);
+        String bucketName = BUCKET_NAME + "::" + localAppId;
+        String localToManagerQueueName = LOCAL_TO_MANAGER_QUEUE_NAME + "::" + localAppId;
+        String managerToLocalQueueName = MANAGER_TO_LOCAL_QUEUE_NAME + "::" + localAppId;
 
-        for (int inputIndex = 0; inputIndex < env.inputFiles.length; inputIndex++) {
-            File inputFile = new File(env.inputFiles[inputIndex]);
-            aws.s3.uploadFileToS3(localAppId + "::" + BUCKET_NAME, inputFile);
-            aws.sqs.sendMessage(localAppId + "::" + LOCAL_TO_MANAGER_QUEUE_NAME,
-                    String.format("%s::%s::%s::%s::%s",
-                            localAppId, "analyze", inputFile.getName(), inputIndex, env.reviewsPerWorker));
+        aws.ec2.runManager();
+        aws.s3.createS3Bucket(bucketName);
+        aws.sqs.createQueue(localToManagerQueueName);
+        aws.sqs.createQueue(managerToLocalQueueName);
+
+        for (int inputIndex = 0; inputIndex < env.inputFilesPaths.length; inputIndex++) {
+            File inputFile = new File(env.inputFilesPaths[inputIndex]);
+            aws.s3.uploadFileToS3(bucketName, inputFile);
+            aws.sqs.sendMessage(localToManagerQueueName, String.join("::",
+                    localAppId,
+                    "analyze",
+                    inputFile.getName(), // S3 bucket key
+                    Integer.toString(inputIndex),
+                    env.reviewsPerWorker + ""));
         }
 
         int filesLeftToProcess = env.numberOfFiles;
         while (filesLeftToProcess > 0) {
-            List<Message> receivedMessages = aws.sqs.receiveMessages(localAppId + "::" + MANAGER_TO_LOCAL_QUEUE_NAME);
+            List<Message> receivedMessages = aws.sqs.receiveMessages(managerToLocalQueueName);
             for (Message receivedMessage : receivedMessages) {
                 String[] parts = receivedMessage.body().split("::");
-                String receivedLocalAppId = parts[0], summary = parts[1], inputIndex = parts[2], status = parts[3]; // failed or done
+                String receivedLocalAppId = parts[0], summaryFileName = parts[1], inputIndex = parts[2], status = parts[3]; // failed or done
                 if (receivedLocalAppId.equals(localAppId)) {
                     if (status.equals("done")) {
-                        env.executor.execute(new LocalAppTask(aws, env.outputFiles[Integer.parseInt(inputIndex) + env.numberOfFiles], summary));
-                        aws.s3.deleteFileFromS3(localAppId + "::" + BUCKET_NAME, summary);
+                        int outputPathIndex = Integer.parseInt(inputIndex) + env.numberOfFiles;
+                        env.executor.execute(new LocalAppTask(
+                                env.outputFilesPaths[outputPathIndex],
+                                summaryFileName, // S3 bucket key
+                                bucketName));
+                        aws.s3.deleteFileFromS3(bucketName, summaryFileName);
                         filesLeftToProcess--;
                     }
                 }
@@ -55,26 +66,32 @@ public class LocalApp {
 
 
         if (env.terminate) {
-            aws.sqs.sendMessage(localAppId + "::" + LOCAL_TO_MANAGER_QUEUE_NAME,
-                    String.format("%s::%s", localAppId, "terminate"));
+            aws.sqs.sendMessage(localToManagerQueueName,
+                    String.join("::", localAppId, "terminate"));
         }
 
         env.executor.shutdown();
+        waitForExecutorToFinish(env.executor);
 
+        aws.sqs.deleteQueue(managerToLocalQueueName);
+        aws.sqs.deleteQueue(localToManagerQueueName);
+        aws.s3.deleteS3Bucket(bucketName);
+
+        System.out.println("LocalApp finished");
+    }
+
+    private static void waitForExecutorToFinish(ThreadPoolExecutor executor) {
         while (true) {
             try {
-                if (env.executor.awaitTermination(1, TimeUnit.SECONDS)) {
+                if (executor.awaitTermination(1, TimeUnit.SECONDS)) {
                     break;
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-
-        aws.sqs.deleteQueue(localAppId + "::" + MANAGER_TO_LOCAL_QUEUE_NAME);
-        aws.sqs.deleteQueue(localAppId + "::" + LOCAL_TO_MANAGER_QUEUE_NAME);
-        aws.s3.deleteS3Bucket(localAppId + "::" + BUCKET_NAME);
-        System.out.println("LocalApp finished");
     }
 
 }
+
+

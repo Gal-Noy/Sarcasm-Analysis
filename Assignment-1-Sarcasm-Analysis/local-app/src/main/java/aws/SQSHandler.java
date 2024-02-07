@@ -31,11 +31,6 @@ public class SQSHandler {
                 .build());
     }
 
-    public void sendMessages(String queueName, List<String> messages) {
-        for (String message : messages) {
-            sendMessage(queueName, message);
-        }
-    }
 
     public List<Message> receiveMessages(String queueName) {
         String queueUrl = getQueueUrl(queueName);
@@ -46,29 +41,6 @@ public class SQSHandler {
         return sqs.receiveMessage(request).messages();
     }
 
-    public void deleteMessages(String queueName, List<Message> messages) {
-        for (Message message : messages) {
-            deleteMessage(queueName, message);
-        }
-    }
-
-    private void deleteMessage(String queueName, Message message) {
-        String queueUrl = getQueueUrl(queueName);
-        // create message instance
-        DeleteMessageRequest request = DeleteMessageRequest.builder()
-                .queueUrl(queueUrl)
-                .receiptHandle(message.receiptHandle())
-                .build();
-        sqs.deleteMessage(request);
-    }
-
-    public void deleteAllMessages(String queueName) {
-        String queueUrl = getQueueUrl(queueName);
-        List<Message> messages = receiveMessages(queueName);
-        for (Message message : messages) {
-            deleteMessage(queueName, message);
-        }
-    }
 
     public void deleteQueue(String queueName) {
         DeleteQueueRequest request = DeleteQueueRequest.builder()
@@ -76,5 +48,7 @@ public class SQSHandler {
                 .build();
         sqs.deleteQueue(request);
     }
+
+
 
 }

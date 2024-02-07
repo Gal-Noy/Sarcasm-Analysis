@@ -1,13 +1,14 @@
 package aws;
 
-import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.ec2.Ec2Client;
 import software.amazon.awssdk.services.ec2.model.*;
 
 import java.util.Base64;
 
+import static aws.AWSConfig.*;
+
 public class EC2Handler {
-    private final Ec2Client ec2 = Ec2Client.builder().region(AWSConfig.REGION).build();
+    private final Ec2Client ec2 = Ec2Client.builder().region(REGION).build();
 
     public void runManager() {
         // Check if a manager node exists
@@ -19,7 +20,8 @@ public class EC2Handler {
                         managerActive = true;
                         // Check if the manager is active
                         if (!instance.state().name().equals(InstanceStateName.RUNNING) &&
-                                !instance.state().name().equals(InstanceStateName.PENDING)) {
+                                !instance.state().name().equals(InstanceStateName.PENDING) &&
+                                !instance.state().name().equals(InstanceStateName.STOPPING)) {
                             // Start the manager
                             ec2.startInstances(StartInstancesRequest.builder().instanceIds(instance.instanceId()).build());
                             break;
@@ -34,14 +36,18 @@ public class EC2Handler {
     }
 
     private void createManagerInstance() {
-        createEC2Instance(AWSConfig.MANAGER_INSTANCE_SCRIPT, "Manager", AWSConfig.INSTANCE_TYPE);
+        createEC2Instance(MANAGER_INSTANCE_SCRIPT, "Manager", INSTANCE_TYPE);
     }
 
-    public String createEC2Instance(String script, String tagName, InstanceType instanceType) {
-        Ec2Client ec2 = Ec2Client.builder().region(AWSConfig.REGION).build();
+    public void createWorkerInstance() {
+        createEC2Instance(WORKER_INSTANCE_SCRIPT, "Worker", INSTANCE_TYPE);
+    }
+
+    public void createEC2Instance(String script, String tagName, InstanceType instanceType) {
+        Ec2Client ec2 = Ec2Client.builder().region(REGION).build();
         RunInstancesRequest runRequest = RunInstancesRequest.builder()
                 .instanceType(instanceType)
-                .imageId(AWSConfig.AMI_ID)
+                .imageId(AMI_ID)
                 .maxCount(1)
                 .minCount(1)
                 .iamInstanceProfile(IamInstanceProfileSpecification.builder().name("LabInstanceProfile").build())
@@ -67,22 +73,28 @@ public class EC2Handler {
             ec2.createTags(tagRequest);
             System.out.printf(
                     "[DEBUG] Successfully started EC2 instance %s based on AMI %s\n",
-                    instanceId, AWSConfig.AMI_ID);
+                    instanceId, AMI_ID);
 
         } catch (Ec2Exception e) {
             System.err.println("[ERROR] " + e.getMessage());
             System.exit(1);
         }
-        return instanceId;
     }
 
-    public void terminateEC2(String instanceId) {
-        TerminateInstancesRequest request = TerminateInstancesRequest.builder()
-                .instanceIds(instanceId)
-                .build();
-        ec2.terminateInstances(request);
+    public int countActiveWorkers() {
+        int activeWorkers = 0;
+        for (Reservation reservation : ec2.describeInstances().reservations()) {
+            for (Instance instance : reservation.instances()) {
+                for (Tag tag : instance.tags()) {
+                    if (tag.key().equals("Type") && tag.value().equals("Worker")) {
+                        if (instance.state().name().equals(InstanceStateName.RUNNING) ||
+                                instance.state().name().equals(InstanceStateName.PENDING)) {
+                            activeWorkers++;
+                        }
+                    }
+                }
+            }
+        }
+        return activeWorkers;
     }
-
-
-
 }
