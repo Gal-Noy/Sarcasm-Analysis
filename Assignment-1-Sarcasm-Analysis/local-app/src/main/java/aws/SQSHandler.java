@@ -9,23 +9,11 @@ public class SQSHandler {
 
     private final SqsClient sqs = SqsClient.builder().region(AWSConfig.REGION).build();
 
-    public void createQueues() {
-        createQueue(AWSConfig.LOCAL_TO_MANAGER_QUEUE_NAME);
-        createQueue(AWSConfig.MANAGER_TO_WORKER_QUEUE_NAME);
-    }
-
     public void createQueue(String queueName) {
         CreateQueueRequest request = CreateQueueRequest.builder()
                 .queueName(queueName)
                 .build();
         sqs.createQueue(request);
-    }
-
-    public void deleteQueue(String queueName) {
-        DeleteQueueRequest request = DeleteQueueRequest.builder()
-                .queueUrl(queueName)
-                .build();
-        sqs.deleteQueue(request);
     }
 
     public String getQueueUrl(String queueName) {
@@ -42,6 +30,7 @@ public class SQSHandler {
                 .messageBody(message)
                 .build());
     }
+
     public void sendMessages(String queueName, List<String> messages) {
         for (String message : messages) {
             sendMessage(queueName, message);
@@ -52,7 +41,7 @@ public class SQSHandler {
         String queueUrl = getQueueUrl(queueName);
         ReceiveMessageRequest request = ReceiveMessageRequest.builder()
                 .queueUrl(queueUrl)
-                .maxNumberOfMessages(20)
+                .maxNumberOfMessages(20) // long polling
                 .build();
         return sqs.receiveMessage(request).messages();
     }
@@ -65,6 +54,7 @@ public class SQSHandler {
 
     private void deleteMessage(String queueName, Message message) {
         String queueUrl = getQueueUrl(queueName);
+        // create message instance
         DeleteMessageRequest request = DeleteMessageRequest.builder()
                 .queueUrl(queueUrl)
                 .receiptHandle(message.receiptHandle())
@@ -80,9 +70,11 @@ public class SQSHandler {
         }
     }
 
-    public void deleteQueues() {
-        deleteQueue(AWSConfig.LOCAL_TO_MANAGER_QUEUE_NAME);
-        deleteQueue(AWSConfig.MANAGER_TO_WORKER_QUEUE_NAME);
+    public void deleteQueue(String queueName) {
+        DeleteQueueRequest request = DeleteQueueRequest.builder()
+                .queueUrl(queueName)
+                .build();
+        sqs.deleteQueue(request);
     }
 
 }

@@ -23,7 +23,7 @@ public class Manager {
             List<String> requests = aws.sqs.receiveMessages(AWSConfig.LOCAL_TO_MANAGER_QUEUE_NAME)
                     .stream().map(Message::body).toList();
             for (String request : requests) {
-                // request format: local::manager::<localAppId>::<inputFile>::<reviewsPerWorker>
+                // request format: local::manager::<requestType>::<localAppId>::<inputFile>::<reviewsPerWorker>
                 String[] requestContent = request.split("::");
                 String requestType = requestContent[2];
                 if (requestType.equals("terminate")) {

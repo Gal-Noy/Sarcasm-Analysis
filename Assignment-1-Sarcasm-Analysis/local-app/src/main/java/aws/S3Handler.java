@@ -11,14 +11,14 @@ import java.io.InputStream;
 public class S3Handler {
     private final S3Client s3 = S3Client.builder().region(AWSConfig.REGION).build();
 
-    public void createS3Bucket() {
+    public void createS3Bucket(String bucketName) {
         try {
             s3.createBucket(CreateBucketRequest
                     .builder()
-                    .bucket(AWSConfig.BUCKET_NAME)
+                    .bucket(bucketName)
                     .build());
             s3.waiter().waitUntilBucketExists(HeadBucketRequest.builder()
-                    .bucket(AWSConfig.BUCKET_NAME)
+                    .bucket(bucketName)
                     .build());
         } catch (S3Exception e) {
             System.out.println(e.getMessage());
@@ -26,10 +26,10 @@ public class S3Handler {
     }
 
     public String getBucketUrl() {
-        return "https://" + AWSConfig.BUCKET_NAME + ".s3." + AWSConfig.REGION.id() + ".amazonaws.com/";
+        return "https://" + AWSConfig.BUCKET_NAME + ".s3.amazonaws.com/";
     }
 
-    public void uploadFileToS3(File inputFile) {
+    public void uploadFileToS3(String bucketName, File inputFile) {
         PutObjectRequest objectRequest = PutObjectRequest.builder()
                 .bucket(AWSConfig.BUCKET_NAME)
                 .key(inputFile.getName())
@@ -37,25 +37,25 @@ public class S3Handler {
         s3.putObject(objectRequest, RequestBody.fromFile(inputFile));
     }
 
-    public InputStream downloadFileFromS3(String key) {
+    public InputStream downloadFileFromS3(String bucketName, String key) {
         GetObjectRequest objectRequest = GetObjectRequest.builder()
-                .bucket(AWSConfig.BUCKET_NAME)
+                .bucket(bucketName)
                 .key(key)
                 .build();
         return s3.getObject(objectRequest, ResponseTransformer.toBytes()).asInputStream();
     }
 
-    public void deleteFileFromS3(String key) {
+    public void deleteFileFromS3(String bucketName, String key) {
         DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder()
-                .bucket(AWSConfig.BUCKET_NAME)
+                .bucket(bucketName)
                 .key(key)
                 .build();
         s3.deleteObject(deleteObjectRequest);
     }
 
-    public void deleteS3Bucket() {
+    public void deleteS3Bucket(String bucketName) {
         DeleteBucketRequest deleteBucketRequest = DeleteBucketRequest.builder()
-                .bucket(AWSConfig.BUCKET_NAME)
+                .bucket(bucketName)
                 .build();
         s3.deleteBucket(deleteBucketRequest);
     }

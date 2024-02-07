@@ -1,7 +1,5 @@
-import java.io.File;
-import java.util.Scanner;
-
-import org.json.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 
 public class Env {
     public boolean terminate;
@@ -9,6 +7,7 @@ public class Env {
     public int numberOfFiles; // N
     public String[] inputFiles; // length = N
     public String[] outputFiles; // length = N
+    public ThreadPoolExecutor executor;
 
 
     public Env(String[] args) {
@@ -26,6 +25,8 @@ public class Env {
             inputFiles[i] = args[i];
             outputFiles[i] = args[i + numberOfFiles];
         }
+
+        executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(numberOfFiles);
     }
 
 }

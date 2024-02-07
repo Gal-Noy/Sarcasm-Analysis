@@ -27,6 +27,6 @@ public class AWSConfig {
 
     // SQS
     public static final String LOCAL_TO_MANAGER_QUEUE_NAME = "localToManagerQueue";
-    public static final String MANAGER_TO_WORKER_QUEUE_NAME = "managerToWorkerQueue";
+    public static final String MANAGER_TO_LOCAL_QUEUE_NAME = "managerToLocalQueue";
 
 }
