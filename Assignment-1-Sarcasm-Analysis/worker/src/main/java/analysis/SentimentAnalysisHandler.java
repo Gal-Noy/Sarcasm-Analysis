@@ -1,4 +1,4 @@
-package analyzer;
+package analysis;
 
 import java.util.Properties;
 import edu.stanford.nlp.ling.CoreAnnotations.SentencesAnnotation;

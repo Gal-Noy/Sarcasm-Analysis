@@ -7,9 +7,9 @@ import java.io.File;
 import java.io.InputStream;
 
 public class S3Handler {
-    private final S3Client s3 = S3Client.builder().region(AWSConfig.REGION1).build();
+    private final S3Client s3 = S3Client.builder().region(AWSConfig.REGION).build();
 
-    public void createS3Bucket(String bucketName) {
+    public void createS3BucketIfNotExists(String bucketName) {
         try {
             s3.createBucket(CreateBucketRequest
                     .builder()
@@ -27,7 +27,7 @@ public class S3Handler {
 
     public void uploadFileToS3(String bucketName, File inputFile) {
         PutObjectRequest objectRequest = PutObjectRequest.builder()
-                .bucket(AWSConfig.BUCKET_NAME)
+                .bucket(bucketName)
                 .key(inputFile.getName())
                 .build();
         s3.putObject(objectRequest, RequestBody.fromFile(inputFile));

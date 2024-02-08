@@ -1,12 +1,14 @@
 import software.amazon.awssdk.services.ec2.Ec2Client;
+import software.amazon.awssdk.services.ec2.model.Tag;
 import software.amazon.awssdk.services.ec2.model.*;
+
 import java.util.Base64;
 
 public class EC2Handler {
-    private final Ec2Client ec2 = Ec2Client.builder().region(AWSConfig.REGION2).build();
+    private final Ec2Client ec2 = Ec2Client.builder().region(AWSConfig.REGION).build();
 
-    public void createEC2Instance(String script, String tagName, InstanceType instanceType) {
-        Ec2Client ec2 = Ec2Client.builder().region(AWSConfig.REGION2).build();
+    public void createEC2Instance(String script, String typeTagValue, String nameTagValue, InstanceType instanceType) {
+        Ec2Client ec2 = Ec2Client.builder().region(AWSConfig.REGION).build();
         RunInstancesRequest runRequest = RunInstancesRequest.builder()
                 .instanceType(instanceType)
                 .imageId(AWSConfig.AMI_ID)
@@ -17,20 +19,11 @@ public class EC2Handler {
                 .userData(Base64.getEncoder().encodeToString((script).getBytes()))
                 .build();
 
-
         RunInstancesResponse response = ec2.runInstances(runRequest);
 
         String instanceId = response.instances().get(0).instanceId();
 
-        software.amazon.awssdk.services.ec2.model.Tag tag = Tag.builder()
-                .key(AWSConfig.TAG_TYPE)
-                .value(tagName)
-                .build();
-
-        CreateTagsRequest tagRequest = (CreateTagsRequest) CreateTagsRequest.builder()
-                .resources(instanceId)
-                .tags(tag)
-                .build();
+        CreateTagsRequest tagRequest = createTags(typeTagValue, nameTagValue, instanceId);
 
         try {
             ec2.createTags(tagRequest);
@@ -44,13 +37,30 @@ public class EC2Handler {
         }
     }
 
+    private CreateTagsRequest createTags(String typeTagValue, String nameTagValue, String instanceId) {
+        Tag typeTag = Tag.builder()
+                .key(AWSConfig.TYPE_TAG)
+                .value(typeTagValue)
+                .build();
+
+        Tag nameTag = Tag.builder()
+                .key(AWSConfig.NAME_TAG)
+                .value(nameTagValue)
+                .build();
+
+        return CreateTagsRequest.builder()
+                .resources(instanceId)
+                .tags(typeTag, nameTag)
+                .build();
+    }
+
     public void runManager() {
         // Check if a manager node exists
         boolean isManagerExists = false;
         for (Reservation reservation : ec2.describeInstances().reservations()) {
             for (Instance instance : reservation.instances()) {
                 for (Tag tag : instance.tags()) {
-                    if (tag.key().equals(AWSConfig.TAG_TYPE) && tag.value().equals(AWSConfig.MANAGER_TAG_VALUE)) {
+                    if (tag.key().equals(AWSConfig.TYPE_TAG) && tag.value().equals(AWSConfig.MANAGER_TYPE_TAG_VALUE)) {
                         if (!instance.state().name().equals(InstanceStateName.TERMINATED) &&
                                 !instance.state().name().equals(InstanceStateName.SHUTTING_DOWN)) {
                             isManagerExists = true;
@@ -71,11 +81,13 @@ public class EC2Handler {
     }
 
     private void createManagerInstance() {
-        createEC2Instance(AWSConfig.MANAGER_INSTANCE_SCRIPT, AWSConfig.MANAGER_TAG_VALUE, AWSConfig.INSTANCE_TYPE);
+        createEC2Instance(AWSConfig.MANAGER_INSTANCE_SCRIPT, AWSConfig.MANAGER_TYPE_TAG_VALUE,
+                AWSConfig.MANAGER_NAME_TAG_VALUE, AWSConfig.INSTANCE_TYPE);
     }
 
     public void createWorkerInstance() {
-        createEC2Instance(AWSConfig.WORKER_INSTANCE_SCRIPT, AWSConfig.WORKER_TAG_VALUE, AWSConfig.INSTANCE_TYPE);
+        createEC2Instance(AWSConfig.WORKER_INSTANCE_SCRIPT, AWSConfig.WORKER_TYPE_TAG_VALUE,
+                AWSConfig.WORKER_NAME_TAG_VALUE, AWSConfig.INSTANCE_TYPE);
     }
 
     public int countActiveWorkers() {
@@ -83,7 +95,7 @@ public class EC2Handler {
         for (Reservation reservation : ec2.describeInstances().reservations()) {
             for (Instance instance : reservation.instances()) {
                 for (Tag tag : instance.tags()) {
-                    if (tag.key().equals(AWSConfig.TAG_TYPE) && tag.value().equals(AWSConfig.WORKER_TAG_VALUE)) {
+                    if (tag.key().equals(AWSConfig.TYPE_TAG) && tag.value().equals(AWSConfig.WORKER_TYPE_TAG_VALUE)) {
                         if (instance.state().name().equals(InstanceStateName.RUNNING) ||
                                 instance.state().name().equals(InstanceStateName.PENDING)) {
                             activeWorkers++;

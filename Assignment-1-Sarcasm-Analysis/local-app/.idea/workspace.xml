@@ -5,29 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4b4dc6e6-069e-49cd-8d09-ba7a937ac67a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../.idea/aws.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/aws.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../aws-handler/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../aws-handler/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../aws-handler/src/main/java/AWSConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../aws-handler/src/main/java/AWSConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../aws-handler/src/main/java/EC2Handler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../aws-handler/src/main/java/EC2Handler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../aws-handler/src/main/java/S3Handler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../aws-handler/src/main/java/S3Handler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../aws-handler/src/main/java/SQSHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../aws-handler/src/main/java/SQSHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/LocalApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/LocalApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/aws/AWS.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/aws/AWSConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/aws/EC2Handler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/aws/S3Handler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/aws/SQSHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../manager/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../manager/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../manager/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../manager/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../manager/src/main/java/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../manager/src/main/java/Manager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../manager/src/main/java/ManagerEnv.java" beforeDir="false" afterPath="$PROJECT_DIR$/../manager/src/main/java/ManagerEnv.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../manager/src/main/java/ManagerTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/../manager/src/main/java/ManagerTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../manager/src/main/java/RequestParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/../manager/src/main/java/RequestParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../manager/src/main/java/Review.java" beforeDir="false" afterPath="$PROJECT_DIR$/../manager/src/main/java/Review.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../worker/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../worker/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../worker/src/main/java/Worker.java" beforeDir="false" afterPath="$PROJECT_DIR$/../worker/src/main/java/Worker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../worker/src/main/java/analyzer/NamedEntityRecognitionHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../worker/src/main/java/analyzer/SentimentAnalysisHandler.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,13 +116,8 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/LocalApp.java</url>
-          <line>58</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/LocalApp.java</url>
-          <line>73</line>
-          <option name="timeStamp" value="3" />
+          <line>42</line>
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -1,3 +1,5 @@
+import org.json.JSONObject;
+
 public class Review {
     private String id;
     private String link;
@@ -15,6 +17,18 @@ public class Review {
         this.rating = rating;
         this.author = author;
         this.date = date;
+    }
+
+    public static Review fromJson(JSONObject reviewJson) {
+        return new Review(
+                reviewJson.getString("id"),
+                reviewJson.getString("link"),
+                reviewJson.getString("title"),
+                reviewJson.getString("text"),
+                reviewJson.getInt("rating"),
+                reviewJson.getString("author"),
+                reviewJson.getString("date")
+        );
     }
 
     public String getId() {

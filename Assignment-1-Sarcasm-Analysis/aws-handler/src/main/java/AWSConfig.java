@@ -2,14 +2,17 @@ import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.ec2.model.InstanceType;
 
 public class AWSConfig {
-    public static Region REGION1 = Region.US_WEST_2; // for S3 and SQS
-    public static Region REGION2 = Region.US_EAST_1; // for EC2
+    public static Region REGION = Region.US_EAST_1;
     public static final String ANALYZE_TASK = "analyze";
     public static final String TERMINATE_TASK = "terminate";
     public static final String RESPONSE_STATUS_DONE = "done";
     public static final String RESPONSE_STATUS_ERROR = "error";
     public static final String SENTIMENT_ANALYSIS_TASK = "sentimentAnalysis";
     public static final String ENTITY_RECOGNITION_TASK = "entityRecognition";
+    public static final String MESSAGE_DELIMITER = "::";
+    public static final String SUMMARY_DELIMITER = "##";
+    private static final String ENTITIES_DELIMITER = ";";
+
 
 
     // S3
@@ -25,17 +28,23 @@ public class AWSConfig {
 
     public static final String MANAGER_INSTANCE_SCRIPT = "#!/bin/bash\n" +
             "wget https://" + JARS_BUCKET_NAME + ".s3.amazonaws.com/manager.jar\n" +
-            "java -jar manager.jar\n" +
-            "shutdown -h now";
+            "java -jar manager.jar";
+//            "java -jar manager.jar\n" +
+//            "shutdown -h now";
 
     public static String WORKER_INSTANCE_SCRIPT = "#!/bin/bash\n" +
             "wget https://" + JARS_BUCKET_NAME + ".s3.amazonaws.com/worker.jar\n" +
-            "java -jar worker.jar\n" +
-            "shutdown -h now";
+            "java -jar worker.jar";
+//            "java -jar worker.jar\n" +
+//            "shutdown -h now";
 
-    public static final String TAG_TYPE = "Type";
-    public static final String MANAGER_TAG_VALUE = "Manager";
-    public static final String WORKER_TAG_VALUE = "Worker";
+    public static final String TYPE_TAG = "Type";
+    public static final String MANAGER_TYPE_TAG_VALUE = "Manager";
+    public static final String WORKER_TYPE_TAG_VALUE = "Worker";
+    public static final String NAME_TAG = "Name";
+    public static final String MANAGER_NAME_TAG_VALUE = "sarcasm-analysis-manager";
+    public static final String WORKER_NAME_TAG_VALUE = "sarcasm-analysis-worker-" + System.currentTimeMillis();
+
 
     // SQS
     public static final String LOCAL_TO_MANAGER_QUEUE_NAME = "localToManagerQueue";
