@@ -13,69 +13,20 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import static aws.AWSConfig.BUCKET_NAME;
-import static aws.AWSConfig.LOCAL_TO_MANAGER_QUEUE_NAME;
+import static aws.AWSConfig.*;
 
 public class Manager {
+    private static final AWS aws = AWS.getInstance();
+    private int workers = 0;
+    private int activeWorkers = 0;
+
     public static void main(String[] args) {
-        System.out.println("Manager started");
-        boolean isTerminated = false;
-        int workers = 0, activeWorkers = 0;
-        String terminatingLocalApp = null;
-        final ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(10);
-        AWS aws = AWS.getInstance();
+        System.out.println("[DEBUG] Manager started");
 
-        while (!isTerminated) {
-            List<String> localToManagerQueues = aws.sqs.getAllLocalToManagerQueues();
-            for (String queueUrl : localToManagerQueues) {
-                List<String> requests = aws.sqs.receiveMessages(queueUrl)
-                        .stream().map(Message::body).toList();
-                for (String request : requests) {
-                    // request format: <localAppId>::<requestType>::<inputFileName>::<inputIndex>::<reviewsPerWorker>
-                    String[] requestContent = request.split("::");
-                    String localAppId = requestContent[0], requestType = requestContent[1];
+        ManagerEnv env = new ManagerEnv();
 
-                    if (requestType.equals("terminate")) {
-                        executor.shutdown();
-                        waitForExecutorToFinish(executor);
-                        isTerminated = true;
-                        aws.sqs.deleteMessage(queueUrl, request);
-//                        terminatingLocalApp = localAppId;
-//                        aws.sqs.handleTerminationByLocalApp(localAppId);
-                        break;
-                    }
-
-                    String inputFileName = requestContent[2], inputIndex = requestContent[3];
-                    int reviewsPerWorker = Integer.parseInt(requestContent[4]);
-
-                    InputStream inputFile = aws.s3.downloadFileFromS3(
-                            AWSConfig.BUCKET_NAME + "::" + localAppId, inputFileName);
-                    Map<String, Review> requestReviews = RequestParser.parseRequest(inputFile);
-                    int totalReviews = requestReviews.size();
-
-                    activeWorkers = aws.ec2.countActiveWorkers();
-                    int remainingWorkersCapacity = 18 - activeWorkers;
-                    if (remainingWorkersCapacity > 0) {
-                        int workersNeeded = (int) Math.ceil((double) totalReviews / reviewsPerWorker);
-                        int workersToCreate = Math.min(workersNeeded, remainingWorkersCapacity);
-                        workers += workersToCreate;
-                        for (int i = 0; i < workersToCreate; i++) {
-                            aws.ec2.createWorkerInstance();
-                            activeWorkers++;
-                        }
-                    }
-
-                    executor.execute(new ManagerTask(
-                            localAppId,
-                            inputFileName,
-                            inputIndex,
-                            requestReviews,
-                            BUCKET_NAME + "::" + localAppId
-                    ));
-
-                    aws.sqs.deleteMessage(queueUrl, request);
-                }
-            }
+        while (!env.isTerminated) {
+            handleTasksFromLocalApps(env);
         }
 
         // Serve the local app that requested termination
@@ -105,6 +56,64 @@ public class Manager {
 
     }
 
+    private static void handleTasksFromLocalApps(ManagerEnv env) {
+        List<String> localToManagerQueues = aws.sqs.getAllLocalToManagerQueues();
+        for (String queueUrl : localToManagerQueues) {
+            List<String> requests = aws.sqs.receiveMessages(queueUrl)
+                    .stream().map(Message::body).toList();
+            for (String request : requests) {
+                // <local_app_id>::<task_type>::<input_file>::<input_index>::<reviews_per_worker>
+                String[] requestContent = request.split("::");
+                String localAppId = requestContent[0], requestType = requestContent[1];
+
+                if (requestType.equals(TERMINATE_TASK)) {
+                    handleTerminateRequest(env, localAppId, queueUrl, request);
+                    break;
+                }
+
+                String inputFileName = requestContent[2], inputIndex = requestContent[3];
+                int reviewsPerWorker = Integer.parseInt(requestContent[4]);
+
+                InputStream inputFile = aws.s3.downloadFileFromS3(
+                        AWSConfig.BUCKET_NAME + "::" + localAppId, inputFileName);
+                Map<String, Review> requestReviews = RequestParser.parseRequest(inputFile);
+
+                assignWorkers(env, (int) Math.ceil((double) requestReviews.size() / reviewsPerWorker));
+
+                env.executor.execute(new ManagerTask(
+                        localAppId,
+                        inputFileName,
+                        inputIndex,
+                        requestReviews,
+                        BUCKET_NAME + "::" + localAppId
+                ));
+
+                aws.sqs.deleteMessage(queueUrl, request);
+            }
+        }
+    }
+
+    private static void handleTerminateRequest(ManagerEnv env, String localAppId, String queueUrl, String request) {
+        env.executor.shutdown();
+        waitForExecutorToFinish(env.executor);
+        env.isTerminated = true;
+        aws.sqs.deleteMessage(queueUrl, request);
+//                        terminatingLocalApp = localAppId;
+//                        aws.sqs.handleTerminationByLocalApp(localAppId);
+    }
+
+    private static void assignWorkers(ManagerEnv env, int workersNeeded) {
+        int activeWorkers = aws.ec2.countActiveWorkers();
+        int remainingWorkersCapacity = 18 - activeWorkers;
+        if (remainingWorkersCapacity > 0) {
+            int workersToCreate = Math.min(workersNeeded, remainingWorkersCapacity);
+            env.workers += workersToCreate;
+            for (int i = 0; i < workersToCreate; i++) {
+                aws.ec2.createWorkerInstance();
+            }
+        }
+    }
+
     private static void waitForExecutorToFinish(ThreadPoolExecutor executor) {
         while (true) {
             try {
@@ -116,7 +125,6 @@ public class Manager {
             }
         }
     }
-
 
 }
 

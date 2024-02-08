@@ -12,21 +12,7 @@ import java.util.List;
 import static aws.AWSConfig.LOCAL_TO_MANAGER_QUEUE_NAME;
 
 public class S3Handler {
-    private final S3Client s3 = S3Client.builder().region(AWSConfig.REGION).build();
-
-    public void createS3Bucket(String bucketName) {
-        try {
-            s3.createBucket(CreateBucketRequest
-                    .builder()
-                    .bucket(bucketName)
-                    .build());
-            s3.waiter().waitUntilBucketExists(HeadBucketRequest.builder()
-                    .bucket(bucketName)
-                    .build());
-        } catch (S3Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
+    private final S3Client s3 = S3Client.builder().region(AWSConfig.REGION1).build();
 
     public void uploadFileToS3(String bucketName, File inputFile) {
         PutObjectRequest objectRequest = PutObjectRequest.builder()
@@ -34,6 +20,14 @@ public class S3Handler {
                 .key(inputFile.getName())
                 .build();
         s3.putObject(objectRequest, RequestBody.fromFile(inputFile));
+    }
+
+    public void uploadContentToS3(String bucketName, String key, String content) {
+        PutObjectRequest objectRequest = PutObjectRequest.builder()
+                .bucket(bucketName)
+                .key(key)
+                .build();
+        s3.putObject(objectRequest, RequestBody.fromString(content));
     }
 
     public InputStream downloadFileFromS3(String bucketName, String key) {
@@ -50,12 +44,5 @@ public class S3Handler {
                 .key(key)
                 .build();
         s3.deleteObject(deleteObjectRequest);
-    }
-
-    public void deleteS3Bucket(String bucketName) {
-        DeleteBucketRequest deleteBucketRequest = DeleteBucketRequest.builder()
-                .bucket(bucketName)
-                .build();
-        s3.deleteBucket(deleteBucketRequest);
     }
 }

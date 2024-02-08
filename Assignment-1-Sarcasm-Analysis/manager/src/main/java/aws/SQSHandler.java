@@ -12,7 +12,7 @@ import static aws.AWSConfig.LOCAL_TO_MANAGER_QUEUE_NAME;
 
 public class SQSHandler {
 
-    private final SqsClient sqs = SqsClient.builder().region(AWSConfig.REGION).build();
+    private final SqsClient sqs = SqsClient.builder().region(AWSConfig.REGION1).build();
 
     public void createQueue(String queueName) {
         CreateQueueRequest request = CreateQueueRequest.builder()

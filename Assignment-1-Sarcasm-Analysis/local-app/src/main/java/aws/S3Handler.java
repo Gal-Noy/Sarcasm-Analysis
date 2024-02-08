@@ -1,5 +1,6 @@
 package aws;
 
+import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.core.sync.ResponseTransformer;
 import software.amazon.awssdk.services.s3.S3Client;
@@ -9,7 +10,7 @@ import java.io.File;
 import java.io.InputStream;
 
 public class S3Handler {
-    private final S3Client s3 = S3Client.builder().region(AWSConfig.REGION).build();
+    private final S3Client s3 = S3Client.builder().region(AWSConfig.REGION1).build();
 
     public void createS3Bucket(String bucketName) {
         try {
@@ -20,8 +21,9 @@ public class S3Handler {
             s3.waiter().waitUntilBucketExists(HeadBucketRequest.builder()
                     .bucket(bucketName)
                     .build());
+            System.out.println("[DEBUG] S3 bucket " + bucketName + " created");
         } catch (S3Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("[ERROR] " + e.getMessage());
         }
     }
 
@@ -48,6 +50,19 @@ public class S3Handler {
                 .key(key)
                 .build();
         s3.deleteObject(deleteObjectRequest);
+    }
+
+    public void emptyS3Bucket(String bucketName) {
+        ListObjectsRequest listObjects = ListObjectsRequest.builder()
+                .bucket(bucketName)
+                .build();
+        ListObjectsResponse listResponse = s3.listObjects(listObjects);
+        for (S3Object s3Object : listResponse.contents()) {
+            s3.deleteObject(DeleteObjectRequest.builder()
+                    .bucket(bucketName)
+                    .key(s3Object.key())
+                    .build());
+        }
     }
 
     public void deleteS3Bucket(String bucketName) {

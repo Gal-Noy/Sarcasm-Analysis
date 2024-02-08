@@ -7,13 +7,14 @@ import java.util.List;
 
 public class SQSHandler {
 
-    private final SqsClient sqs = SqsClient.builder().region(AWSConfig.REGION).build();
+    private final SqsClient sqs = SqsClient.builder().region(AWSConfig.REGION1).build();
 
     public void createQueue(String queueName) {
         CreateQueueRequest request = CreateQueueRequest.builder()
                 .queueName(queueName)
                 .build();
         sqs.createQueue(request);
+        System.out.println("[DEBUG] Created queue " + queueName);
     }
 
     public String getQueueUrl(String queueName) {

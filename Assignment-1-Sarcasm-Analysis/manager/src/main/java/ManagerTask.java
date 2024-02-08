@@ -15,6 +15,7 @@ public class ManagerTask implements Runnable {
     private final String bucketName;
     private int tasksSent = 0;
     private int tasksCompleted = 0;
+    private final StringBuilder summaryMessage;
 
     public ManagerTask(String localAppId, String inputFileName, String inputIndex, Map<String, Review> requestReviews, String bucketName) {
         this.localAppId = localAppId;
@@ -22,6 +23,7 @@ public class ManagerTask implements Runnable {
         this.inputIndex = inputIndex;
         this.requestReviews = requestReviews;
         this.bucketName = bucketName;
+        this.summaryMessage = new StringBuilder();
     }
 
     @Override
@@ -34,20 +36,25 @@ public class ManagerTask implements Runnable {
 
         receiveTasksFromWorkers();
 
+        System.out.println("[DEBUG] All tasks completed, sending summary to local app");
+
+        handleSummary();
+
         System.out.printf("[DEBUG] ManagerTask finished for localAppId %s\n", localAppId);
     }
 
-    public void sendTasksToWorkers() {
+    private void sendTasksToWorkers() {
         String managerToWorkerQueueUrl = aws.sqs.getQueueUrl(MANAGER_TO_WORKER_QUEUE_NAME + "::" + localAppId);
 
         for (Map.Entry<String, Review> entry : requestReviews.entrySet()) {
             String reviewId = entry.getKey();
             String reviewText = entry.getValue().getText();
 
+            // <local_app_id>::<task_type>::<input_file>::<input_index>::<review_id>
             String sentimentTask = String.join("::",
-                    localAppId, inputFileName, inputIndex, reviewId, reviewText, SENTIMENT_ANALYSIS_TASK);
+                    localAppId, SENTIMENT_ANALYSIS_TASK, inputIndex, reviewId);
             String entityTask = String.join("::",
-                    localAppId, inputFileName, inputIndex, reviewId, reviewText, ENTITY_RECOGNITION_TASK);
+                    localAppId, ENTITY_RECOGNITION_TASK, inputFileName, inputIndex, reviewId);
 
             aws.sqs.sendMessage(managerToWorkerQueueUrl, sentimentTask);
             aws.sqs.sendMessage(managerToWorkerQueueUrl, entityTask);
@@ -56,7 +63,7 @@ public class ManagerTask implements Runnable {
         }
     }
 
-    public void receiveTasksFromWorkers() {
+    private void receiveTasksFromWorkers() {
         String workerToManagerQueueUrl = aws.sqs.getQueueUrl(WORKER_TO_MANAGER_QUEUE_NAME + "::" + localAppId);
 
         List<String> responses = aws.sqs.receiveMessages(workerToManagerQueueUrl)
@@ -64,19 +71,36 @@ public class ManagerTask implements Runnable {
 
         while (tasksCompleted < tasksSent) {
             for (String response : responses) {
+                // <local_app_id>::<task_type>::<task_result>::<input_index>::<review_id>
                 String[] responseContent = response.split("::");
-                String localAppId = responseContent[0], inputIndex = responseContent[1], reviewId = responseContent[2],
-                        taskType = responseContent[3], taskResult = responseContent[4];
+                String localAppId = responseContent[0], taskType = responseContent[1], taskResult = responseContent[2],
+                        inputIndex = responseContent[3], reviewId = responseContent[4];
 
-                if (taskType.equals(SENTIMENT_ANALYSIS_TASK)) {
-                    requestReviews.get(taskId).setSentiment(taskResult);
-                } else if (taskType.equals(ENTITY_RECOGNITION_TASK)) {
-                    requestReviews.get(taskId).setEntities(taskResult);
+                if (localAppId.equals(this.localAppId) && inputIndex.equals(this.inputIndex)) {
+                    int reviewRating = requestReviews.get(reviewId).getRating();
+                    String reviewLink = requestReviews.get(reviewId).getLink();
+                    summaryMessage.append(String.join("::",
+                            reviewId, reviewRating + "", reviewLink, taskType, taskResult))
+                            .append(";;");
                 }
 
-                aws.sqs.deleteMessage(workerToManagerQueueUrl, message);
                 tasksCompleted++;
+                aws.sqs.deleteMessage(workerToManagerQueueUrl, response);
             }
         }
+    }
+
+    private void handleSummary() {
+        System.out.printf("[DEBUG] Handling summary for localAppId %s\n", localAppId);
+
+        String summaryFileName = String.join("::", localAppId, "summary", inputIndex); // S3 bucket key
+        aws.s3.uploadContentToS3(bucketName, summaryFileName, summaryMessage.toString());
+
+        String managerToLocalQueueUrl = aws.sqs.getQueueUrl(MANAGER_TO_LOCAL_QUEUE_NAME + "::" + localAppId);
+        // <local_app_id>::<response_status>::<summary_file_name>::<input_index>
+        String responseContent = String.join("::", localAppId, RESPONSE_STATUS_DONE, summaryFileName, inputIndex);
+        aws.sqs.sendMessage(managerToLocalQueueUrl, responseContent);
+
+        System.out.printf("[DEBUG] Sent summary to local app for inputIndex %s\n", inputIndex);
     }
 }

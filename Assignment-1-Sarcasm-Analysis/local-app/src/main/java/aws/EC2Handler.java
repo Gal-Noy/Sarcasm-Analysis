@@ -8,44 +8,46 @@ import java.util.Base64;
 import static aws.AWSConfig.*;
 
 public class EC2Handler {
-    private final Ec2Client ec2 = Ec2Client.builder().region(REGION).build();
+    private final Ec2Client ec2 = Ec2Client.builder().region(REGION2).build();
 
     public void runManager() {
         // Check if a manager node exists
-        boolean managerActive = false;
+        boolean isManagerExists = false;
         for (Reservation reservation : ec2.describeInstances().reservations()) {
             for (Instance instance : reservation.instances()) {
                 for (Tag tag : instance.tags()) {
-                    if (tag.key().equals("Type") && tag.value().equals("Manager")) {
-                        managerActive = true;
-                        // Check if the manager is active
-                        if (!instance.state().name().equals(InstanceStateName.RUNNING) &&
-                                !instance.state().name().equals(InstanceStateName.PENDING) &&
-                                !instance.state().name().equals(InstanceStateName.STOPPING)) {
-                            // Start the manager
-                            ec2.startInstances(StartInstancesRequest.builder().instanceIds(instance.instanceId()).build());
-                            break;
-                        }
+                    if (tag.key().equals(MANAGER_TAG_TYPE) && tag.value().equals(MANAGER_TAG_VALUE)) {
+                        if (!instance.state().name().equals(InstanceStateName.TERMINATED) &&
+                                !instance.state().name().equals(InstanceStateName.SHUTTING_DOWN)) {
+                            isManagerExists = true;
+                            if (!instance.state().name().equals(InstanceStateName.RUNNING) &&
+                                    !instance.state().name().equals(InstanceStateName.PENDING)) {
+                                // Start the manager
+                                ec2.startInstances(StartInstancesRequest.builder().instanceIds(instance.instanceId()).build());
+                                break;
+                            }
+                        } else break;
                     }
                 }
             }
         }
-        if (!managerActive) {
+        if (!isManagerExists) {
             createManagerInstance();
         }
     }
 
     private void createManagerInstance() {
-        createEC2Instance(MANAGER_INSTANCE_SCRIPT, "Manager", INSTANCE_TYPE);
+        createEC2Instance(MANAGER_INSTANCE_SCRIPT, MANAGER_TAG_VALUE, INSTANCE_TYPE);
     }
 
     public void createEC2Instance(String script, String tagName, InstanceType instanceType) {
-        Ec2Client ec2 = Ec2Client.builder().region(REGION).build();
+        Ec2Client ec2 = Ec2Client.builder().region(REGION2).build();
         RunInstancesRequest runRequest = RunInstancesRequest.builder()
                 .instanceType(instanceType)
                 .imageId(AMI_ID)
                 .maxCount(1)
                 .minCount(1)
+                .keyName(KEY_NAME)
                 .iamInstanceProfile(IamInstanceProfileSpecification.builder().name("LabInstanceProfile").build())
                 .userData(Base64.getEncoder().encodeToString((script).getBytes()))
                 .build();

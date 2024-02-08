@@ -1,7 +1,7 @@
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
-public class Env {
+public class LocalAppEnv {
     public boolean terminate;
     public int reviewsPerWorker; // n
     public int numberOfFiles; // N
@@ -10,7 +10,7 @@ public class Env {
     public ThreadPoolExecutor executor;
 
 
-    public Env(String[] args) {
+    public LocalAppEnv(String[] args) {
         int numberOfArguments = args.length;
 
         terminate = numberOfArguments % 2 == 0;
