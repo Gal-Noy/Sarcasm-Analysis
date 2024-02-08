@@ -7,21 +7,14 @@
     <list default="true" id="4b4dc6e6-069e-49cd-8d09-ba7a937ac67a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../aws-handler/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../aws-handler/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../aws-handler/src/main/java/AWSConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../aws-handler/src/main/java/AWSConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../aws-handler/src/main/java/EC2Handler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../aws-handler/src/main/java/EC2Handler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../aws-handler/src/main/java/S3Handler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../aws-handler/src/main/java/S3Handler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../aws-handler/src/main/java/SQSHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../aws-handler/src/main/java/SQSHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/LocalApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/LocalApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../manager/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../manager/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/LocalAppTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/LocalAppTask.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../manager/src/main/java/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../manager/src/main/java/Manager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../manager/src/main/java/ManagerEnv.java" beforeDir="false" afterPath="$PROJECT_DIR$/../manager/src/main/java/ManagerEnv.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../manager/src/main/java/ManagerTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/../manager/src/main/java/ManagerTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../manager/src/main/java/RequestParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/../manager/src/main/java/RequestParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../manager/src/main/java/Review.java" beforeDir="false" afterPath="$PROJECT_DIR$/../manager/src/main/java/Review.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../worker/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../worker/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../worker/src/main/java/Worker.java" beforeDir="false" afterPath="$PROJECT_DIR$/../worker/src/main/java/Worker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../worker/src/main/java/analyzer/NamedEntityRecognitionHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../worker/src/main/java/analyzer/SentimentAnalysisHandler.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,23 +42,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.LocalApp.executor&quot;: &quot;Debug&quot;,
-    &quot;Application.Unnamed.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/galno/Documents/GitHub/Distributed-Systems-Assignments/Assignment-1-Sarcasm-Analysis/AWSHandler/target/AWSHandler-1.0-SNAPSHOT.jar&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.45402297&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.general&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.LocalApp.executor": "Run",
+    "Application.Unnamed.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/galno/Documents/GitHub/Distributed-Systems-Assignments/Assignment-1-Sarcasm-Analysis/AWSHandler/target/AWSHandler-1.0-SNAPSHOT.jar",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.45402297",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.general"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="" />
@@ -78,7 +71,7 @@
     <configuration name="LocalApp" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="LocalApp" />
       <module name="local-app" />
-      <option name="PROGRAM_PARAMETERS" value="../inputs/input1.txt output 2" />
+      <option name="PROGRAM_PARAMETERS" value="../inputs/test-input1.txt ../inputs/test-input2.txt output1 output2 3" />
       <extension name="software.aws.toolkits.jetbrains.core.execution.JavaAwsConnectionExtension">
         <option name="credential" />
         <option name="region" />
@@ -115,9 +108,9 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/LocalApp.java</url>
-          <line>42</line>
-          <option name="timeStamp" value="7" />
+          <url>file://$PROJECT_DIR$/src/main/java/LocalAppTask.java</url>
+          <line>21</line>
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -13,7 +13,9 @@ public class LocalApp {
     private static final String localAppId = UUID.randomUUID().toString().replace("-", "").substring(0, 16);
 
     public static void main(String[] args) {
-        if (args.length < 3) {
+        int argsLen = args.length;
+        if (argsLen < 3 || (argsLen % 2 != 0 && args[argsLen - 1].equals("terminate"))
+                || Integer.parseInt(args[argsLen - 1]) == 0) {
             System.out.println("Usage: LocalApp <input_file1> ... <input_fileN> <output_file1> ... <output_fileN> <n> [terminate]");
             return;
         }
@@ -53,11 +55,12 @@ public class LocalApp {
         env.executor.shutdown();
         waitForExecutorToFinish(env.executor);
 
-        aws.sqs.deleteQueue(managerToLocalQueueUrl);
-        aws.sqs.deleteQueue(localToManagerQueueUrl);
+        // TODO: Uncomment these 4 lines
+//        aws.sqs.deleteQueue(managerToLocalQueueUrl);
+//        aws.sqs.deleteQueue(localToManagerQueueUrl);
 
-        aws.s3.emptyS3Bucket(bucketName);
-        aws.s3.deleteS3Bucket(bucketName);
+//        aws.s3.emptyS3Bucket(bucketName);
+//        aws.s3.deleteS3Bucket(bucketName);
 
         System.out.println("[DEBUG] LocalApp finished");
     }
@@ -81,34 +84,34 @@ public class LocalApp {
     private static void receiveResponsesFromManager(LocalAppEnv env, String bucketName, String managerToLocalQueueUrl) {
         int filesLeftToProcess = env.numberOfFiles;
         while (filesLeftToProcess > 0) {
+            System.out.println("[DEBUG] Receiving responses from manager");
             List<Message> responses = aws.sqs.receiveMessages(managerToLocalQueueUrl);
-            if (!responses.isEmpty()) {
-                for (Message response : responses) {
-                    String responseBody = response.body();
-                    // <local_app_id>::<response_status>::<summary_file_name>::<input_index>
-                    String[] responseContent = responseBody.split("::");
-                    String receivedLocalAppId = responseContent[0],
-                            status = responseContent[1], // done or error
-                            summaryFileName = responseContent[2],
-                            inputIndex = responseContent[3];
-                    if (receivedLocalAppId.equals(localAppId)) {
+            for (Message response : responses) {
+                String responseBody = response.body();
+                // <local_app_id>::<response_status>::<summary_file_name>::<input_index>
+                String[] responseContent = responseBody.split("::");
+                String receivedLocalAppId = responseContent[0],
+                        status = responseContent[1], // done or error
+                        summaryFileName = responseContent[2],
+                        inputIndex = responseContent[3];
 
-                        System.out.println("[DEBUG] Received response from manager: " + summaryFileName + " " + status);
+                if (receivedLocalAppId.equals(localAppId)) {
+                    System.out.println("[DEBUG] Received response from manager: " + summaryFileName + " " + status);
 
-                        if (status.equals(AWSConfig.RESPONSE_STATUS_DONE)) {
-                            int outputPathIndex = Integer.parseInt(inputIndex) + env.numberOfFiles;
-                            env.executor.execute(new LocalAppTask(
-                                    env.outputFilesPaths[outputPathIndex],
-                                    summaryFileName, // S3 bucket key
-                                    bucketName));
-                            aws.s3.deleteFileFromS3(bucketName, summaryFileName);
-                            filesLeftToProcess--;
-                        }
+                    if (status.equals(AWSConfig.RESPONSE_STATUS_DONE)) {
+                        env.executor.execute(new LocalAppTask(
+                                env.outputFilesPaths[Integer.parseInt(inputIndex)],
+                                summaryFileName, // S3 bucket key
+                                bucketName));
+                        aws.s3.deleteFileFromS3(bucketName, summaryFileName);
+                        filesLeftToProcess--;
                     }
                     aws.sqs.deleteMessage(managerToLocalQueueUrl, response);
                 }
+
             }
         }
+
     }
 
     private static void waitForExecutorToFinish(ThreadPoolExecutor executor) {

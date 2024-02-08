@@ -68,18 +68,10 @@ public class SQSHandler {
     public List<Message> receiveMessages(String queueUrl) {
         ReceiveMessageRequest request = ReceiveMessageRequest.builder()
                 .queueUrl(queueUrl)
-                .maxNumberOfMessages(10) // long polling
+                .maxNumberOfMessages(10)
+                .waitTimeSeconds(20) // long polling
                 .build();
         return sqs.receiveMessage(request).messages();
-    }
-
-    public Message receiveSingleMessage(String queueUrl) {
-        ReceiveMessageRequest request = ReceiveMessageRequest.builder()
-                .queueUrl(queueUrl)
-                .maxNumberOfMessages(1)
-                .build();
-
-        return sqs.receiveMessage(request).messages().get(0);
     }
 
     public void deleteMessage(String queueUrl, Message message) {

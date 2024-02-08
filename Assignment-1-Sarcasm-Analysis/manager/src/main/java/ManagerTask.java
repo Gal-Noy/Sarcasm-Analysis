@@ -6,7 +6,6 @@ import java.util.Map;
 public class ManagerTask implements Runnable {
     private final AWS aws = AWS.getInstance();
     private final String localAppId;
-    private final String inputFileName;
     private final String inputIndex;
     private final Map<String, Review> requestReviews;
     private final String bucketName;
@@ -14,9 +13,8 @@ public class ManagerTask implements Runnable {
     private int tasksCompleted = 0;
     private final StringBuilder summaryMessage;
 
-    public ManagerTask(String localAppId, String inputFileName, String inputIndex, Map<String, Review> requestReviews, String bucketName) {
+    public ManagerTask(String localAppId, String inputIndex, Map<String, Review> requestReviews, String bucketName) {
         this.localAppId = localAppId;
-        this.inputFileName = inputFileName;
         this.inputIndex = inputIndex;
         this.requestReviews = requestReviews;
         this.bucketName = bucketName;
@@ -56,19 +54,21 @@ public class ManagerTask implements Runnable {
             aws.sqs.sendMessage(managerToWorkerQueueUrl, task);
 
             tasksSent++;
+            System.out.println("[DEBUG] " + tasksSent + " of request number " + inputIndex);
         }
         System.out.println("[DEBUG] Sent tasks to workers");
     }
 
     private void receiveResponsesFromWorkers() {
-        System.out.println("[DEBUG] Receiving responses from workers");
+        System.out.println("[DEBUG] Receiving responses from workers for local app " + localAppId);
         String workerToManagerQueueUrl = aws.sqs.getQueueUrl(
 //                AWSConfig.WORKER_TO_MANAGER_QUEUE_NAME + "-" + localAppId TODO: Uncomment this line
                 AWSConfig.WORKER_TO_MANAGER_QUEUE_NAME  // TODO: Delete this line
         );
 
-        List<Message> responses = aws.sqs.receiveMessages(workerToManagerQueueUrl);
         while (tasksCompleted < tasksSent) {
+            List<Message> responses = aws.sqs.receiveMessages(workerToManagerQueueUrl);
+            System.out.println("[DEBUG] Received " + responses.size() + " responses from workers");
             for (Message response : responses) {
                 String responseBody = response.body();
                 // <local_app_id>::<sentiment>::<entities>::<input_index>::<review_id>
@@ -76,25 +76,30 @@ public class ManagerTask implements Runnable {
                 String localAppId = responseContent[0], sentiment = responseContent[1],
                         entities = responseContent[2], inputIndex = responseContent[3], reviewId = responseContent[4];
 
+                // Check if response is for this task
                 if (localAppId.equals(this.localAppId) && inputIndex.equals(this.inputIndex)) {
                     int reviewRating = requestReviews.get(reviewId).getRating();
                     String reviewLink = requestReviews.get(reviewId).getLink();
 
-                    // <review_id>::<review_rating>::<review_link>::<sentiment>::<entities>##
+                    // <review_id>::<review_rating>::<review_link>::<sentiment>::<entities>##<...>
                     summaryMessage.append(String.join("::",
-                            reviewId, reviewRating + "", reviewLink, sentiment, entities))
-                            .append("##");
+                                    reviewId, reviewRating + "", reviewLink, sentiment, entities));
+                    if (tasksCompleted == tasksSent - 1) {
+                        summaryMessage.append("##");
+                    }
                 }
 
                 tasksCompleted++;
                 aws.sqs.deleteMessage(workerToManagerQueueUrl, response);
+
+                System.out.println("[DEBUG] " + tasksCompleted + " of request number " + inputIndex);
             }
         }
         System.out.println("[DEBUG] Received all responses from workers");
     }
 
     private void handleSummary() {
-        String summaryFileName = String.join("::", localAppId, "summary", inputIndex); // S3 bucket key
+        String summaryFileName = String.join(AWSConfig.SUMMARY_FILE_NAME_DELIMITER, localAppId, "summary", inputIndex);
         aws.s3.uploadContentToS3(bucketName, summaryFileName, summaryMessage.toString());
 
         String managerToLocalQueueUrl = aws.sqs.getQueueUrl(

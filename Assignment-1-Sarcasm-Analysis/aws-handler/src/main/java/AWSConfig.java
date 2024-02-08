@@ -1,6 +1,8 @@
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.ec2.model.InstanceType;
 
+import java.util.UUID;
+
 public class AWSConfig {
     public static Region REGION = Region.US_EAST_1;
     public static final String ANALYZE_TASK = "analyze";
@@ -11,8 +13,8 @@ public class AWSConfig {
     public static final String ENTITY_RECOGNITION_TASK = "entityRecognition";
     public static final String MESSAGE_DELIMITER = "::";
     public static final String SUMMARY_DELIMITER = "##";
+    public static final String SUMMARY_FILE_NAME_DELIMITER = "-";
     private static final String ENTITIES_DELIMITER = ";";
-
 
 
     // S3
@@ -43,7 +45,8 @@ public class AWSConfig {
     public static final String WORKER_TYPE_TAG_VALUE = "Worker";
     public static final String NAME_TAG = "Name";
     public static final String MANAGER_NAME_TAG_VALUE = "sarcasm-analysis-manager";
-    public static final String WORKER_NAME_TAG_VALUE = "sarcasm-analysis-worker-" + System.currentTimeMillis();
+    public static final String WORKER_NAME_TAG_VALUE = "sarcasm-analysis-worker-"
+            + UUID.randomUUID().toString().replace("-", "").substring(0, 8);
 
 
     // SQS

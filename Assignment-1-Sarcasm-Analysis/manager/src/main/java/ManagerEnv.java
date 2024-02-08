@@ -10,6 +10,6 @@ public class ManagerEnv {
         isTerminated = false;
         terminatingLocalApp = null;
         workers = 0;
-        executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(1);
+        executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.MAX_VALUE);
     }
 }

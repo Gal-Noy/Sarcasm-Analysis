@@ -7,21 +7,14 @@
     <list default="true" id="84ce2b10-687e-4dac-9463-de5567c6d594" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/AWSConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AWSConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/EC2Handler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/EC2Handler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/S3Handler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/S3Handler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/SQSHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SQSHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../local-app/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../local-app/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../local-app/src/main/java/LocalApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/../local-app/src/main/java/LocalApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../manager/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../manager/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../local-app/src/main/java/LocalAppTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/../local-app/src/main/java/LocalAppTask.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../manager/src/main/java/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../manager/src/main/java/Manager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../manager/src/main/java/ManagerEnv.java" beforeDir="false" afterPath="$PROJECT_DIR$/../manager/src/main/java/ManagerEnv.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../manager/src/main/java/ManagerTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/../manager/src/main/java/ManagerTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../manager/src/main/java/RequestParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/../manager/src/main/java/RequestParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../manager/src/main/java/Review.java" beforeDir="false" afterPath="$PROJECT_DIR$/../manager/src/main/java/Review.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../worker/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../worker/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../worker/src/main/java/Worker.java" beforeDir="false" afterPath="$PROJECT_DIR$/../worker/src/main/java/Worker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../worker/src/main/java/analyzer/NamedEntityRecognitionHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../worker/src/main/java/analyzer/SentimentAnalysisHandler.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

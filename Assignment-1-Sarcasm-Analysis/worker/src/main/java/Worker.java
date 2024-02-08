@@ -1,4 +1,5 @@
 import java.util.List;
+
 import analysis.SentimentAnalysisHandler;
 import analysis.NamedEntityRecognitionHandler;
 import software.amazon.awssdk.services.sqs.model.Message;
@@ -15,34 +16,39 @@ public class Worker {
     }
 
     private static void handleTasksFromManager() {
-        List<String> managerToWorkerQueues = aws.sqs.getAllManagerToWorkerQueues();
-        for (String queueUrl : managerToWorkerQueues) {
-            Message task = null;
-            try {
-                task = aws.sqs.receiveSingleMessage(queueUrl);
-                String taskBody = task.body();
-                // <local_app_id>::<input_index>::<review_id>::<review_text>
-                String[] taskContent = taskBody.split("::");
-                String localAppId = taskContent[0], inputIndex = taskContent[1],
-                        reviewId = taskContent[2], reviewText = taskContent[3];
+        int tasksCompleted = 0;
+        while (true) {
+            List<String> managerToWorkerQueues = aws.sqs.getAllManagerToWorkerQueues();
+            for (String queueUrl : managerToWorkerQueues) {
+                System.out.println("[DEBUG] Receiving tasks from manager for queue " + queueUrl.split("/")[4].split("-")[0]);
+                List<Message> tasks = aws.sqs.receiveMessages(queueUrl); // long polling
+                for (Message task : tasks) {
+                    try {
+                        String taskBody = task.body();
+                        // <local_app_id>::<input_index>::<review_id>::<review_text>
+                        String[] taskContent = taskBody.split("::");
+                        String localAppId = taskContent[0], inputIndex = taskContent[1],
+                                reviewId = taskContent[2], reviewText = taskContent[3];
 
-                String sentiment = String.valueOf(sentimentAnalysisHandler.findSentiment(reviewText));
-                String entities = String.join(";", namedEntityRecognitionHandler.findEntities(reviewText));
+                        String sentiment = String.valueOf(sentimentAnalysisHandler.findSentiment(reviewText));
+                        String entities = String.join(";", namedEntityRecognitionHandler.findEntities(reviewText));
 
-                // <local_app_id>::<sentiment>::<entities>::<input_index>::<review_id>
-                String response = String.join("::", localAppId, sentiment, entities, inputIndex, reviewId);
+                        // <local_app_id>::<sentiment>::<entities>::<input_index>::<review_id>
+                        String response = String.join("::", localAppId, sentiment, entities, inputIndex, reviewId);
 
-                aws.sqs.sendMessage(AWSConfig.WORKER_TO_MANAGER_QUEUE_NAME, response); // TODO: Delete this line
+                        aws.sqs.sendMessage(AWSConfig.WORKER_TO_MANAGER_QUEUE_NAME, response); // TODO: Delete this line
 //            aws.sqs.sendMessage(AWSConfig.WORKER_TO_MANAGER_QUEUE_NAME + "-" + localAppId, response); TODO: Uncomment this line
-            } catch (RuntimeException e) {
-                System.err.println("[ERROR] " + e.getMessage());
-            }
-            finally {
-                if (task != null) {
-                    aws.sqs.deleteMessage(queueUrl, task);
+                    } catch (RuntimeException e) {
+                        System.err.println("[ERROR] " + e.getMessage());
+                    } finally {
+                        tasksCompleted++;
+                        System.out.println("[DEBUG] Completed " + tasksCompleted + " tasks");
+                        aws.sqs.deleteMessage(queueUrl, task);
+
+                    }
                 }
+                break; // check if any queues added
             }
         }
     }
-
 }
