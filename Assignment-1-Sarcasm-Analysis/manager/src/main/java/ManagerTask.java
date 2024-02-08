@@ -1,10 +1,5 @@
-import aws.AWS;
-import software.amazon.awssdk.services.sqs.model.Message;
-
 import java.util.List;
 import java.util.Map;
-
-import static aws.AWSConfig.*;
 
 public class ManagerTask implements Runnable {
     private final AWS aws = AWS.getInstance();
@@ -44,7 +39,7 @@ public class ManagerTask implements Runnable {
     }
 
     private void sendTasksToWorkers() {
-        String managerToWorkerQueueUrl = aws.sqs.getQueueUrl(MANAGER_TO_WORKER_QUEUE_NAME + "::" + localAppId);
+        String managerToWorkerQueueUrl = aws.sqs.getQueueUrl(AWSConfig.MANAGER_TO_WORKER_QUEUE_NAME + "::" + localAppId);
 
         for (Map.Entry<String, Review> entry : requestReviews.entrySet()) {
             String reviewId = entry.getKey();
@@ -52,9 +47,9 @@ public class ManagerTask implements Runnable {
 
             // <local_app_id>::<task_type>::<input_file>::<input_index>::<review_id>
             String sentimentTask = String.join("::",
-                    localAppId, SENTIMENT_ANALYSIS_TASK, inputIndex, reviewId);
+                    localAppId, AWSConfig.SENTIMENT_ANALYSIS_TASK, inputIndex, reviewId);
             String entityTask = String.join("::",
-                    localAppId, ENTITY_RECOGNITION_TASK, inputFileName, inputIndex, reviewId);
+                    localAppId, AWSConfig.ENTITY_RECOGNITION_TASK, inputFileName, inputIndex, reviewId);
 
             aws.sqs.sendMessage(managerToWorkerQueueUrl, sentimentTask);
             aws.sqs.sendMessage(managerToWorkerQueueUrl, entityTask);
@@ -64,11 +59,9 @@ public class ManagerTask implements Runnable {
     }
 
     private void receiveTasksFromWorkers() {
-        String workerToManagerQueueUrl = aws.sqs.getQueueUrl(WORKER_TO_MANAGER_QUEUE_NAME + "::" + localAppId);
+        String workerToManagerQueueUrl = aws.sqs.getQueueUrl(AWSConfig.WORKER_TO_MANAGER_QUEUE_NAME + "::" + localAppId);
 
-        List<String> responses = aws.sqs.receiveMessages(workerToManagerQueueUrl)
-                .stream().map(Message::body).toList();
-
+        List<String> responses = aws.sqs.receiveMessages(workerToManagerQueueUrl);
         while (tasksCompleted < tasksSent) {
             for (String response : responses) {
                 // <local_app_id>::<task_type>::<task_result>::<input_index>::<review_id>
@@ -96,9 +89,9 @@ public class ManagerTask implements Runnable {
         String summaryFileName = String.join("::", localAppId, "summary", inputIndex); // S3 bucket key
         aws.s3.uploadContentToS3(bucketName, summaryFileName, summaryMessage.toString());
 
-        String managerToLocalQueueUrl = aws.sqs.getQueueUrl(MANAGER_TO_LOCAL_QUEUE_NAME + "::" + localAppId);
+        String managerToLocalQueueUrl = aws.sqs.getQueueUrl(AWSConfig.MANAGER_TO_LOCAL_QUEUE_NAME + "::" + localAppId);
         // <local_app_id>::<response_status>::<summary_file_name>::<input_index>
-        String responseContent = String.join("::", localAppId, RESPONSE_STATUS_DONE, summaryFileName, inputIndex);
+        String responseContent = String.join("::", localAppId, AWSConfig.RESPONSE_STATUS_DONE, summaryFileName, inputIndex);
         aws.sqs.sendMessage(managerToLocalQueueUrl, responseContent);
 
         System.out.printf("[DEBUG] Sent summary to local app for inputIndex %s\n", inputIndex);

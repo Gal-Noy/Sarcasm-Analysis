@@ -1,14 +1,7 @@
-package aws;
-
-import software.amazon.awssdk.services.s3.model.Bucket;
-import software.amazon.awssdk.services.s3.model.ListBucketsRequest;
-import software.amazon.awssdk.services.s3.model.ListBucketsResponse;
 import software.amazon.awssdk.services.sqs.SqsClient;
 import software.amazon.awssdk.services.sqs.model.*;
 
 import java.util.List;
-
-import static aws.AWSConfig.LOCAL_TO_MANAGER_QUEUE_NAME;
 
 public class SQSHandler {
 
@@ -19,6 +12,7 @@ public class SQSHandler {
                 .queueName(queueName)
                 .build();
         sqs.createQueue(request);
+        System.out.println("[DEBUG] Created queue " + queueName);
     }
 
     public String getQueueUrl(String queueName) {
@@ -26,22 +20,6 @@ public class SQSHandler {
                 .queueName(queueName)
                 .build();
         return sqs.getQueueUrl(request).queueUrl();
-    }
-
-    public void sendMessage(String queueName, String message) {
-        String queueUrl = getQueueUrl(queueName);
-        sqs.sendMessage(SendMessageRequest.builder()
-                .queueUrl(queueUrl)
-                .messageBody(message)
-                .build());
-    }
-
-    public List<Message> receiveMessages(String queueUrl) {
-        ReceiveMessageRequest request = ReceiveMessageRequest.builder()
-                .queueUrl(queueUrl)
-                .maxNumberOfMessages(20) // long polling
-                .build();
-        return sqs.receiveMessage(request).messages();
     }
 
     public void deleteQueue(String queueName) {
@@ -54,7 +32,7 @@ public class SQSHandler {
     public List<String> getAllLocalToManagerQueues() {
         try {
             ListQueuesRequest listQueuesRequest = ListQueuesRequest
-                    .builder().queueNamePrefix(LOCAL_TO_MANAGER_QUEUE_NAME).build();
+                    .builder().queueNamePrefix(AWSConfig.LOCAL_TO_MANAGER_QUEUE_NAME).build();
             ListQueuesResponse listQueuesResponse = sqs.listQueues(listQueuesRequest);
             return listQueuesResponse.queueUrls();
 
@@ -65,6 +43,24 @@ public class SQSHandler {
         return null;
     }
 
+
+    public void sendMessage(String queueName, String message) {
+        String queueUrl = getQueueUrl(queueName);
+        sqs.sendMessage(SendMessageRequest.builder()
+                .queueUrl(queueUrl)
+                .messageBody(message)
+                .build());
+    }
+
+    public List<String> receiveMessages(String queueName) {
+        String queueUrl = getQueueUrl(queueName);
+        ReceiveMessageRequest request = ReceiveMessageRequest.builder()
+                .queueUrl(queueUrl)
+                .maxNumberOfMessages(20) // long polling
+                .build();
+        return sqs.receiveMessage(request).messages().stream().map(Message::body).toList();
+    }
+
     public void deleteMessage(String queueUrl, String message) {
         DeleteMessageRequest request = DeleteMessageRequest.builder()
                 .queueUrl(queueUrl)
@@ -72,5 +68,7 @@ public class SQSHandler {
                 .build();
         sqs.deleteMessage(request);
     }
+
+
 
 }

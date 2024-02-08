@@ -1,14 +1,9 @@
-import aws.AWS;
-import aws.AWSConfig;
-import software.amazon.awssdk.services.sqs.model.Message;
 
 import java.io.File;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-
-import static aws.AWSConfig.*;
 
 public class LocalApp {
     private static final AWS aws = AWS.getInstance();
@@ -22,9 +17,9 @@ public class LocalApp {
 
         LocalAppEnv env = new LocalAppEnv(args);
 
-        String bucketName = BUCKET_NAME + "::" + localAppId;
-        String localToManagerQueueName = LOCAL_TO_MANAGER_QUEUE_NAME + "::" + localAppId;
-        String managerToLocalQueueName = MANAGER_TO_LOCAL_QUEUE_NAME + "::" + localAppId;
+        String bucketName = AWSConfig.BUCKET_NAME + "::" + localAppId;
+        String localToManagerQueueName = AWSConfig.LOCAL_TO_MANAGER_QUEUE_NAME + "::" + localAppId;
+        String managerToLocalQueueName = AWSConfig.MANAGER_TO_LOCAL_QUEUE_NAME + "::" + localAppId;
 
         aws.ec2.runManager();
         aws.s3.createS3Bucket(bucketName);
@@ -40,7 +35,7 @@ public class LocalApp {
 
             // <local_app_id>::terminate
             aws.sqs.sendMessage(localToManagerQueueName,
-                    String.join("::", localAppId, TERMINATE_TASK));
+                    String.join("::", localAppId, AWSConfig.TERMINATE_TASK));
         }
 
         env.executor.shutdown();
@@ -61,7 +56,7 @@ public class LocalApp {
             // <local_app_id>::analyze::<input_file>::<input_index>::<reviews_per_worker>
             aws.sqs.sendMessage(localToManagerQueueName, String.join("::",
                     localAppId,
-                    ANALYZE_TASK,
+                    AWSConfig.ANALYZE_TASK,
                     inputFile.getName(), // S3 bucket key
                     Integer.toString(inputIndex),
                     env.reviewsPerWorker + ""));
@@ -73,8 +68,7 @@ public class LocalApp {
     private static void receiveResponsesFromManager(LocalAppEnv env, String bucketName, String managerToLocalQueueName) {
         int filesLeftToProcess = env.numberOfFiles;
         while (filesLeftToProcess > 0) {
-            List<String> responses = aws.sqs.receiveMessages(managerToLocalQueueName)
-                    .stream().map(Message::body).toList();
+            List<String> responses = aws.sqs.receiveMessages(managerToLocalQueueName);
             for (String response : responses) {
                 // <local_app_id>::<response_status>::<summary_file_name>::<input_index>
                 String[] responseContent = response.split("::");
@@ -86,7 +80,7 @@ public class LocalApp {
 
                     System.out.println("[DEBUG] Received response from manager: " + summaryFileName + " " + status);
 
-                    if (status.equals(RESPONSE_STATUS_DONE)) {
+                    if (status.equals(AWSConfig.RESPONSE_STATUS_DONE)) {
                         int outputPathIndex = Integer.parseInt(inputIndex) + env.numberOfFiles;
                         env.executor.execute(new LocalAppTask(
                                 env.outputFilesPaths[outputPathIndex],

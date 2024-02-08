@@ -1,24 +1,13 @@
-import aws.AWS;
-import aws.AWSConfig;
-import org.json.JSONObject;
 import software.amazon.awssdk.services.sqs.model.Message;
-import software.amazon.awssdk.thirdparty.jackson.core.JsonParser;
 
-import java.io.File;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
-import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import static aws.AWSConfig.*;
-
 public class Manager {
     private static final AWS aws = AWS.getInstance();
-    private int workers = 0;
-    private int activeWorkers = 0;
 
     public static void main(String[] args) {
         System.out.println("[DEBUG] Manager started");
@@ -59,14 +48,13 @@ public class Manager {
     private static void handleTasksFromLocalApps(ManagerEnv env) {
         List<String> localToManagerQueues = aws.sqs.getAllLocalToManagerQueues();
         for (String queueUrl : localToManagerQueues) {
-            List<String> requests = aws.sqs.receiveMessages(queueUrl)
-                    .stream().map(Message::body).toList();
+            List<String> requests = aws.sqs.receiveMessages(queueUrl);
             for (String request : requests) {
                 // <local_app_id>::<task_type>::<input_file>::<input_index>::<reviews_per_worker>
                 String[] requestContent = request.split("::");
                 String localAppId = requestContent[0], requestType = requestContent[1];
 
-                if (requestType.equals(TERMINATE_TASK)) {
+                if (requestType.equals(AWSConfig.TERMINATE_TASK)) {
                     handleTerminateRequest(env, localAppId, queueUrl, request);
                     break;
                 }
@@ -78,6 +66,7 @@ public class Manager {
                         AWSConfig.BUCKET_NAME + "::" + localAppId, inputFileName);
                 Map<String, Review> requestReviews = RequestParser.parseRequest(inputFile);
 
+                assert requestReviews != null;
                 assignWorkers(env, (int) Math.ceil((double) requestReviews.size() / reviewsPerWorker));
 
                 env.executor.execute(new ManagerTask(
@@ -85,7 +74,7 @@ public class Manager {
                         inputFileName,
                         inputIndex,
                         requestReviews,
-                        BUCKET_NAME + "::" + localAppId
+                        AWSConfig.BUCKET_NAME + "::" + localAppId
                 ));
 
                 aws.sqs.deleteMessage(queueUrl, request);

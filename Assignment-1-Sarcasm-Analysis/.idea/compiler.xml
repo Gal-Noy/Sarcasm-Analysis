@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="aws-handler" />
+        <module name="manager" />
         <module name="worker" />
+        <module name="local-app" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="Assignment-1-Sarcasm-Analysis" target="19" />
-    </bytecodeTargetLevel>
   </component>
 </project>

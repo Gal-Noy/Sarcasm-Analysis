@@ -1,5 +1,3 @@
-package aws;
-
 public class AWS {
     private static final AWS instance = new AWS();
     public static AWS getInstance() {
