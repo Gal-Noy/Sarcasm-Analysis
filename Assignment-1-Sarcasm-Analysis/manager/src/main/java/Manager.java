@@ -54,17 +54,24 @@ public class Manager {
 
     private static void pollTasksFromLocalApps(ManagerEnv env) throws Exception {
         List<String> localToManagerQueues = aws.sqs.getAllLocalToManagerQueues();
-        int numberOfQueues = localToManagerQueues.size();
-        System.out.println("[DEBUG] Received " + numberOfQueues + " local app queues");
+
+        for (String queueUrl : localToManagerQueues) {
+            if (!env.polledQueues.contains(queueUrl)) {
+                env.polledQueues.add(queueUrl);
+            }
+        }
+
+        int numberOfQueues = env.polledQueues.size();
+        System.out.println("[DEBUG] Polling from " + numberOfQueues + " local app queues");
         env.executor.setCorePoolSize(10 * numberOfQueues);
 
         List<Future<?>> pendingQueuePollers = new ArrayList<>();
 
-        for (String queueUrl : localToManagerQueues) {
+        for (String queueUrl : env.polledQueues) {
             Future<?> future = env.executor.submit(() -> {
                 while (!env.isTerminated) { // For each local app queue, there is a thread long polling for tasks
                     try {
-                        List<Message> requests = aws.sqs.receiveMessages(queueUrl);
+                        List<Message> requests = aws.sqs.receiveMessages(queueUrl); // long polling
                         System.out.println("[DEBUG] Received " + requests.size() + " requests from queue " + queueUrlToName(queueUrl));
                         handleQueueTasks(env, requests, queueUrl);
                     } catch (IOException e) {
@@ -76,7 +83,7 @@ public class Manager {
             pendingQueuePollers.add(future);
         }
 
-        // wait for all queue pollers to finish
+        // Main thread waits for all queue pollers to finish
         for (Future<?> pendingQueuePoller : pendingQueuePollers) {
             try {
                 pendingQueuePoller.get();
@@ -88,8 +95,6 @@ public class Manager {
     }
 
     private static void handleQueueTasks(ManagerEnv env, List<Message> requests, String queueUrl) throws IOException {
-//        List<Future<?>> pendingRequests = new ArrayList<>();
-
         for (Message request : requests) {
             String requestBody = request.body();
             System.out.println("[DEBUG] Received request " + requestBody);
@@ -135,16 +140,7 @@ public class Manager {
 
             aws.sqs.deleteMessage(queueUrl, request);
         }
-
-//        for (Future<?> pendingRequest : pendingRequests) {
-//            try {
-//                pendingRequest.get();
-//            } catch (Exception e) {
-//                System.err.println("[ERROR] " + e.getMessage());
-//            }
-//        }
     }
-
 
     private static void handleTerminateRequest(ManagerEnv env, String localAppId, String queueUrl, Message request) {
         env.executor.shutdown();
@@ -181,6 +177,7 @@ public class Manager {
         }
     }
 
+    // TODO: Delete this method
     private static String queueUrlToName(String queueUrl) {
         return queueUrl.split("/")[4].split("-")[0];
     }

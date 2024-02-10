@@ -5,6 +5,7 @@ import software.amazon.awssdk.services.sqs.model.Message;
 import java.io.File;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.Future;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -96,13 +97,21 @@ public class LocalApp {
                         inputIndex = responseContent[3];
 
                 if (receivedLocalAppId.equals(localAppId)) {
-                    System.out.println("[DEBUG] Received response from manager: " + summaryFileName + " " + status);
+                    System.out.println("[DEBUG] Response received from manager: " + summaryFileName + " " + status);
 
                     if (status.equals(AWSConfig.RESPONSE_STATUS_DONE)) {
-                        env.executor.execute(new LocalAppTask(
+                        Future<?> localAppTask = env.executor.submit(new LocalAppTask(
                                 env.outputFilesPaths[Integer.parseInt(inputIndex)],
                                 summaryFileName, // S3 bucket key
                                 bucketName));
+
+                        // Wait for task to finish
+                        try {
+                            localAppTask.get();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
                         aws.s3.deleteFileFromS3(bucketName, summaryFileName);
                         filesLeftToProcess--;
                     }

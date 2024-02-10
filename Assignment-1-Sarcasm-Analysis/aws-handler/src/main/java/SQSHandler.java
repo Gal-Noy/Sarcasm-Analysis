@@ -70,6 +70,7 @@ public class SQSHandler {
                 .queueUrl(queueUrl)
                 .maxNumberOfMessages(10)
                 .waitTimeSeconds(20) // long polling
+                .visibilityTimeout(60) // prevents the same message from being delivered to multiple workers
                 .build();
         return sqs.receiveMessage(request).messages();
     }

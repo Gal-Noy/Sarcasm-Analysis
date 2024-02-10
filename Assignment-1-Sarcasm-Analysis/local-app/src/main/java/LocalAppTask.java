@@ -26,25 +26,56 @@ public class LocalAppTask implements Runnable {
 
             StringBuilder htmlContent = new StringBuilder();
 
-            htmlContent.append("<html><head><title>Review Summary</title></head><body>");
+            htmlContent.append("""
+                    <html>
+                    <head>
+                    <title>Reviews Summary</title>
+                    <style>
+                    table {
+                      font-family: arial, sans-serif;
+                      border-collapse: collapse;
+                    }
+                    td, th {
+                      border: 1px solid #dddddd;
+                      text-align: left;
+                      padding: 8px;
+                    }
+                    tr:nth-child(even) {
+                      background-color: #dddddd;
+                    }
+                    </style>
+                    </head>
+                    <body>
+                    <table>
+                      <tr>
+                        <th>Review Link</th>
+                        <th>Entities</th>
+                        <th>Sarcasm</th>
+                      </tr>""");
 
             for (String content : summaryContent) {
                 // <review_id>::<review_rating>::<review_link>::<sentiment>::<entities>
-                String[] reviewContent = content.split("::");
-                String reviewId = reviewContent[0], reviewRating = reviewContent[1],
+                String[] reviewContent = content.split("::", -1);
+                String reviewRating = reviewContent[1],
                         reviewLink = reviewContent[2], sentiment = reviewContent[3],
                         entities = reviewContent[4];
 
-                String colorCode = getColorCode(sentiment);
+                String colorCode = getColorCode(Integer.parseInt(sentiment));
+                String formattedEntities = entities.isEmpty() ? "" : "[" + entities.replace(";", ", ").replace(":", ": ") + "]";
                 boolean isSarcastic = isSarcasticReview(Integer.parseInt(reviewRating));
 
-                htmlContent.append("<div style=\"color:").append(colorCode).append(";\">")
-                        .append("<a href=\"").append(reviewLink).append("\">Review Link</a><br>")
-                        .append("Entities: [").append(entities).append("]<br>")
-                        .append("Sarcasm: ").append(isSarcastic ? "Yes" : "No")
-                        .append("</div><br>");
+                htmlContent.append(String.format("""
+                        <tr>
+                          <td><a href="%s" style="color:%s">Review Link</a><br></td>
+                          <td>%s</td>
+                          <td>%s</td>
+                        </tr>""", reviewLink,
+                        colorCode,
+                        formattedEntities,
+                        isSarcastic ? "Yes" : "No"));
             }
-            htmlContent.append("</body></html>");
+
+            htmlContent.append("</table></body></html>");
 
             FileWriter htmlFile = new FileWriter(outputFilePath + ".html");
             htmlFile.write(htmlContent.toString());
@@ -55,13 +86,13 @@ public class LocalAppTask implements Runnable {
         System.out.println("[DEBUG] Summary file created at " + outputFilePath + ".html");
     }
 
-    private String getColorCode(String sentiment) {
+    private String getColorCode(int sentiment) {
         return switch (sentiment) {
-            case "very negative" -> "darkred";
-            case "negative" -> "red";
-            case "neutral" -> "black";
-            case "positive" -> "lightgreen";
-            case "very positive" -> "darkgreen";
+            case 0 -> "darkred";
+            case 1 -> "red";
+            case 2 -> "black";
+            case 3 -> "lightgreen";
+            case 4 -> "darkgreen";
             default -> "black";
         };
     }

@@ -84,8 +84,8 @@ public class ManagerTask implements Runnable {
                     // <review_id>::<review_rating>::<review_link>::<sentiment>::<entities>##<...>
                     summaryMessage.append(String.join("::",
                                     reviewId, reviewRating + "", reviewLink, sentiment, entities));
-                    if (tasksCompleted == tasksSent - 1) {
-                        summaryMessage.append("##");
+                    if (tasksCompleted < tasksSent - 1) {
+                        summaryMessage.append(AWSConfig.SUMMARY_DELIMITER);
                     }
                 }
 

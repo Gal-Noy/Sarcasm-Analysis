@@ -4,6 +4,7 @@ import analysis.SentimentAnalysisHandler;
 import analysis.NamedEntityRecognitionHandler;
 import software.amazon.awssdk.services.sqs.model.Message;
 
+
 public class Worker {
     private static final AWS aws = AWS.getInstance();
     private static final SentimentAnalysisHandler sentimentAnalysisHandler = new SentimentAnalysisHandler();
@@ -16,11 +17,10 @@ public class Worker {
     }
 
     private static void handleTasksFromManager() {
-        int tasksCompleted = 0;
+        int tasksCompleted = 0; // TODO: Delete this line
         while (true) {
             List<String> managerToWorkerQueues = aws.sqs.getAllManagerToWorkerQueues();
             for (String queueUrl : managerToWorkerQueues) {
-                System.out.println("[DEBUG] Receiving tasks from manager for queue " + queueUrl.split("/")[4].split("-")[0]);
                 List<Message> tasks = aws.sqs.receiveMessages(queueUrl); // long polling
                 for (Message task : tasks) {
                     try {
@@ -41,13 +41,12 @@ public class Worker {
                     } catch (RuntimeException e) {
                         System.err.println("[ERROR] " + e.getMessage());
                     } finally {
-                        tasksCompleted++;
-                        System.out.println("[DEBUG] Completed " + tasksCompleted + " tasks");
+                        tasksCompleted++; // TODO: Delete this line
+                        System.out.println("[DEBUG] Completed " + tasksCompleted + " tasks"); // TODO: Delete this line
                         aws.sqs.deleteMessage(queueUrl, task);
 
                     }
                 }
-                break; // check if any queues added
             }
         }
     }
