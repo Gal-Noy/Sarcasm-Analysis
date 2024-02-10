@@ -23,31 +23,10 @@ public class SQSHandler {
         return sqs.getQueueUrl(request).queueUrl();
     }
 
-    public void deleteQueue(String queueUrl) {
-        DeleteQueueRequest request = DeleteQueueRequest.builder()
-                .queueUrl(queueUrl)
-                .build();
-        sqs.deleteQueue(request);
-    }
-
-    public List<String> getAllLocalToManagerQueues() {
+    public List<String> getAllQueuesByPrefix(String queueNamePrefix) {
         try {
             ListQueuesRequest listQueuesRequest = ListQueuesRequest
-                    .builder().queueNamePrefix(AWSConfig.LOCAL_TO_MANAGER_QUEUE_NAME).build();
-            ListQueuesResponse listQueuesResponse = sqs.listQueues(listQueuesRequest);
-            return listQueuesResponse.queueUrls();
-
-        } catch (SqsException e) {
-            System.err.printf("[ERROR] %s", e.awsErrorDetails().errorMessage());
-            System.exit(1);
-        }
-        return null;
-    }
-
-    public List<String> getAllManagerToWorkerQueues() {
-        try {
-            ListQueuesRequest listQueuesRequest = ListQueuesRequest
-                    .builder().queueNamePrefix(AWSConfig.MANAGER_TO_WORKER_QUEUE_NAME).build();
+                    .builder().queueNamePrefix(queueNamePrefix).build();
             ListQueuesResponse listQueuesResponse = sqs.listQueues(listQueuesRequest);
             return listQueuesResponse.queueUrls();
         }
@@ -56,6 +35,27 @@ public class SQSHandler {
             System.exit(1);
         }
         return null;
+    }
+
+    public void deleteQueue(String queueUrl) {
+        DeleteQueueRequest request = DeleteQueueRequest.builder()
+                .queueUrl(queueUrl)
+                .build();
+        sqs.deleteQueue(request);
+    }
+
+    public void deleteAllManagerToWorkerQueues() {
+        List<String> managerToWorkerQueues = getAllQueuesByPrefix(AWSConfig.MANAGER_TO_WORKER_QUEUE_NAME);
+        for (String queueUrl : managerToWorkerQueues) {
+            deleteQueue(queueUrl);
+        }
+    }
+
+    public void deleteAllWorkerToManagerQueues() {
+        List<String> workerToManagerQueues = getAllQueuesByPrefix(AWSConfig.WORKER_TO_MANAGER_QUEUE_NAME);
+        for (String queueUrl : workerToManagerQueues) {
+            deleteQueue(queueUrl);
+        }
     }
 
     public void sendMessage(String queueUrl, String message) {

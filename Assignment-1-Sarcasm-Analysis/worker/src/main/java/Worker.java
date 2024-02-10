@@ -19,7 +19,7 @@ public class Worker {
     private static void handleTasksFromManager() {
         int tasksCompleted = 0; // TODO: Delete this line
         while (true) {
-            List<String> managerToWorkerQueues = aws.sqs.getAllManagerToWorkerQueues();
+            List<String> managerToWorkerQueues = aws.sqs.getAllQueuesByPrefix(AWSConfig.MANAGER_TO_WORKER_QUEUE_NAME);
             for (String queueUrl : managerToWorkerQueues) {
                 List<Message> tasks = aws.sqs.receiveMessages(queueUrl); // long polling
                 for (Message task : tasks) {
@@ -38,13 +38,13 @@ public class Worker {
 
                         aws.sqs.sendMessage(AWSConfig.WORKER_TO_MANAGER_QUEUE_NAME, response); // TODO: Delete this line
 //            aws.sqs.sendMessage(AWSConfig.WORKER_TO_MANAGER_QUEUE_NAME + "-" + localAppId, response); TODO: Uncomment this line
+
+                        tasksCompleted++; // TODO: Delete this line
+                        System.out.println("[DEBUG] Completed " + tasksCompleted + " tasks for local app " + localAppId); // TODO: Delete this line
                     } catch (RuntimeException e) {
                         System.err.println("[ERROR] " + e.getMessage());
                     } finally {
-                        tasksCompleted++; // TODO: Delete this line
-                        System.out.println("[DEBUG] Completed " + tasksCompleted + " tasks"); // TODO: Delete this line
                         aws.sqs.deleteMessage(queueUrl, task);
-
                     }
                 }
             }

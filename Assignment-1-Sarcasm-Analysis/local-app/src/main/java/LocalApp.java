@@ -24,8 +24,6 @@ public class LocalApp {
 
         LocalAppEnv env = new LocalAppEnv(args);
 
-//        aws.ec2.runManager(); TODO: Uncomment this line
-
 //        String bucketName = AWSConfig.BUCKET_NAME + "-" + localAppId; TODO: Uncomment this line
         String bucketName = AWSConfig.BUCKET_NAME; // TODO: Delete this line
         aws.s3.createS3BucketIfNotExists(bucketName);
@@ -42,6 +40,8 @@ public class LocalApp {
         String managerToLocalQueueUrl = aws.sqs.createQueue(managerToLocalQueueName);
 
         sendTasksToManager(env, bucketName, localToManagerQueueUrl);
+
+        //        aws.ec2.runManager(); TODO: Uncomment this line
 
         receiveResponsesFromManager(env, bucketName, managerToLocalQueueUrl);
 
@@ -87,7 +87,7 @@ public class LocalApp {
         while (filesLeftToProcess > 0) {
             System.out.println("[DEBUG] Receiving responses from manager");
             List<Message> responses = aws.sqs.receiveMessages(managerToLocalQueueUrl);
-            for (Message response : responses) {
+            for (Message response : responses) { // response for each input file
                 String responseBody = response.body();
                 // <local_app_id>::<response_status>::<summary_file_name>::<input_index>
                 String[] responseContent = responseBody.split("::");
@@ -117,7 +117,6 @@ public class LocalApp {
                     }
                     aws.sqs.deleteMessage(managerToLocalQueueUrl, response);
                 }
-
             }
         }
 
@@ -136,7 +135,6 @@ public class LocalApp {
             }
         }
     }
-
 
 }
 

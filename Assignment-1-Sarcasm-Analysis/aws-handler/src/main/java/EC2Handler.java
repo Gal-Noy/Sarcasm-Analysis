@@ -107,4 +107,40 @@ public class EC2Handler {
         return activeWorkers;
     }
 
+    public void terminateEC2Instance(String instanceId) {
+        TerminateInstancesRequest request = TerminateInstancesRequest.builder()
+                .instanceIds(instanceId)
+                .build();
+        ec2.terminateInstances(request);
+    }
+
+    public void terminateAllWorkers() {
+        for (Reservation reservation : ec2.describeInstances().reservations()) {
+            for (Instance instance : reservation.instances()) {
+                for (Tag tag : instance.tags()) {
+                    if (tag.key().equals(AWSConfig.TYPE_TAG) && tag.value().equals(AWSConfig.WORKER_TYPE_TAG_VALUE)) {
+                        if (instance.state().name().equals(InstanceStateName.RUNNING) ||
+                                instance.state().name().equals(InstanceStateName.PENDING)) {
+                            terminateEC2Instance(instance.instanceId());
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public void terminateManager() {
+        for (Reservation reservation : ec2.describeInstances().reservations()) {
+            for (Instance instance : reservation.instances()) {
+                for (Tag tag : instance.tags()) {
+                    if (tag.key().equals(AWSConfig.TYPE_TAG) && tag.value().equals(AWSConfig.MANAGER_TYPE_TAG_VALUE)) {
+                        if (instance.state().name().equals(InstanceStateName.RUNNING) ||
+                                instance.state().name().equals(InstanceStateName.PENDING)) {
+                            terminateEC2Instance(instance.instanceId());
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

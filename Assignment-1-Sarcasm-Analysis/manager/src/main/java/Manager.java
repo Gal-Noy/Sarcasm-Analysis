@@ -25,35 +25,20 @@ public class Manager {
             }
         }
 
-        // Serve the local app that requested termination
-//        String terminatingAppQueueUrl = aws.sqs.getQueueUrl(
-//                LOCAL_TO_MANAGER_QUEUE_NAME + "::" + terminatingLocalApp);
-//        String terminatingAppS3Bucket = AWSConfig.BUCKET_NAME + "::" + terminatingLocalApp;
-//        List<String> remainingRequests = aws.sqs.receiveMessages(terminatingAppQueueUrl)
-//                .stream().map(Message::body).toList();
-//        for (String request : remainingRequests) {
-//            String[] requestContent = request.split("::");
-//            String requestType = requestContent[1], inputFileName = requestContent[2], inputIndex = requestContent[3];
-//            int reviewsPerWorker = Integer.parseInt(requestContent[4]);
-//            InputStream inputFile = aws.s3.downloadFileFromS3(terminatingAppS3Bucket, inputFileName);
-//            int totalReviews = getReviewsCount(inputFile);
-//            int workersNeeded = (int) Math.ceil((double) totalReviews / reviewsPerWorker);
-//            workers += workersNeeded;
-//            for (int i = 0; i < workersNeeded; i++) {
-//
-//            }
-//        }
+        // Handle termination
+        env.executor.shutdown();
+        waitForExecutorToFinish(env.executor);
 
-        // wait for all workers to finish and delete the queues
+        aws.sqs.deleteAllManagerToWorkerQueues();
+        aws.sqs.deleteAllWorkerToManagerQueues();
 
-        // create response messages for the jobs if needed
+        aws.ec2.terminateManager();
 
-        // terminates the manager instance
-
+        System.out.println("[DEBUG] Manager finished");
     }
 
     private static void pollTasksFromLocalApps(ManagerEnv env) throws Exception {
-        List<String> localToManagerQueues = aws.sqs.getAllLocalToManagerQueues();
+        List<String> localToManagerQueues = aws.sqs.getAllQueuesByPrefix(AWSConfig.LOCAL_TO_MANAGER_QUEUE_NAME);
 
         for (String queueUrl : localToManagerQueues) {
             if (!env.polledQueues.contains(queueUrl)) {
@@ -63,7 +48,7 @@ public class Manager {
 
         int numberOfQueues = env.polledQueues.size();
         System.out.println("[DEBUG] Polling from " + numberOfQueues + " local app queues");
-        env.executor.setCorePoolSize(10 * numberOfQueues);
+        env.executor.setCorePoolSize(10 * numberOfQueues); // For maximum 10 input files per local app
 
         List<Future<?>> pendingQueuePollers = new ArrayList<>();
 
@@ -83,15 +68,8 @@ public class Manager {
             pendingQueuePollers.add(future);
         }
 
-        // Main thread waits for all queue pollers to finish
-        for (Future<?> pendingQueuePoller : pendingQueuePollers) {
-            try {
-                pendingQueuePoller.get();
-            } catch (Exception e) {
-                System.err.println("[ERROR] " + e.getMessage());
-            }
-        }
-
+        // After termination request and all tasks are handled for the terminating local app
+        handleTermination(env, pendingQueuePollers);
     }
 
     private static void handleQueueTasks(ManagerEnv env, List<Message> requests, String queueUrl) throws IOException {
@@ -104,9 +82,13 @@ public class Manager {
             String localAppId = requestContent[0], requestType = requestContent[1];
 
             if (requestType.equals(AWSConfig.TERMINATE_TASK)) {
-                System.out.println("[DEBUG] Received terminate request");
-                handleTerminateRequest(env, localAppId, queueUrl, request);
-                break;
+                System.out.println("[DEBUG] Received terminate request from local app " + localAppId);
+
+                env.isTerminated = true;
+                aws.sqs.deleteMessage(queueUrl, request);
+
+                // Continue to serve the local app that requested termination
+                continue;
             }
 
             String inputFileName = requestContent[2], inputIndex = requestContent[3];
@@ -128,6 +110,7 @@ public class Manager {
 //                aws.sqs.createQueue(AWSConfig.MANAGER_TO_WORKER_QUEUE_NAME + "-" + localAppId); TODO: Uncomment this line
 //                aws.sqs.createQueue(AWSConfig.WORKER_TO_MANAGER_QUEUE_NAME + "-" + localAppId); TODO: Uncomment this line
 
+            // Task for each input file, to send tasks to workers and receive responses
             env.executor.execute(new ManagerTask(
                     localAppId,
                     inputIndex,
@@ -136,19 +119,21 @@ public class Manager {
                     AWSConfig.BUCKET_NAME // TODO: Delete this line
             ));
 
-//            pendingRequests.add(future);
-
             aws.sqs.deleteMessage(queueUrl, request);
         }
     }
 
-    private static void handleTerminateRequest(ManagerEnv env, String localAppId, String queueUrl, Message request) {
-        env.executor.shutdown();
-        waitForExecutorToFinish(env.executor);
-        env.isTerminated = true;
-        aws.sqs.deleteMessage(queueUrl, request);
-//                        terminatingLocalApp = localAppId;
-//                        aws.sqs.handleTerminationByLocalApp(localAppId);
+    private static void handleTermination(ManagerEnv env, List<Future<?>> pendingQueuePollers) {
+        // Main thread waits for all queue pollers to finish
+        for (Future<?> pendingQueuePoller : pendingQueuePollers) {
+            try {
+                pendingQueuePoller.get();
+            } catch (Exception e) {
+                System.err.println("[ERROR] " + e.getMessage());
+            }
+        }
+
+        aws.ec2.terminateAllWorkers();
     }
 
     private static void assignWorkers(ManagerEnv env, int workersNeeded) {

@@ -6,17 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="4b4dc6e6-069e-49cd-8d09-ba7a937ac67a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../aws-handler/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../aws-handler/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../aws-handler/src/main/java/SQSHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../aws-handler/src/main/java/SQSHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../inputs/test-input1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../inputs/test-input1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../inputs/test-input2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../inputs/test-input2.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output1.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output2.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/LocalApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/LocalApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/LocalAppTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/LocalAppTask.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../manager/src/main/java/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../manager/src/main/java/Manager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../manager/src/main/java/ManagerEnv.java" beforeDir="false" afterPath="$PROJECT_DIR$/../manager/src/main/java/ManagerEnv.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../manager/src/main/java/ManagerTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/../manager/src/main/java/ManagerTask.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../worker/src/main/java/Worker.java" beforeDir="false" afterPath="$PROJECT_DIR$/../worker/src/main/java/Worker.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
