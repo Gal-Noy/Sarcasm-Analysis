@@ -1,5 +1,6 @@
 import software.amazon.awssdk.services.sqs.model.Message;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +12,8 @@ public class ManagerTask implements Runnable {
     private final String bucketName;
     private int tasksSent = 0;
     private int tasksCompleted = 0;
+    private Map<String, String> reviewsSentiment = new HashMap<>();
+    private Map<String, String> reviewsEntities = new HashMap<>();
     private final StringBuilder summaryMessage;
 
     public ManagerTask(String localAppId, String inputIndex, Map<String, Review> requestReviews, String bucketName) {
@@ -18,6 +21,8 @@ public class ManagerTask implements Runnable {
         this.inputIndex = inputIndex;
         this.requestReviews = requestReviews;
         this.bucketName = bucketName;
+        this.reviewsSentiment = new HashMap<>();
+        this.reviewsEntities = new HashMap<>();
         this.summaryMessage = new StringBuilder();
     }
 
@@ -49,11 +54,15 @@ public class ManagerTask implements Runnable {
             String reviewId = entry.getKey();
             String reviewText = entry.getValue().getText();
 
-            // <local_app_id>::<input_index>::<review_id>::<review_text>
-            String task = String.join("::", localAppId, inputIndex, reviewId, reviewText);
-            aws.sqs.sendMessage(managerToWorkerQueueUrl, task);
+            // <local_app_id>::<input_index>::<review_id>::<review_text>::<task_type>
+            String sentimentTask = String.join("::", localAppId, inputIndex, reviewId, reviewText, AWSConfig.SENTIMENT_ANALYSIS_TASK);
+            String entitiesTask = String.join("::", localAppId, inputIndex, reviewId, reviewText, AWSConfig.ENTITY_RECOGNITION_TASK);
 
-            tasksSent++;
+            aws.sqs.sendMessage(managerToWorkerQueueUrl, sentimentTask);
+            aws.sqs.sendMessage(managerToWorkerQueueUrl, entitiesTask);
+
+            tasksSent += 2;
+
             System.out.println("[DEBUG] " + tasksSent + " of request number " + inputIndex);
         }
         System.out.println("[DEBUG] Sent tasks to workers");
@@ -71,24 +80,38 @@ public class ManagerTask implements Runnable {
             System.out.println("[DEBUG] Received " + responses.size() + " responses from workers");
             for (Message response : responses) {
                 String responseBody = response.body();
-                // <local_app_id>::<sentiment>::<entities>::<input_index>::<review_id>
-                String[] responseContent = responseBody.split("::");
-                String localAppId = responseContent[0], sentiment = responseContent[1],
-                        entities = responseContent[2], inputIndex = responseContent[3], reviewId = responseContent[4];
+                // <local_app_id>::<input_index>::<review_id>::<task_type>::<task_result>
+                String[] responseContent = responseBody.split("::", -1);
+                String localAppId = responseContent[0], inputIndex = responseContent[1],
+                        reviewId = responseContent[2], taskType = responseContent[3], taskResult = responseContent[4];
 
                 // Check if response is for this task
                 if (localAppId.equals(this.localAppId) && inputIndex.equals(this.inputIndex)) {
                     int reviewRating = requestReviews.get(reviewId).getRating();
                     String reviewLink = requestReviews.get(reviewId).getLink();
 
-                    // <review_id>::<review_rating>::<review_link>::<sentiment>::<entities>##<...>
-                    summaryMessage.append(String.join("::",
-                                    reviewId, reviewRating + "", reviewLink, sentiment, entities));
-                    if (tasksCompleted < tasksSent - 1) {
-                        summaryMessage.append(AWSConfig.SUMMARY_DELIMITER);
+                    if (taskType.equals(AWSConfig.SENTIMENT_ANALYSIS_TASK)) {
+                        reviewsSentiment.put(reviewId, taskResult);
                     }
-                }
 
+                    if (taskType.equals(AWSConfig.ENTITY_RECOGNITION_TASK)) {
+                        reviewsEntities.put(reviewId, taskResult);
+                    }
+
+                    if (reviewsSentiment.containsKey(reviewId) && reviewsEntities.containsKey(reviewId)) {
+                        String sentiment = reviewsSentiment.get(reviewId);
+                        String entities = reviewsEntities.get(reviewId);
+
+                        if (!summaryMessage.isEmpty()) {
+                            summaryMessage.append(AWSConfig.SUMMARY_DELIMITER);
+                        }
+
+                        // <review_id>::<review_rating>::<review_link>::<sentiment>::<entities>
+                        summaryMessage.append(String.join("::",
+                                reviewId, reviewRating + "", reviewLink, sentiment, entities));
+                    }
+
+                }
                 tasksCompleted++;
                 aws.sqs.deleteMessage(workerToManagerQueueUrl, response);
 
