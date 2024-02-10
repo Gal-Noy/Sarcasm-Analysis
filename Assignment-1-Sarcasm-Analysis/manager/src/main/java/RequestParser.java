@@ -10,7 +10,6 @@ import java.util.Map;
 
 public class RequestParser {
     public static Map<String, Review> parseRequest(InputStream inputFile) throws IOException {
-        System.out.println("[DEBUG] Parsing request");
 
         Map<String, Review> requestReviews = new HashMap<>();
 

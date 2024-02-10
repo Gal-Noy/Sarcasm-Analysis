@@ -1,3 +1,4 @@
+import org.slf4j.Logger;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.core.sync.ResponseTransformer;
 import software.amazon.awssdk.services.s3.S3Client;
@@ -8,6 +9,11 @@ import java.io.InputStream;
 
 public class S3Handler {
     private final S3Client s3 = S3Client.builder().region(AWSConfig.REGION).build();
+    final Logger logger;
+
+    public S3Handler(Logger logger) {
+        this.logger = logger;
+    }
 
     public void createS3BucketIfNotExists(String bucketName) {
         try {
@@ -18,9 +24,13 @@ public class S3Handler {
             s3.waiter().waitUntilBucketExists(HeadBucketRequest.builder()
                     .bucket(bucketName)
                     .build());
-            System.out.println("[DEBUG] S3 bucket " + bucketName + " created");
+            logger.info("[INFO] S3 bucket " + bucketName + " created");
         } catch (S3Exception e) {
-            System.out.println("[ERROR] " + e.getMessage());
+            if (!e.getMessage().contains("BucketAlreadyOwnedByYou")) {
+                logger.error("[ERROR] " + e.getMessage());
+            } else {
+                logger.info("[INFO] S3 bucket " + bucketName + " already exists");
+            }
         }
     }
 
@@ -31,6 +41,8 @@ public class S3Handler {
                 .key(inputFile.getName())
                 .build();
         s3.putObject(objectRequest, RequestBody.fromFile(inputFile));
+
+        logger.info("[INFO] File " + inputFile.getName() + " uploaded to S3 bucket " + bucketName);
     }
 
     public void uploadContentToS3(String bucketName, String key, String content) {
@@ -39,9 +51,12 @@ public class S3Handler {
                 .key(key)
                 .build();
         s3.putObject(objectRequest, RequestBody.fromString(content));
+
+        logger.info("[INFO] Content uploaded to S3 bucket " + bucketName + " with key " + key);
     }
 
     public InputStream downloadFileFromS3(String bucketName, String key) {
+        logger.info("[INFO] Downloading file " + key + " from S3 bucket " + bucketName);
         GetObjectRequest objectRequest = GetObjectRequest.builder()
                 .bucket(bucketName)
                 .key(key)
@@ -55,6 +70,8 @@ public class S3Handler {
                 .key(key)
                 .build();
         s3.deleteObject(deleteObjectRequest);
+
+        logger.info("[INFO] File " + key + " deleted from S3 bucket " + bucketName);
     }
 
     public void emptyS3Bucket(String bucketName) {
@@ -68,6 +85,8 @@ public class S3Handler {
                     .key(s3Object.key())
                     .build());
         }
+
+        logger.info("[INFO] S3 bucket " + bucketName + " emptied");
     }
 
     public void deleteS3Bucket(String bucketName) {
@@ -75,5 +94,7 @@ public class S3Handler {
                 .bucket(bucketName)
                 .build();
         s3.deleteBucket(deleteBucketRequest);
+
+        logger.info("[INFO] S3 bucket " + bucketName + " deleted");
     }
 }

@@ -1,3 +1,5 @@
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import software.amazon.awssdk.services.sqs.SqsClient;
 import software.amazon.awssdk.services.sqs.model.*;
 
@@ -6,13 +8,20 @@ import java.util.List;
 public class SQSHandler {
 
     private final SqsClient sqs = SqsClient.builder().region(AWSConfig.REGION).build();
+    final Logger logger;
+
+    public SQSHandler(Logger logger) {
+        this.logger = logger;
+    }
 
     public String createQueue(String queueName) {
         CreateQueueRequest request = CreateQueueRequest.builder()
                 .queueName(queueName)
                 .build();
         sqs.createQueue(request);
-        System.out.println("[DEBUG] Created queue " + queueName);
+
+        logger.info("[INFO] Queue " + queueName + " created");
+
         return getQueueUrl(queueName);
     }
 
@@ -23,6 +32,10 @@ public class SQSHandler {
         return sqs.getQueueUrl(request).queueUrl();
     }
 
+    public String getLocalAppNameFromQueueUrl(String queueUrl) {
+        return queueUrl.split("/")[4].split("-")[1];
+    }
+
     public List<String> getAllQueuesByPrefix(String queueNamePrefix) {
         try {
             ListQueuesRequest listQueuesRequest = ListQueuesRequest
@@ -31,7 +44,7 @@ public class SQSHandler {
             return listQueuesResponse.queueUrls();
         }
         catch (SqsException e) {
-            System.err.printf("[ERROR] %s", e.awsErrorDetails().errorMessage());
+            logger.error("[ERROR] " + e.getMessage());
             System.exit(1);
         }
         return null;
@@ -42,20 +55,8 @@ public class SQSHandler {
                 .queueUrl(queueUrl)
                 .build();
         sqs.deleteQueue(request);
-    }
 
-    public void deleteAllManagerToWorkerQueues() {
-        List<String> managerToWorkerQueues = getAllQueuesByPrefix(AWSConfig.MANAGER_TO_WORKER_QUEUE_NAME);
-        for (String queueUrl : managerToWorkerQueues) {
-            deleteQueue(queueUrl);
-        }
-    }
-
-    public void deleteAllWorkerToManagerQueues() {
-        List<String> workerToManagerQueues = getAllQueuesByPrefix(AWSConfig.WORKER_TO_MANAGER_QUEUE_NAME);
-        for (String queueUrl : workerToManagerQueues) {
-            deleteQueue(queueUrl);
-        }
+        logger.info("[INFO] Queue " + queueUrl + " deleted");
     }
 
     public void sendMessage(String queueUrl, String message) {
@@ -63,9 +64,13 @@ public class SQSHandler {
                 .queueUrl(queueUrl)
                 .messageBody(message)
                 .build());
+
+        logger.info("[INFO] Sent message to " + queueUrl);
     }
 
     public List<Message> receiveMessages(String queueUrl) {
+        logger.info("[INFO] Polling messages from " + queueUrl);
+
         ReceiveMessageRequest request = ReceiveMessageRequest.builder()
                 .queueUrl(queueUrl)
                 .maxNumberOfMessages(10)
@@ -81,8 +86,7 @@ public class SQSHandler {
                 .receiptHandle(message.receiptHandle())
                 .build();
         sqs.deleteMessage(request);
+
+        logger.info("[INFO] Deleted message from " + queueUrl);
     }
-
-
-
 }

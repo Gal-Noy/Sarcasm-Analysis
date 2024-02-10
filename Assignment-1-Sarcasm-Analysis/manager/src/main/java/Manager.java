@@ -1,4 +1,6 @@
 import software.amazon.awssdk.services.sqs.model.Message;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,9 +13,10 @@ import java.util.concurrent.TimeUnit;
 
 public class Manager {
     private static final AWS aws = AWS.getInstance();
+    private static final Logger logger = LoggerFactory.getLogger(Manager.class);
 
     public static void main(String[] args) {
-        System.out.println("[DEBUG] Manager started");
+        logger.info("[INFO] Manager started");
 
         ManagerEnv env = new ManagerEnv();
 
@@ -21,7 +24,7 @@ public class Manager {
             try {
                 pollTasksFromLocalApps(env);
             } catch (Exception e) {
-                System.err.println("[ERROR] " + e.getMessage());
+                logger.error("[ERROR] " + e.getMessage());
             }
         }
 
@@ -29,38 +32,48 @@ public class Manager {
         env.executor.shutdown();
         waitForExecutorToFinish(env.executor);
 
-        aws.sqs.deleteAllManagerToWorkerQueues();
-        aws.sqs.deleteAllWorkerToManagerQueues();
-
         aws.ec2.terminateManager();
 
-        System.out.println("[DEBUG] Manager finished");
+        logger.info("[INFO] Manager finished");
     }
 
-    private static void pollTasksFromLocalApps(ManagerEnv env) throws Exception {
+    private static void pollTasksFromLocalApps(ManagerEnv env) {
         List<String> localToManagerQueues = aws.sqs.getAllQueuesByPrefix(AWSConfig.LOCAL_TO_MANAGER_QUEUE_NAME);
 
         for (String queueUrl : localToManagerQueues) {
             if (!env.polledQueues.contains(queueUrl)) {
                 env.polledQueues.add(queueUrl);
+
+                String localAppId = aws.sqs.getLocalAppNameFromQueueUrl(queueUrl);
+                aws.sqs.createQueue(AWSConfig.MANAGER_TO_WORKER_QUEUE_NAME + AWSConfig.DEFAULT_DELIMITER + localAppId);
+                aws.sqs.createQueue(AWSConfig.WORKER_TO_MANAGER_QUEUE_NAME + AWSConfig.DEFAULT_DELIMITER + localAppId);
             }
         }
 
         int numberOfQueues = env.polledQueues.size();
-        System.out.println("[DEBUG] Polling from " + numberOfQueues + " local app queues");
         env.executor.setCorePoolSize(10 * numberOfQueues); // For maximum 10 input files per local app
+
+        logger.info("[INFO] Polling tasks from " + numberOfQueues + " local app queues");
 
         List<Future<?>> pendingQueuePollers = new ArrayList<>();
 
         for (String queueUrl : env.polledQueues) {
+            String localAppId = aws.sqs.getLocalAppNameFromQueueUrl(queueUrl);
+
             Future<?> future = env.executor.submit(() -> {
                 while (!env.isTerminated) { // For each local app queue, there is a thread long polling for tasks
                     try {
                         List<Message> requests = aws.sqs.receiveMessages(queueUrl); // long polling
-                        System.out.println("[DEBUG] Received " + requests.size() + " requests from queue " + queueUrlToName(queueUrl));
-                        handleQueueTasks(env, requests, queueUrl);
-                    } catch (IOException e) {
-                        System.err.println("[ERROR] " + e.getMessage());
+                        logger.info("[INFO] Received " + requests.size() + " requests from local app " + localAppId);
+                        if (!requests.isEmpty()) {
+                            handleQueueTasks(env, requests, queueUrl);
+                        }
+                    } catch (Exception e) {
+                        // Queue is deleted when local app terminates
+                        env.polledQueues.remove(queueUrl);
+                        aws.sqs.deleteQueue(AWSConfig.MANAGER_TO_WORKER_QUEUE_NAME + AWSConfig.DEFAULT_DELIMITER + localAppId);
+                        aws.sqs.deleteQueue(AWSConfig.WORKER_TO_MANAGER_QUEUE_NAME + AWSConfig.DEFAULT_DELIMITER + localAppId);
+                        break;
                     }
                 }
             });
@@ -75,14 +88,14 @@ public class Manager {
     private static void handleQueueTasks(ManagerEnv env, List<Message> requests, String queueUrl) throws IOException {
         for (Message request : requests) {
             String requestBody = request.body();
-            System.out.println("[DEBUG] Received request " + requestBody);
+            logger.info("[INFO] Received request: " + requestBody);
 
             // <local_app_id>::<task_type>::<input_file>::<input_index>::<reviews_per_worker>
-            String[] requestContent = requestBody.split("::");
+            String[] requestContent = requestBody.split(AWSConfig.MESSAGE_DELIMITER);
             String localAppId = requestContent[0], requestType = requestContent[1];
 
             if (requestType.equals(AWSConfig.TERMINATE_TASK)) {
-                System.out.println("[DEBUG] Received terminate request from local app " + localAppId);
+                logger.info("[INFO] Termination request received from local app " + localAppId);
 
                 env.isTerminated = true;
                 aws.sqs.deleteMessage(queueUrl, request);
@@ -97,26 +110,25 @@ public class Manager {
             Map<String, Review> requestReviews;
 
             InputStream inputFile = aws.s3.downloadFileFromS3(
-//                        AWSConfig.BUCKET_NAME + "-" + localAppId, TODO: Uncomment this line
-                    AWSConfig.BUCKET_NAME, // TODO: Delete this line
+                    AWSConfig.BUCKET_NAME + AWSConfig.DEFAULT_DELIMITER + localAppId,
                     inputFileName);
             if (inputFile == null) {
-                throw new RuntimeException("Input file not found");
+                logger.error("[ERROR] Input file not found: " + inputFileName);
+                aws.sqs.deleteMessage(queueUrl, request);
+                continue;
             }
             requestReviews = RequestParser.parseRequest(inputFile);
+            logger.info("[INFO] Parsed " + requestReviews.size() + " reviews from input file " + inputFileName);
 
 //            assignWorkers(env, (int) Math.ceil((double) requestReviews.size() / reviewsPerWorker));
-
-//                aws.sqs.createQueue(AWSConfig.MANAGER_TO_WORKER_QUEUE_NAME + "-" + localAppId); TODO: Uncomment this line
-//                aws.sqs.createQueue(AWSConfig.WORKER_TO_MANAGER_QUEUE_NAME + "-" + localAppId); TODO: Uncomment this line
 
             // Task for each input file, to send tasks to workers and receive responses
             env.executor.execute(new ManagerTask(
                     localAppId,
                     inputIndex,
                     requestReviews,
-//                        AWSConfig.BUCKET_NAME + "-" + localAppId TODO: Uncomment this line
-                    AWSConfig.BUCKET_NAME // TODO: Delete this line
+                    AWSConfig.BUCKET_NAME + AWSConfig.DEFAULT_DELIMITER + localAppId,
+                    logger
             ));
 
             aws.sqs.deleteMessage(queueUrl, request);
@@ -133,11 +145,14 @@ public class Manager {
             }
         }
 
+        logger.info("[INFO] All local app queues are removed");
+
         aws.ec2.terminateAllWorkers();
     }
 
     private static void assignWorkers(ManagerEnv env, int workersNeeded) {
-        System.out.println("[DEBUG] Assigning workers");
+        logger.info("[INFO] Assigning workers");
+
         int activeWorkers = aws.ec2.countActiveWorkers();
         int remainingWorkersCapacity = 18 - activeWorkers;
         if (remainingWorkersCapacity > 0) {
@@ -147,24 +162,21 @@ public class Manager {
                 aws.ec2.createWorkerInstance();
             }
         }
-        System.out.println("[DEBUG] Workers assigned");
+
+        logger.info("[INFO] Workers assigned: " + env.workers);
     }
 
     private static void waitForExecutorToFinish(ThreadPoolExecutor executor) {
         while (true) {
             try {
                 if (executor.awaitTermination(1, TimeUnit.SECONDS)) {
+                    logger.info("[INFO] Executor terminated");
                     break;
                 }
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                logger.error("[ERROR] " + e.getMessage());
             }
         }
-    }
-
-    // TODO: Delete this method
-    private static String queueUrlToName(String queueUrl) {
-        return queueUrl.split("/")[4].split("-")[0];
     }
 
 }

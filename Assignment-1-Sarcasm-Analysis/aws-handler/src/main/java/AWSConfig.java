@@ -11,15 +11,13 @@ public class AWSConfig {
     public static final String RESPONSE_STATUS_ERROR = "error";
     public static final String SENTIMENT_ANALYSIS_TASK = "sentimentAnalysis";
     public static final String ENTITY_RECOGNITION_TASK = "entityRecognition";
+    public static final String SUMMARY_FILE_INDICATOR = "summary";
+    public static final String DEFAULT_DELIMITER = "-";
     public static final String MESSAGE_DELIMITER = "::";
     public static final String SUMMARY_DELIMITER = "##";
-    public static final String SUMMARY_FILE_NAME_DELIMITER = "-";
-    private static final String ENTITIES_DELIMITER = ";";
-
 
     // S3
-//    public static final String BUCKET_NAME = "sarcasm-analysis-bucket";
-    public static final String BUCKET_NAME = "sarcasm-analysis-bucket-test";
+    public static final String BUCKET_NAME = "sarcasm-analysis-bucket";
     public static final String JARS_BUCKET_NAME = "sarcasm-analysis-jars-bucket";
 
     // EC2
@@ -30,15 +28,13 @@ public class AWSConfig {
 
     public static final String MANAGER_INSTANCE_SCRIPT = "#!/bin/bash\n" +
             "wget https://" + JARS_BUCKET_NAME + ".s3.amazonaws.com/manager.jar\n" +
-            "java -jar manager.jar";
-//            "java -jar manager.jar\n" +
-//            "shutdown -h now";
+            "java -jar manager.jar\n" +
+            "shutdown -h now";
 
     public static String WORKER_INSTANCE_SCRIPT = "#!/bin/bash\n" +
             "wget https://" + JARS_BUCKET_NAME + ".s3.amazonaws.com/worker.jar\n" +
-            "java -jar worker.jar";
-//            "java -jar worker.jar\n" +
-//            "shutdown -h now";
+            "java -jar worker.jar\n" +
+            "shutdown -h now";
 
     public static final String TYPE_TAG = "Type";
     public static final String MANAGER_TYPE_TAG_VALUE = "Manager";
@@ -47,7 +43,6 @@ public class AWSConfig {
     public static final String MANAGER_NAME_TAG_VALUE = "sarcasm-analysis-manager";
     public static final String WORKER_NAME_TAG_VALUE = "sarcasm-analysis-worker-"
             + UUID.randomUUID().toString().replace("-", "").substring(0, 8);
-
 
     // SQS
     public static final String LOCAL_TO_MANAGER_QUEUE_NAME = "localToManagerQueue";

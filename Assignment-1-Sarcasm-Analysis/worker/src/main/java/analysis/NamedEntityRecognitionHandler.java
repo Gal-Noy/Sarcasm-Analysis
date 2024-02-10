@@ -43,7 +43,7 @@ public class NamedEntityRecognitionHandler {
                 String ne = token.get(NamedEntityTagAnnotation.class);
 
                 if (entities.contains(ne)) {
-                    entitiesFound.add(word + ":" + ne);
+                    entitiesFound.add(word + ": " + ne);
                 }
             }
         }
