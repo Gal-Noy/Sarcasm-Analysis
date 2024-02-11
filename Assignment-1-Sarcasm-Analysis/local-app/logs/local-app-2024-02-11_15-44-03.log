@@ -1,0 +1,13 @@
+LOCAL 2024-02-11 15:44:04 INFO  LocalApp:27 - LocalApp started with id b4870f3861962221
+LOCAL 2024-02-11 15:44:04 INFO  LocalApp:31 - LocalAppEnv created
+LOCAL 2024-02-11 15:44:06 INFO  LocalApp:27 - S3 bucket sarcasm-analysis-bucket-b4870f3861962221 created
+LOCAL 2024-02-11 15:44:07 INFO  LocalApp:22 - Queue localToManagerQueue-b4870f3861962221 created
+LOCAL 2024-02-11 15:44:08 INFO  LocalApp:22 - Queue managerToLocalQueue-b4870f3861962221 created
+LOCAL 2024-02-11 15:44:14 INFO  LocalApp:45 - File test-input1.txt uploaded to S3 bucket sarcasm-analysis-bucket-b4870f3861962221
+LOCAL 2024-02-11 15:44:16 INFO  LocalApp:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-b4870f3861962221
+LOCAL 2024-02-11 15:44:17 INFO  LocalApp:80 - Sent task to manager: test-input1.txt for inputIndex 0 with 20 reviews per worker
+LOCAL 2024-02-11 15:44:44 INFO  LocalApp:84 - Manager instance does not exist
+LOCAL 2024-02-11 15:44:44 INFO  LocalApp:90 - Creating manager instance
+LOCAL 2024-02-11 15:44:46 INFO  LocalApp:36 - Successfully started EC2 instance i-0b18ffdf597ef9d3f based on AMI ami-00e95a9222311e8ed
+LOCAL 2024-02-11 15:47:27 INFO  LocalApp:87 - Polling for responses from manager
+LOCAL 2024-02-11 15:47:27 INFO  LocalApp:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/managerToLocalQueue-b4870f3861962221

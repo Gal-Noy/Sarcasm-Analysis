@@ -23,16 +23,16 @@ public class AWSConfig {
 
     // EC2
     public static final String AMI_ID = "ami-00e95a9222311e8ed";
-    public static final InstanceType INSTANCE_TYPE = InstanceType.T2_MICRO;
+    public static final InstanceType INSTANCE_TYPE = InstanceType.M4_LARGE;
     public static final String KEY_NAME = "vockey";
     public static final String IAM_PROFILE = "LabInstanceProfile";
 
     public static final String MANAGER_INSTANCE_SCRIPT = "#!/bin/bash\n" +
-            "wget https://" + JARS_BUCKET_NAME + ".s3.amazonaws.com/manager.jar\n" +
+            "aws s3 cp s3://" + JARS_BUCKET_NAME + "/manager.jar manager.jar\n" +
             "java -jar manager.jar";
 
     public static final String WORKER_INSTANCE_SCRIPT = "#!/bin/bash\n" +
-            "wget https://" + JARS_BUCKET_NAME + ".s3.amazonaws.com/worker.jar\n" +
+            "aws s3 cp s3://" + JARS_BUCKET_NAME + "/worker.jar worker.jar\n" +
             "java -jar worker.jar";
 
     public static final String TYPE_TAG = "Type";
@@ -40,9 +40,7 @@ public class AWSConfig {
     public static final String WORKER_TYPE_TAG_VALUE = "Worker";
     public static final String NAME_TAG = "Name";
     public static final String MANAGER_NAME_TAG_VALUE = "sarcasm-analysis-manager";
-    public static final String WORKER_NAME_TAG_VALUE = "sarcasm-analysis-worker-"
-            + UUID.randomUUID().toString().replace("-", "").substring(28);
-
+    public static final String WORKER_NAME_TAG_VALUE = "sarcasm-analysis-worker";
     // SQS
     public static final String LOCAL_TO_MANAGER_QUEUE_NAME = "localToManagerQueue";
     public static final String MANAGER_TO_LOCAL_QUEUE_NAME = "managerToLocalQueue";

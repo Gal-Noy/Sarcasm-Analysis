@@ -1,0 +1,6 @@
+LOCAL 2024-02-11 18:15:23 INFO  SQSHandler:55 - Queue https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-9f77f8f96a8ecee2 deleted
+LOCAL 2024-02-11 18:15:23 INFO  SQSHandler:55 - Queue https://sqs.us-east-1.amazonaws.com/767398090493/managerToLocalQueue-9f77f8f96a8ecee2 deleted
+LOCAL 2024-02-11 18:15:23 INFO  SQSHandler:55 - Queue https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue deleted
+LOCAL 2024-02-11 18:15:23 INFO  SQSHandler:55 - Queue https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue deleted
+LOCAL 2024-02-11 18:15:26 INFO  S3Handler:86 - S3 bucket sarcasm-analysis-bucket-9f77f8f96a8ecee2 emptied
+LOCAL 2024-02-11 18:15:26 INFO  S3Handler:95 - S3 bucket sarcasm-analysis-bucket-9f77f8f96a8ecee2 deleted

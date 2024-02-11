@@ -1,0 +1,21 @@
+LOCAL 2024-02-11 20:39:27 INFO  LocalApp:32 - LocalApp started with id 9f82db818a321c1b
+LOCAL 2024-02-11 20:39:27 INFO  LocalApp:36 - LocalAppEnv created
+LOCAL 2024-02-11 20:39:29 INFO  S3Handler:24 - S3 bucket sarcasm-analysis-bucket-9f82db818a321c1b created
+LOCAL 2024-02-11 20:39:30 INFO  SQSHandler:19 - Queue localToManagerQueue-9f82db818a321c1b created
+LOCAL 2024-02-11 20:39:31 INFO  SQSHandler:19 - Queue managerToLocalQueue-9f82db818a321c1b created
+LOCAL 2024-02-11 20:39:31 INFO  S3Handler:42 - File test-input1.txt uploaded to S3 bucket sarcasm-analysis-bucket-9f82db818a321c1b
+LOCAL 2024-02-11 20:39:32 INFO  SQSHandler:73 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-9f82db818a321c1b
+LOCAL 2024-02-11 20:39:32 INFO  LocalApp:85 - Sent task to manager: test-input1.txt for inputIndex 0 with 5 reviews per worker
+LOCAL 2024-02-11 20:39:32 INFO  LocalApp:92 - Polling for responses from manager
+LOCAL 2024-02-11 20:39:52 INFO  LocalApp:92 - Polling for responses from manager
+LOCAL 2024-02-11 20:40:12 INFO  LocalApp:92 - Polling for responses from manager
+LOCAL 2024-02-11 20:40:32 INFO  LocalApp:92 - Polling for responses from manager
+LOCAL 2024-02-11 20:40:52 INFO  LocalApp:92 - Polling for responses from manager
+LOCAL 2024-02-11 20:41:12 INFO  LocalApp:92 - Polling for responses from manager
+LOCAL 2024-02-11 20:41:33 INFO  LocalApp:92 - Polling for responses from manager
+LOCAL 2024-02-11 20:41:53 INFO  LocalApp:92 - Polling for responses from manager
+LOCAL 2024-02-11 20:42:13 INFO  LocalApp:92 - Polling for responses from manager
+LOCAL 2024-02-11 20:42:33 INFO  LocalApp:92 - Polling for responses from manager
+LOCAL 2024-02-11 20:42:53 INFO  LocalApp:92 - Polling for responses from manager
+LOCAL 2024-02-11 20:43:13 INFO  LocalApp:92 - Polling for responses from manager
+LOCAL 2024-02-11 20:43:33 INFO  LocalApp:92 - Polling for responses from manager

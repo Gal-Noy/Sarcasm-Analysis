@@ -1,0 +1,4 @@
+LOCAL 2024-02-11 14:26:46 INFO  Manager:19 - Manager started
+LOCAL 2024-02-11 14:26:48 INFO  Manager:22 - Queue managerToWorkerQueue created
+LOCAL 2024-02-11 14:26:48 INFO  Manager:22 - Queue workerToManagerQueue created
+LOCAL 2024-02-11 14:26:48 INFO  Manager:59 - Polling tasks from 0 local app queues

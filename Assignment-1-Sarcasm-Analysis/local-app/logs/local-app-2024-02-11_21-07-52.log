@@ -1,0 +1,10 @@
+LOCAL 2024-02-11 21:07:52 INFO  LocalApp:32 - LocalApp started with id 813803a414cfd127
+LOCAL 2024-02-11 21:07:52 INFO  LocalApp:36 - LocalAppEnv created
+LOCAL 2024-02-11 21:07:55 INFO  S3Handler:24 - S3 bucket sarcasm-analysis-bucket-813803a414cfd127 created
+LOCAL 2024-02-11 21:07:56 INFO  SQSHandler:19 - Queue localToManagerQueue-813803a414cfd127 created
+LOCAL 2024-02-11 21:07:56 INFO  SQSHandler:19 - Queue managerToLocalQueue-813803a414cfd127 created
+LOCAL 2024-02-11 21:07:58 INFO  S3Handler:42 - File input4.txt uploaded to S3 bucket sarcasm-analysis-bucket-813803a414cfd127
+LOCAL 2024-02-11 21:07:58 INFO  SQSHandler:73 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-813803a414cfd127
+LOCAL 2024-02-11 21:07:58 INFO  LocalApp:85 - Sent task to manager: input4.txt for inputIndex 0 with 100 reviews per worker
+LOCAL 2024-02-11 21:07:58 INFO  LocalApp:92 - Polling for responses from manager
+LOCAL 2024-02-11 21:08:18 INFO  LocalApp:92 - Polling for responses from manager

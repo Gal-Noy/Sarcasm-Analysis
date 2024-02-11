@@ -1,3 +1,4 @@
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.core.sync.ResponseTransformer;
@@ -9,11 +10,7 @@ import java.io.InputStream;
 
 public class S3Handler {
     private final S3Client s3 = S3Client.builder().region(AWSConfig.REGION2).build();
-    final Logger logger;
-
-    public S3Handler(Logger logger) {
-        this.logger = logger;
-    }
+    private final Logger logger = LogManager.getLogger(S3Handler.class);
 
     public void createS3BucketIfNotExists(String bucketName) {
         try {

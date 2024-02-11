@@ -12,17 +12,22 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class LocalApp {
-    private static final String localAppId = UUID.randomUUID().toString().replace(AWSConfig.DEFAULT_DELIMITER, "").substring(0, 16);
+    private static final AWS aws = new AWS();
+    private static final String localAppId = UUID.randomUUID().toString().replace(AWSConfig.DEFAULT_DELIMITER, "").substring(16);
     private static final Logger logger = LogManager.getLogger(LocalApp.class);
-    private static final AWS aws = new AWS(logger);
 
     public static void main(String[] args) {
         int argsLen = args.length;
-        if (argsLen < 3 || (argsLen % 2 != 0 && args[argsLen - 1].equals(AWSConfig.TERMINATE_TASK))
-                || Integer.parseInt(args[argsLen - 1]) == 0) {
+        if (argsLen < 3 || (argsLen % 2 != 0 && args[argsLen - 1].equals(AWSConfig.TERMINATE_TASK))) {
             logger.error("Usage: LocalApp <input_file1> ... <input_fileN> <output_file1> ... <output_fileN> <n> [terminate]");
             return;
         }
+
+//        if (argsLen % 2 != 0) {
+//            aws.sqs.deleteAllQueues();
+//            aws.s3.emptyAndDeleteAllBuckets();
+//            return;
+//        }
 
         logger.info("LocalApp started with id " + localAppId);
 
@@ -41,7 +46,7 @@ public class LocalApp {
 
         sendTasksToManager(env, bucketName, localToManagerQueueUrl);
 
-        //        aws.ec2.runManager(); TODO: Uncomment this line
+        aws.ec2.runManager();
 
         receiveResponsesFromManager(env, bucketName, managerToLocalQueueUrl);
 
@@ -85,11 +90,11 @@ public class LocalApp {
         int filesLeftToProcess = env.numberOfFiles;
         while (filesLeftToProcess > 0) {
             logger.info("Polling for responses from manager");
-            List<Message> responses = aws.sqs.receiveMessages(managerToLocalQueueUrl);
+            List<Message> responses = aws.sqs.receiveMessages(managerToLocalQueueUrl); // long polling
             for (Message response : responses) { // response for each input file
                 String responseBody = response.body();
                 // <local_app_id>::<response_status>::<summary_file_name>::<input_index>
-                String[] responseContent = responseBody.split("::");
+                String[] responseContent = responseBody.split(AWSConfig.MESSAGE_DELIMITER);
                 String receivedLocalAppId = responseContent[0],
                         status = responseContent[1], // done or error
                         summaryFileName = responseContent[2],
@@ -102,8 +107,7 @@ public class LocalApp {
                         Future<?> localAppTask = env.executor.submit(new LocalAppTask(
                                 env.outputFilesPaths[Integer.parseInt(inputIndex)],
                                 summaryFileName, // S3 bucket key
-                                bucketName,
-                                logger));
+                                bucketName));
 
                         // Wait for task to finish
                         try {

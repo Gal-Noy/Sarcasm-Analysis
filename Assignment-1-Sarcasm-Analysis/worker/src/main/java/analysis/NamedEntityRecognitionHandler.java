@@ -15,11 +15,14 @@ import java.util.Properties;
 
 public class NamedEntityRecognitionHandler {
     private final StanfordCoreNLP nerPipeline;
-    private final List<String> entities = List.of("PERSON", "ORGANIZATION", "LOCATION");
+    private final List<String> entities = new ArrayList<>();
 
     public NamedEntityRecognitionHandler() {
         Properties props = new Properties();
         props.setProperty("annotators", "tokenize , ssplit , pos , lemma , ner");
+        entities.add("PERSON");
+        entities.add("ORGANIZATION");
+        entities.add("LOCATION");
         nerPipeline = new StanfordCoreNLP(props);
     }
 

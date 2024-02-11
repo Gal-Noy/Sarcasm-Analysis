@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Worker {
     private static final Logger logger = LogManager.getLogger(Worker.class);
-    private static final AWS aws = new AWS(logger);
+    private static final AWS aws = AWS.getInstance();
     private static final SentimentAnalysisHandler sentimentAnalysisHandler = new SentimentAnalysisHandler();
     private static final NamedEntityRecognitionHandler namedEntityRecognitionHandler = new NamedEntityRecognitionHandler();
 
@@ -20,38 +20,28 @@ public class Worker {
     }
 
     private static void handleTasksFromManager() {
+        String managerToWorkerQueueUrl = aws.sqs.getQueueUrl(AWSConfig.MANAGER_TO_WORKER_QUEUE_NAME);
         while (true) {
-            List<String> managerToWorkerQueues = aws.sqs.getAllQueuesByPrefix(AWSConfig.MANAGER_TO_WORKER_QUEUE_NAME);
-            int numberOfQueues = managerToWorkerQueues.size();
-
-            logger.info("Polling tasks from " + numberOfQueues + " manager queues");
-
-            for (String queueUrl : managerToWorkerQueues) {
-                String localAppId = aws.sqs.getLocalAppNameFromQueueUrl(queueUrl);
-                try {
-                    List<Message> tasks = aws.sqs.receiveMessages(queueUrl);
-                    logger.info("Received " + tasks.size() + " tasks from " + localAppId);
-                    if (!tasks.isEmpty()) {
-                        receiveAndResponseTasks(tasks, queueUrl, localAppId);
-                    }
-                } catch (Exception e) {
-                    continue; // The queue was deleted by the manager due to local app termination
-                }
-            }
-
+            logger.info("Polling tasks from " + AWSConfig.MANAGER_TO_WORKER_QUEUE_NAME);
             try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                logger.error(e.getMessage());
+                List<Message> tasks = aws.sqs.receiveMessages(managerToWorkerQueueUrl); // long polling
+                if (!tasks.isEmpty()) {
+                    processAndResponseTasks(tasks, managerToWorkerQueueUrl);
+                }
+                else {
+                    Thread.sleep(3000);
+                }
+            } catch (Exception e) {
+                continue; // The queue was deleted by the manager due to local app termination
             }
         }
     }
 
-    private static void receiveAndResponseTasks(List<Message> tasks, String queueUrl, String localAppId) {
+    private static void processAndResponseTasks(List<Message> tasks, String queueUrl) {
         for (Message task : tasks) {
             try {
                 String response = getTaskResponse(task.body());
-                aws.sqs.sendMessage(AWSConfig.WORKER_TO_MANAGER_QUEUE_NAME + AWSConfig.DEFAULT_DELIMITER + localAppId, response);
+                aws.sqs.sendMessage(AWSConfig.WORKER_TO_MANAGER_QUEUE_NAME, response);
             } catch (RuntimeException e) {
                 logger.error(e.getMessage());
             } finally {
@@ -59,13 +49,14 @@ public class Worker {
             }
         }
     }
+
     private static String getTaskResponse(String taskBody) {
         // <local_app_id>::<input_index>::<review_id>::<review_text>::<task_type>
         String[] taskContent = taskBody.split(AWSConfig.MESSAGE_DELIMITER);
         String localAppId = taskContent[0], inputIndex = taskContent[1],
                 reviewId = taskContent[2], reviewText = taskContent[3], taskType = taskContent[4];
 
-        logger.info("Received task: " + taskBody);
+        logger.info("Received task: " + taskBody + " for localAppId " + localAppId + " for inputIndex " + inputIndex);
 
         // <local_app_id>::<input_index>::<review_id>::<task_type>::<task_result>
         String response = String.join(AWSConfig.MESSAGE_DELIMITER, localAppId, inputIndex, reviewId, taskType, "");

@@ -1,0 +1,204 @@
+LOCAL 2024-02-11 11:48:57 INFO  Worker:17 - Worker started
+LOCAL 2024-02-11 11:48:59 INFO  Worker:27 - Polling tasks from 1 manager queues
+LOCAL 2024-02-11 11:48:59 INFO  Worker:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:48:59 INFO  Worker:33 - Received 7 tasks from 9e90d306b8dcf545
+LOCAL 2024-02-11 11:48:59 INFO  Worker:68 - Received task: 9e90d306b8dcf545::0::R33DK4T6EHUIHX::Does a nice job of showing your child where different body parts are in a cute manner.  However, my one year old likes to lift the flaps himself and I also think this is a great way for him to be part of the story too.  The problem with this book is the flaps covering the different body parts are very flimsy and very easily ruined.  Compared to some other books out there, this one doesn't live up to expectations.  Youngsters are still figuring out motor skills and are anything but delicate at this stage.  I appreciate books that are made to last more than a couple reads...::sentimentAnalysis
+LOCAL 2024-02-11 11:49:02 INFO  Worker:77 - Sentiment analysis result: 1
+LOCAL 2024-02-11 11:49:02 INFO  Worker:76 - Sent message to workerToManagerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:02 INFO  Worker:98 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:02 INFO  Worker:68 - Received task: 9e90d306b8dcf545::0::R3DHV2T9Q991V7::Very cute!::entityRecognition
+LOCAL 2024-02-11 11:49:02 INFO  Worker:84 - Named entity recognition result: 
+LOCAL 2024-02-11 11:49:03 INFO  Worker:76 - Sent message to workerToManagerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:03 INFO  Worker:98 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:03 INFO  Worker:68 - Received task: 9e90d306b8dcf545::0::R367OTNJ8I36FS::I can't say much about this except that it was a gift for a great granddaughter.  My granddaughter tells me that she reads this to her eighteen month old daughter, and they both enjoy it enough to share it over and over again.  I read it too and found it a fun story.::sentimentAnalysis
+LOCAL 2024-02-11 11:49:04 INFO  Worker:77 - Sentiment analysis result: 3
+LOCAL 2024-02-11 11:49:04 INFO  Worker:76 - Sent message to workerToManagerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:04 INFO  Worker:98 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:04 INFO  Worker:68 - Received task: 9e90d306b8dcf545::0::R3GCFAIUL8BI3Y::This book is adorable. My toddler loves it.::sentimentAnalysis
+LOCAL 2024-02-11 11:49:04 INFO  Worker:77 - Sentiment analysis result: 4
+LOCAL 2024-02-11 11:49:04 INFO  Worker:76 - Sent message to workerToManagerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:04 INFO  Worker:98 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:04 INFO  Worker:68 - Received task: 9e90d306b8dcf545::0::R33SW6AMDKTSB8::Such an entertaining book, my daughter loves books so this is a great look and find book... lol::sentimentAnalysis
+LOCAL 2024-02-11 11:49:05 INFO  Worker:77 - Sentiment analysis result: 3
+LOCAL 2024-02-11 11:49:05 INFO  Worker:76 - Sent message to workerToManagerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:05 INFO  Worker:98 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:05 INFO  Worker:68 - Received task: 9e90d306b8dcf545::0::R3V239ZPPF0XY3::Cutest book ever. All my kids love, love, love it!! I'd give this as a present to other people too.::entityRecognition
+LOCAL 2024-02-11 11:49:05 INFO  Worker:84 - Named entity recognition result: 
+LOCAL 2024-02-11 11:49:05 INFO  Worker:76 - Sent message to workerToManagerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:06 INFO  Worker:98 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:06 INFO  Worker:68 - Received task: 9e90d306b8dcf545::0::RB9QK3F6SUQPU::love::entityRecognition
+LOCAL 2024-02-11 11:49:06 INFO  Worker:84 - Named entity recognition result: 
+LOCAL 2024-02-11 11:49:06 INFO  Worker:76 - Sent message to workerToManagerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:06 INFO  Worker:98 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:07 INFO  Worker:27 - Polling tasks from 1 manager queues
+LOCAL 2024-02-11 11:49:07 INFO  Worker:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:07 INFO  Worker:33 - Received 6 tasks from 9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:07 INFO  Worker:68 - Received task: 9e90d306b8dcf545::0::R33DK4T6EHUIHX::Does a nice job of showing your child where different body parts are in a cute manner.  However, my one year old likes to lift the flaps himself and I also think this is a great way for him to be part of the story too.  The problem with this book is the flaps covering the different body parts are very flimsy and very easily ruined.  Compared to some other books out there, this one doesn't live up to expectations.  Youngsters are still figuring out motor skills and are anything but delicate at this stage.  I appreciate books that are made to last more than a couple reads...::entityRecognition
+LOCAL 2024-02-11 11:49:08 INFO  Worker:84 - Named entity recognition result: 
+LOCAL 2024-02-11 11:49:08 INFO  Worker:76 - Sent message to workerToManagerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:08 INFO  Worker:98 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:08 INFO  Worker:68 - Received task: 9e90d306b8dcf545::0::R14D3WP6J91DCU::Super cute book. My son loves lifting the flaps.::sentimentAnalysis
+LOCAL 2024-02-11 11:49:08 INFO  Worker:77 - Sentiment analysis result: 3
+LOCAL 2024-02-11 11:49:08 INFO  Worker:76 - Sent message to workerToManagerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:08 INFO  Worker:98 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:08 INFO  Worker:68 - Received task: 9e90d306b8dcf545::0::R1IKZK5S0DCKZ0::My daughter loves lifting the flaps herself! She's almost a year. Great colorful pictures. I'm never disappointed with Karen Katz!::entityRecognition
+LOCAL 2024-02-11 11:49:08 INFO  Worker:84 - Named entity recognition result: Karen: PERSON, Katz: PERSON
+LOCAL 2024-02-11 11:49:09 INFO  Worker:76 - Sent message to workerToManagerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:09 INFO  Worker:98 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:09 INFO  Worker:68 - Received task: 9e90d306b8dcf545::0::R3R9QKZ61DMKGF::This gift was liked by the child and parents.::entityRecognition
+LOCAL 2024-02-11 11:49:09 INFO  Worker:84 - Named entity recognition result: 
+LOCAL 2024-02-11 11:49:09 INFO  Worker:76 - Sent message to workerToManagerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:09 INFO  Worker:98 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:09 INFO  Worker:68 - Received task: 9e90d306b8dcf545::0::R1L8O7RM8DD6J3::The book is sturdy and well made. My baby likes to carry her books around and they are routinely dropped. It has held up really well. She loves the flaps and finding the hands, feet, etc. My only critique is that the body parts that are highlighted are the smallest item on the whole page. As a visual representation for teaching a child it seems weird that the focal points are not scaled to be more familiarly identifiable.::sentimentAnalysis
+LOCAL 2024-02-11 11:49:10 INFO  Worker:77 - Sentiment analysis result: 1
+LOCAL 2024-02-11 11:49:10 INFO  Worker:76 - Sent message to workerToManagerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:11 INFO  Worker:98 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:11 INFO  Worker:68 - Received task: 9e90d306b8dcf545::0::R366N97DLUODS7::Cute!::sentimentAnalysis
+LOCAL 2024-02-11 11:49:11 INFO  Worker:77 - Sentiment analysis result: 2
+LOCAL 2024-02-11 11:49:11 INFO  Worker:76 - Sent message to workerToManagerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:11 INFO  Worker:98 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:12 INFO  Worker:27 - Polling tasks from 1 manager queues
+LOCAL 2024-02-11 11:49:12 INFO  Worker:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:12 INFO  Worker:33 - Received 8 tasks from 9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:12 INFO  Worker:68 - Received task: 9e90d306b8dcf545::0::RSO743RDYVWTZ::My girls love this book so much I bought it for my niece!::sentimentAnalysis
+LOCAL 2024-02-11 11:49:13 INFO  Worker:77 - Sentiment analysis result: 2
+LOCAL 2024-02-11 11:49:13 INFO  Worker:76 - Sent message to workerToManagerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:13 INFO  Worker:98 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:13 INFO  Worker:68 - Received task: 9e90d306b8dcf545::0::RSO743RDYVWTZ::My girls love this book so much I bought it for my niece!::entityRecognition
+LOCAL 2024-02-11 11:49:13 INFO  Worker:84 - Named entity recognition result: 
+LOCAL 2024-02-11 11:49:13 INFO  Worker:76 - Sent message to workerToManagerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:13 INFO  Worker:98 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:13 INFO  Worker:68 - Received task: 9e90d306b8dcf545::0::R8OWCLDI0GGL0::Love Karen Katz::sentimentAnalysis
+LOCAL 2024-02-11 11:49:13 INFO  Worker:77 - Sentiment analysis result: 4
+LOCAL 2024-02-11 11:49:13 INFO  Worker:76 - Sent message to workerToManagerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:14 INFO  Worker:98 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:14 INFO  Worker:68 - Received task: 9e90d306b8dcf545::0::R3DHV2T9Q991V7::Very cute!::sentimentAnalysis
+LOCAL 2024-02-11 11:49:14 INFO  Worker:77 - Sentiment analysis result: 4
+LOCAL 2024-02-11 11:49:14 INFO  Worker:76 - Sent message to workerToManagerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:14 INFO  Worker:98 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:14 INFO  Worker:68 - Received task: 9e90d306b8dcf545::0::R3P2KOXRF7Z400::So cute and fun.::sentimentAnalysis
+LOCAL 2024-02-11 11:49:14 INFO  Worker:77 - Sentiment analysis result: 3
+LOCAL 2024-02-11 11:49:15 INFO  Worker:76 - Sent message to workerToManagerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:15 INFO  Worker:98 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:15 INFO  Worker:68 - Received task: 9e90d306b8dcf545::0::R3P2KOXRF7Z400::So cute and fun.::entityRecognition
+LOCAL 2024-02-11 11:49:15 INFO  Worker:84 - Named entity recognition result: 
+LOCAL 2024-02-11 11:49:15 INFO  Worker:76 - Sent message to workerToManagerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:15 INFO  Worker:98 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:15 INFO  Worker:68 - Received task: 9e90d306b8dcf545::0::R3GCFAIUL8BI3Y::This book is adorable. My toddler loves it.::entityRecognition
+LOCAL 2024-02-11 11:49:16 INFO  Worker:84 - Named entity recognition result: 
+LOCAL 2024-02-11 11:49:16 INFO  Worker:76 - Sent message to workerToManagerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:16 INFO  Worker:98 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:16 INFO  Worker:68 - Received task: 9e90d306b8dcf545::0::RB9QK3F6SUQPU::love::sentimentAnalysis
+LOCAL 2024-02-11 11:49:16 INFO  Worker:77 - Sentiment analysis result: 4
+LOCAL 2024-02-11 11:49:16 INFO  Worker:76 - Sent message to workerToManagerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:16 INFO  Worker:98 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:17 INFO  Worker:27 - Polling tasks from 1 manager queues
+LOCAL 2024-02-11 11:49:17 INFO  Worker:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:18 INFO  Worker:33 - Received 6 tasks from 9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:18 INFO  Worker:68 - Received task: 9e90d306b8dcf545::0::RJ62XWHGDIF7::As soon as I got this package, I gave it to my 18 month old son to open and he made me read it to him about a dozen times. He loves it! He's obsessed with his belly button, so this is the perfect book for him. He's also obsessed with peek-a-boo, so he loves lifting the flaps. It was a definite hit!::sentimentAnalysis
+LOCAL 2024-02-11 11:49:19 INFO  Worker:77 - Sentiment analysis result: 2
+LOCAL 2024-02-11 11:49:19 INFO  Worker:76 - Sent message to workerToManagerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:20 INFO  Worker:98 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:20 INFO  Worker:68 - Received task: 9e90d306b8dcf545::0::R8OWCLDI0GGL0::Love Karen Katz::entityRecognition
+LOCAL 2024-02-11 11:49:20 INFO  Worker:84 - Named entity recognition result: Karen: PERSON, Katz: PERSON
+LOCAL 2024-02-11 11:49:20 INFO  Worker:76 - Sent message to workerToManagerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:20 INFO  Worker:98 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:20 INFO  Worker:68 - Received task: 9e90d306b8dcf545::0::R14D3WP6J91DCU::Super cute book. My son loves lifting the flaps.::entityRecognition
+LOCAL 2024-02-11 11:49:20 INFO  Worker:84 - Named entity recognition result: 
+LOCAL 2024-02-11 11:49:20 INFO  Worker:76 - Sent message to workerToManagerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:20 INFO  Worker:98 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:20 INFO  Worker:68 - Received task: 9e90d306b8dcf545::0::R1RUXYHCSZSHJ0::Cute lift-the-flap book. My 9 month old loves it!::sentimentAnalysis
+LOCAL 2024-02-11 11:49:20 INFO  Worker:77 - Sentiment analysis result: 2
+LOCAL 2024-02-11 11:49:20 INFO  Worker:76 - Sent message to workerToManagerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:21 INFO  Worker:98 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:21 INFO  Worker:68 - Received task: 9e90d306b8dcf545::0::R367OTNJ8I36FS::I can't say much about this except that it was a gift for a great granddaughter.  My granddaughter tells me that she reads this to her eighteen month old daughter, and they both enjoy it enough to share it over and over again.  I read it too and found it a fun story.::entityRecognition
+LOCAL 2024-02-11 11:49:21 INFO  Worker:84 - Named entity recognition result: 
+LOCAL 2024-02-11 11:49:21 INFO  Worker:76 - Sent message to workerToManagerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:21 INFO  Worker:98 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:21 INFO  Worker:68 - Received task: 9e90d306b8dcf545::0::R3MRIY8FUDOYHU::My almost 2 year old son loves the Katz books. We have the Beach Ball book, the Zoom Zoom book, and this one, so far, but I'm sure we'll get more. My son really likes this one, though I think he prefers the Beach Ball book Where Is Baby's Beach Ball?: A Lift-the-Flap Book (Karen Katz Lift-the-Flap Books) best, but all the Katz books are top faves.::sentimentAnalysis
+LOCAL 2024-02-11 11:49:25 INFO  Worker:77 - Sentiment analysis result: 2
+LOCAL 2024-02-11 11:49:25 INFO  Worker:76 - Sent message to workerToManagerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:25 INFO  Worker:98 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:26 INFO  Worker:27 - Polling tasks from 1 manager queues
+LOCAL 2024-02-11 11:49:26 INFO  Worker:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:26 INFO  Worker:33 - Received 7 tasks from 9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:26 INFO  Worker:68 - Received task: 9e90d306b8dcf545::0::RGMH5ROASTBS8::Well-made children's book that an child will love.::entityRecognition
+LOCAL 2024-02-11 11:49:26 INFO  Worker:84 - Named entity recognition result: 
+LOCAL 2024-02-11 11:49:27 INFO  Worker:76 - Sent message to workerToManagerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:27 INFO  Worker:98 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:27 INFO  Worker:68 - Received task: 9e90d306b8dcf545::0::R1RUXYHCSZSHJ0::Cute lift-the-flap book. My 9 month old loves it!::entityRecognition
+LOCAL 2024-02-11 11:49:27 INFO  Worker:84 - Named entity recognition result: 
+LOCAL 2024-02-11 11:49:27 INFO  Worker:76 - Sent message to workerToManagerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:27 INFO  Worker:98 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:27 INFO  Worker:68 - Received task: 9e90d306b8dcf545::0::RW6ORU2M3C461::I bought this book for a newborn. She loved when our parents read to her as an infant. She's now almost two and loves playing with it herself. I got it based on the positive reviews. I'm so glad I did. Will buy it again and highly recommend::sentimentAnalysis
+LOCAL 2024-02-11 11:49:28 INFO  Worker:77 - Sentiment analysis result: 3
+LOCAL 2024-02-11 11:49:28 INFO  Worker:76 - Sent message to workerToManagerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:28 INFO  Worker:98 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:28 INFO  Worker:68 - Received task: 9e90d306b8dcf545::0::RW6ORU2M3C461::I bought this book for a newborn. She loved when our parents read to her as an infant. She's now almost two and loves playing with it herself. I got it based on the positive reviews. I'm so glad I did. Will buy it again and highly recommend::entityRecognition
+LOCAL 2024-02-11 11:49:28 INFO  Worker:84 - Named entity recognition result: 
+LOCAL 2024-02-11 11:49:29 INFO  Worker:76 - Sent message to workerToManagerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:29 INFO  Worker:98 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:29 INFO  Worker:68 - Received task: 9e90d306b8dcf545::0::R1L8O7RM8DD6J3::The book is sturdy and well made. My baby likes to carry her books around and they are routinely dropped. It has held up really well. She loves the flaps and finding the hands, feet, etc. My only critique is that the body parts that are highlighted are the smallest item on the whole page. As a visual representation for teaching a child it seems weird that the focal points are not scaled to be more familiarly identifiable.::entityRecognition
+LOCAL 2024-02-11 11:49:29 INFO  Worker:84 - Named entity recognition result: 
+LOCAL 2024-02-11 11:49:29 INFO  Worker:76 - Sent message to workerToManagerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:30 INFO  Worker:98 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:30 INFO  Worker:68 - Received task: 9e90d306b8dcf545::0::R3V239ZPPF0XY3::Cutest book ever. All my kids love, love, love it!! I'd give this as a present to other people too.::sentimentAnalysis
+LOCAL 2024-02-11 11:49:30 INFO  Worker:77 - Sentiment analysis result: 2
+LOCAL 2024-02-11 11:49:30 INFO  Worker:76 - Sent message to workerToManagerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:30 INFO  Worker:98 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:30 INFO  Worker:68 - Received task: 9e90d306b8dcf545::0::R366N97DLUODS7::Cute!::entityRecognition
+LOCAL 2024-02-11 11:49:30 INFO  Worker:84 - Named entity recognition result: 
+LOCAL 2024-02-11 11:49:30 INFO  Worker:76 - Sent message to workerToManagerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:30 INFO  Worker:98 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:31 INFO  Worker:27 - Polling tasks from 1 manager queues
+LOCAL 2024-02-11 11:49:31 INFO  Worker:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:32 INFO  Worker:33 - Received 6 tasks from 9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:32 INFO  Worker:68 - Received task: 9e90d306b8dcf545::0::RJ62XWHGDIF7::As soon as I got this package, I gave it to my 18 month old son to open and he made me read it to him about a dozen times. He loves it! He's obsessed with his belly button, so this is the perfect book for him. He's also obsessed with peek-a-boo, so he loves lifting the flaps. It was a definite hit!::entityRecognition
+LOCAL 2024-02-11 11:49:32 INFO  Worker:84 - Named entity recognition result: 
+LOCAL 2024-02-11 11:49:33 INFO  Worker:76 - Sent message to workerToManagerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:33 INFO  Worker:98 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:33 INFO  Worker:68 - Received task: 9e90d306b8dcf545::0::R1IKZK5S0DCKZ0::My daughter loves lifting the flaps herself! She's almost a year. Great colorful pictures. I'm never disappointed with Karen Katz!::sentimentAnalysis
+LOCAL 2024-02-11 11:49:33 INFO  Worker:77 - Sentiment analysis result: 3
+LOCAL 2024-02-11 11:49:33 INFO  Worker:76 - Sent message to workerToManagerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:33 INFO  Worker:98 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:33 INFO  Worker:68 - Received task: 9e90d306b8dcf545::0::RGMH5ROASTBS8::Well-made children's book that an child will love.::sentimentAnalysis
+LOCAL 2024-02-11 11:49:33 INFO  Worker:77 - Sentiment analysis result: 3
+LOCAL 2024-02-11 11:49:34 INFO  Worker:76 - Sent message to workerToManagerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:34 INFO  Worker:98 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:34 INFO  Worker:68 - Received task: 9e90d306b8dcf545::0::R3R9QKZ61DMKGF::This gift was liked by the child and parents.::sentimentAnalysis
+LOCAL 2024-02-11 11:49:34 INFO  Worker:77 - Sentiment analysis result: 3
+LOCAL 2024-02-11 11:49:34 INFO  Worker:76 - Sent message to workerToManagerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:34 INFO  Worker:98 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:34 INFO  Worker:68 - Received task: 9e90d306b8dcf545::0::R33SW6AMDKTSB8::Such an entertaining book, my daughter loves books so this is a great look and find book... lol::entityRecognition
+LOCAL 2024-02-11 11:49:34 INFO  Worker:84 - Named entity recognition result: 
+LOCAL 2024-02-11 11:49:34 INFO  Worker:76 - Sent message to workerToManagerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:34 INFO  Worker:98 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:34 INFO  Worker:68 - Received task: 9e90d306b8dcf545::0::R3MRIY8FUDOYHU::My almost 2 year old son loves the Katz books. We have the Beach Ball book, the Zoom Zoom book, and this one, so far, but I'm sure we'll get more. My son really likes this one, though I think he prefers the Beach Ball book Where Is Baby's Beach Ball?: A Lift-the-Flap Book (Karen Katz Lift-the-Flap Books) best, but all the Katz books are top faves.::entityRecognition
+LOCAL 2024-02-11 11:49:35 INFO  Worker:84 - Named entity recognition result: Katz: PERSON, Karen: PERSON, Katz: PERSON, Katz: PERSON
+LOCAL 2024-02-11 11:49:35 INFO  Worker:76 - Sent message to workerToManagerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:35 INFO  Worker:98 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:36 INFO  Worker:27 - Polling tasks from 1 manager queues
+LOCAL 2024-02-11 11:49:36 INFO  Worker:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:44 INFO  Worker:33 - Received 0 tasks from 9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:45 INFO  Worker:27 - Polling tasks from 1 manager queues
+LOCAL 2024-02-11 11:49:45 INFO  Worker:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:47 INFO  Worker:27 - Polling tasks from 1 manager queues
+LOCAL 2024-02-11 11:49:47 INFO  Worker:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:48 INFO  Worker:27 - Polling tasks from 1 manager queues
+LOCAL 2024-02-11 11:49:48 INFO  Worker:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:49 INFO  Worker:27 - Polling tasks from 1 manager queues
+LOCAL 2024-02-11 11:49:49 INFO  Worker:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:51 INFO  Worker:27 - Polling tasks from 1 manager queues
+LOCAL 2024-02-11 11:49:51 INFO  Worker:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:52 INFO  Worker:27 - Polling tasks from 1 manager queues
+LOCAL 2024-02-11 11:49:52 INFO  Worker:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:53 INFO  Worker:27 - Polling tasks from 1 manager queues
+LOCAL 2024-02-11 11:49:53 INFO  Worker:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:55 INFO  Worker:27 - Polling tasks from 1 manager queues
+LOCAL 2024-02-11 11:49:55 INFO  Worker:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:56 INFO  Worker:27 - Polling tasks from 1 manager queues
+LOCAL 2024-02-11 11:49:56 INFO  Worker:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:57 INFO  Worker:27 - Polling tasks from 1 manager queues
+LOCAL 2024-02-11 11:49:57 INFO  Worker:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545
+LOCAL 2024-02-11 11:49:59 INFO  Worker:27 - Polling tasks from 1 manager queues
+LOCAL 2024-02-11 11:49:59 INFO  Worker:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue-9e90d306b8dcf545

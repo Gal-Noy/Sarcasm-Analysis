@@ -1,3 +1,4 @@
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import software.amazon.awssdk.services.sqs.model.Message;
@@ -8,7 +9,8 @@ import java.util.Map;
 import java.util.UUID;
 
 public class ManagerTask implements Runnable {
-    private final AWS aws;
+    private final AWS aws = AWS.getInstance();
+    private final ManagerEnv env = ManagerEnv.getInstance();
     private final String localAppId;
     private final String inputIndex;
     private final Map<String, Review> requestReviews;
@@ -18,11 +20,10 @@ public class ManagerTask implements Runnable {
     private final Map<String, String> reviewsSentiment;
     private final Map<String, String> reviewsEntities;
     private final StringBuilder summaryMessage;
-    private final Logger logger;
-    private final String taskId = UUID.randomUUID().toString().replace(AWSConfig.DEFAULT_DELIMITER, "").substring(0, 8);
+    private final Logger logger = LogManager.getLogger(ManagerTask.class);
+    private final int workersToRelease;
 
-
-    public ManagerTask(String localAppId, String inputIndex, Map<String, Review> requestReviews, String bucketName, Logger logger) {
+    public ManagerTask(String localAppId, String inputIndex, Map<String, Review> requestReviews, String bucketName, int workersToRelease) {
         this.localAppId = localAppId;
         this.inputIndex = inputIndex;
         this.requestReviews = requestReviews;
@@ -30,8 +31,7 @@ public class ManagerTask implements Runnable {
         this.reviewsSentiment = new HashMap<>();
         this.reviewsEntities = new HashMap<>();
         this.summaryMessage = new StringBuilder();
-        this.logger = logger;
-        this.aws = new AWS(logger);
+        this.workersToRelease = workersToRelease;
     }
 
 
@@ -41,24 +41,25 @@ public class ManagerTask implements Runnable {
 
         sendTasksToWorkers();
 
-        logger.info("ManagerTask " + taskId + " sent tasks to workers for local app " + localAppId + " for inputIndex " + inputIndex);
+        logger.info("Sent tasks to workers for local app " + localAppId + " for inputIndex " + inputIndex);
 
         receiveResponsesFromWorkers();
 
-        logger.info("ManagerTask " + taskId + " received all responses from workers for local app " + localAppId + " for inputIndex " + inputIndex);
+        logger.info("Received all responses from workers for local app " + localAppId + " for inputIndex " + inputIndex);
 
         handleSummary();
 
-        logger.info("ManagerTask " + taskId + " finished summary for local app " + localAppId + " for inputIndex " + inputIndex);
+        logger.info("Finished summary for local app " + localAppId + " for inputIndex " + inputIndex);
+
+        env.releaseWorkers(workersToRelease);
+
         logger.info("ManagerTask finished for local app " + localAppId + " for inputIndex " + inputIndex);
     }
 
     private void sendTasksToWorkers() {
-        logger.info("ManagerTask " + taskId + " sending tasks to workers for local app " + localAppId + " for inputIndex " + inputIndex);
+        logger.info("Sending tasks to workers for local app " + localAppId + " for inputIndex " + inputIndex);
 
-        String managerToWorkerQueueUrl = aws.sqs.getQueueUrl(
-                AWSConfig.MANAGER_TO_WORKER_QUEUE_NAME + AWSConfig.DEFAULT_DELIMITER + localAppId
-        );
+        String managerToWorkerQueueUrl = aws.sqs.getQueueUrl(AWSConfig.MANAGER_TO_WORKER_QUEUE_NAME);
 
         for (Map.Entry<String, Review> entry : requestReviews.entrySet()) {
             String reviewId = entry.getKey();
@@ -73,20 +74,18 @@ public class ManagerTask implements Runnable {
 
             tasksSent += 2;
 
-            logger.info("ManagerTask " + taskId + " sent tasks for reviewId " + reviewId + " for local app " + localAppId + " for inputIndex " + inputIndex);
-            logger.info("ManagerTask " + taskId + " sent total tasks " + tasksSent + " to workers for local app " + localAppId + " for inputIndex " + inputIndex);
+            logger.info("Sent tasks for reviewId " + reviewId + " for local app " + localAppId + " for inputIndex " + inputIndex);
+            logger.info("Sent total tasks " + tasksSent + " to workers for local app " + localAppId + " for inputIndex " + inputIndex);
         }
     }
 
     private void receiveResponsesFromWorkers() {
-        logger.info("ManagerTask " + taskId + " receiving responses from workers for local app " + localAppId + " for inputIndex " + inputIndex);
+        logger.info("Receiving responses from workers for local app " + localAppId + " for inputIndex " + inputIndex);
 
-        String workerToManagerQueueUrl = aws.sqs.getQueueUrl(
-                AWSConfig.WORKER_TO_MANAGER_QUEUE_NAME + AWSConfig.DEFAULT_DELIMITER + localAppId
-        );
+        String workerToManagerQueueUrl = aws.sqs.getQueueUrl(AWSConfig.WORKER_TO_MANAGER_QUEUE_NAME);
 
         while (tasksCompleted < tasksSent) {
-            List<Message> responses = aws.sqs.receiveMessages(workerToManagerQueueUrl);
+            List<Message> responses = aws.sqs.receiveMessages(workerToManagerQueueUrl); // long polling
 
             for (Message response : responses) {
                 String responseBody = response.body();
@@ -97,10 +96,7 @@ public class ManagerTask implements Runnable {
 
                 // Check if response is for this task
                 if (localAppId.equals(this.localAppId) && inputIndex.equals(this.inputIndex)) {
-                    logger.info("ManagerTask " + taskId + " received response for reviewId " + reviewId + " for inputIndex " + inputIndex + " for taskType " + taskType + " with taskResult " + taskResult);
-
-                    int reviewRating = requestReviews.get(reviewId).getRating();
-                    String reviewLink = requestReviews.get(reviewId).getLink();
+                    logger.info("Received response for reviewId " + reviewId + " for inputIndex " + inputIndex + " for taskType " + taskType + " with taskResult " + taskResult);
 
                     if (taskType.equals(AWSConfig.SENTIMENT_ANALYSIS_TASK)) {
                         reviewsSentiment.put(reviewId, taskResult);
@@ -113,28 +109,35 @@ public class ManagerTask implements Runnable {
                     if (reviewsSentiment.containsKey(reviewId) && reviewsEntities.containsKey(reviewId)) {
                         String sentiment = reviewsSentiment.get(reviewId);
                         String entities = reviewsEntities.get(reviewId);
+                        int reviewRating = requestReviews.get(reviewId).getRating();
+                        String reviewLink = requestReviews.get(reviewId).getLink();
 
-                        if (!summaryMessage.isEmpty()) {
+                        if (summaryMessage.length() > 0){
                             summaryMessage.append(AWSConfig.SUMMARY_DELIMITER);
                         }
 
-                        // <review_id>::<review_rating>::<review_link>::<sentiment>::<entities>
+                        // ...##<review_id>::<review_rating>::<review_link>::<sentiment>::<entities>##...
                         summaryMessage.append(String.join(AWSConfig.MESSAGE_DELIMITER,
                                 reviewId, reviewRating + "", reviewLink, sentiment, entities));
 
-                        logger.info("ManagerTask " + taskId + " updated summary message for reviewId " + reviewId + " for inputIndex " + inputIndex + " with sentiment " + sentiment + " and entities " + entities);
+                        logger.info("Updated summary message for reviewId " + reviewId + " for inputIndex " + inputIndex + " with sentiment " + sentiment + " and entities " + entities);
                     }
 
+                    tasksCompleted++;
+                    aws.sqs.deleteMessage(workerToManagerQueueUrl, response);
+                    logger.info("Completed tasks " + tasksCompleted + " out of " + tasksSent + " for local app " + localAppId + " for inputIndex " + inputIndex);
                 }
-                tasksCompleted++;
-                aws.sqs.deleteMessage(workerToManagerQueueUrl, response);
-
-                logger.info("ManagerTask " + taskId + " completed tasks " + tasksCompleted + " out of " + tasksSent + " for local app " + localAppId + " for inputIndex " + inputIndex);
+                else {
+                    // Put back in queue
+                    logger.info("Putting back not relevant response in workerToManager queue");
+                    aws.sqs.sendMessage(workerToManagerQueueUrl, responseBody);
+                }
             }
         }
     }
 
     private void handleSummary() {
+        // <local_app_id>-summary-<input_index>
         String summaryFileName = String.join(AWSConfig.DEFAULT_DELIMITER, localAppId, AWSConfig.SUMMARY_FILE_INDICATOR, inputIndex);
         aws.s3.uploadContentToS3(bucketName, summaryFileName, summaryMessage.toString());
 
@@ -145,6 +148,6 @@ public class ManagerTask implements Runnable {
         String responseContent = String.join(AWSConfig.MESSAGE_DELIMITER, localAppId, AWSConfig.RESPONSE_STATUS_DONE, summaryFileName, inputIndex);
         aws.sqs.sendMessage(managerToLocalQueueUrl, responseContent);
 
-        logger.info("ManagerTask " + taskId + " uploaded summary file " + summaryFileName + " to S3 and sent response to local app " + localAppId + " for inputIndex " + inputIndex);
+        logger.info("Uploaded summary file " + summaryFileName + " to S3 and sent response to local app " + localAppId + " for inputIndex " + inputIndex);
     }
 }

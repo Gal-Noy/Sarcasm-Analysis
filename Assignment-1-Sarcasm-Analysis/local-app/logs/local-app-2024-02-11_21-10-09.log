@@ -1,0 +1,2 @@
+LOCAL 2024-02-11 21:10:13 INFO  S3Handler:86 - S3 bucket sarcasm-analysis-bucket-ae7c96f663a660c6 emptied
+LOCAL 2024-02-11 21:10:14 INFO  S3Handler:95 - S3 bucket sarcasm-analysis-bucket-ae7c96f663a660c6 deleted

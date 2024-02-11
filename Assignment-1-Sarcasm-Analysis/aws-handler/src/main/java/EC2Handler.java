@@ -1,3 +1,4 @@
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import software.amazon.awssdk.services.ec2.Ec2Client;
 import software.amazon.awssdk.services.ec2.model.Tag;
@@ -7,11 +8,7 @@ import java.util.Base64;
 
 public class EC2Handler {
     private final Ec2Client ec2 = Ec2Client.builder().region(AWSConfig.REGION1).build();
-    final Logger logger;
-
-    public EC2Handler(Logger logger) {
-        this.logger = logger;
-    }
+    private final Logger logger = LogManager.getLogger(EC2Handler.class);
 
     public void createEC2Instance(String script, String typeTagValue, String nameTagValue, InstanceType instanceType) {
         Ec2Client ec2 = Ec2Client.builder().region(AWSConfig.REGION1).build();
@@ -69,13 +66,19 @@ public class EC2Handler {
                                 !instance.state().name().equals(InstanceStateName.SHUTTING_DOWN)) {
                             isManagerExists = true;
                             logger.info("Manager instance " + instance.instanceId() + " is " + instance.state().name());
-                            if (!instance.state().name().equals(InstanceStateName.RUNNING) &&
-                                    !instance.state().name().equals(InstanceStateName.PENDING)) {
-                                // Start the manager
-                                ec2.startInstances(StartInstancesRequest.builder().instanceIds(instance.instanceId()).build());
-                                break;
+                            if (instance.state().name().equals(InstanceStateName.RUNNING) ||
+                                    instance.state().name().equals(InstanceStateName.PENDING)) {
+                                // If manager is running or pending, do nothing
+                            } else {
+                                // Terminate and create a new manager instance
+                                terminateEC2Instance(instance.instanceId());
+                                createManagerInstance();
                             }
-                        } else break;
+                            return;
+                        } else {
+                            // Instance is terminated or shutting down, continue checking other instances
+                            break;
+                        }
                     }
                 }
             }
@@ -149,6 +152,23 @@ public class EC2Handler {
                         if (instance.state().name().equals(InstanceStateName.RUNNING) ||
                                 instance.state().name().equals(InstanceStateName.PENDING)) {
                             terminateEC2Instance(instance.instanceId());
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public void terminateWorkerInstance() {
+        logger.info("Terminating worker instance");
+        for (Reservation reservation : ec2.describeInstances().reservations()) {
+            for (Instance instance : reservation.instances()) {
+                for (Tag tag : instance.tags()) {
+                    if (tag.key().equals(AWSConfig.TYPE_TAG) && tag.value().equals(AWSConfig.WORKER_TYPE_TAG_VALUE)) {
+                        if (instance.state().name().equals(InstanceStateName.RUNNING) ||
+                                instance.state().name().equals(InstanceStateName.PENDING)) {
+                            terminateEC2Instance(instance.instanceId());
+                            return;
                         }
                     }
                 }

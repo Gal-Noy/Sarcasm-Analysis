@@ -1,0 +1,27 @@
+LOCAL 2024-02-11 20:38:28 INFO  LocalApp:32 - LocalApp started with id 8ffe4fd3274fa45d
+LOCAL 2024-02-11 20:38:28 INFO  LocalApp:36 - LocalAppEnv created
+LOCAL 2024-02-11 20:38:31 INFO  S3Handler:24 - S3 bucket sarcasm-analysis-bucket-8ffe4fd3274fa45d created
+LOCAL 2024-02-11 20:38:32 INFO  SQSHandler:19 - Queue localToManagerQueue-8ffe4fd3274fa45d created
+LOCAL 2024-02-11 20:38:32 INFO  SQSHandler:19 - Queue managerToLocalQueue-8ffe4fd3274fa45d created
+LOCAL 2024-02-11 20:38:33 INFO  S3Handler:42 - File test-input1.txt uploaded to S3 bucket sarcasm-analysis-bucket-8ffe4fd3274fa45d
+LOCAL 2024-02-11 20:38:33 INFO  SQSHandler:73 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-8ffe4fd3274fa45d
+LOCAL 2024-02-11 20:38:33 INFO  LocalApp:85 - Sent task to manager: test-input1.txt for inputIndex 0 with 10 reviews per worker
+LOCAL 2024-02-11 20:38:34 INFO  S3Handler:42 - File test-input2.txt uploaded to S3 bucket sarcasm-analysis-bucket-8ffe4fd3274fa45d
+LOCAL 2024-02-11 20:38:34 INFO  SQSHandler:73 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-8ffe4fd3274fa45d
+LOCAL 2024-02-11 20:38:34 INFO  LocalApp:85 - Sent task to manager: test-input2.txt for inputIndex 1 with 10 reviews per worker
+LOCAL 2024-02-11 20:38:34 INFO  LocalApp:92 - Polling for responses from manager
+LOCAL 2024-02-11 20:38:54 INFO  LocalApp:92 - Polling for responses from manager
+LOCAL 2024-02-11 20:39:14 INFO  LocalApp:92 - Polling for responses from manager
+LOCAL 2024-02-11 20:39:35 INFO  LocalApp:92 - Polling for responses from manager
+LOCAL 2024-02-11 20:39:55 INFO  LocalApp:92 - Polling for responses from manager
+LOCAL 2024-02-11 20:40:15 INFO  LocalApp:92 - Polling for responses from manager
+LOCAL 2024-02-11 20:40:35 INFO  LocalApp:92 - Polling for responses from manager
+LOCAL 2024-02-11 20:40:55 INFO  LocalApp:92 - Polling for responses from manager
+LOCAL 2024-02-11 20:41:16 INFO  LocalApp:92 - Polling for responses from manager
+LOCAL 2024-02-11 20:41:36 INFO  LocalApp:92 - Polling for responses from manager
+LOCAL 2024-02-11 20:41:56 INFO  LocalApp:92 - Polling for responses from manager
+LOCAL 2024-02-11 20:42:16 INFO  LocalApp:92 - Polling for responses from manager
+LOCAL 2024-02-11 20:42:36 INFO  LocalApp:92 - Polling for responses from manager
+LOCAL 2024-02-11 20:42:57 INFO  LocalApp:92 - Polling for responses from manager
+LOCAL 2024-02-11 20:43:17 INFO  LocalApp:92 - Polling for responses from manager
+LOCAL 2024-02-11 20:43:37 INFO  LocalApp:92 - Polling for responses from manager

@@ -1,0 +1,10 @@
+LOCAL 2024-02-11 16:08:49 INFO  LocalApp:58 - Queue https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-9cba06b3ca055fef deleted
+LOCAL 2024-02-11 16:08:49 INFO  LocalApp:58 - Queue https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-b63592fbe23e1b6c deleted
+LOCAL 2024-02-11 16:08:50 INFO  LocalApp:58 - Queue https://sqs.us-east-1.amazonaws.com/767398090493/managerToLocalQueue-9cba06b3ca055fef deleted
+LOCAL 2024-02-11 16:08:50 INFO  LocalApp:58 - Queue https://sqs.us-east-1.amazonaws.com/767398090493/managerToLocalQueue-b63592fbe23e1b6c deleted
+LOCAL 2024-02-11 16:08:50 INFO  LocalApp:58 - Queue https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue deleted
+LOCAL 2024-02-11 16:08:50 INFO  LocalApp:58 - Queue https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue deleted
+LOCAL 2024-02-11 16:08:53 INFO  LocalApp:89 - S3 bucket sarcasm-analysis-bucket-9cba06b3ca055fef emptied
+LOCAL 2024-02-11 16:08:53 INFO  LocalApp:98 - S3 bucket sarcasm-analysis-bucket-9cba06b3ca055fef deleted
+LOCAL 2024-02-11 16:08:54 INFO  LocalApp:89 - S3 bucket sarcasm-analysis-bucket-b63592fbe23e1b6c emptied
+LOCAL 2024-02-11 16:08:55 INFO  LocalApp:98 - S3 bucket sarcasm-analysis-bucket-b63592fbe23e1b6c deleted

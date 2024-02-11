@@ -1,0 +1,5 @@
+LOCAL 2024-02-11 19:51:09 INFO  LocalApp:32 - LocalApp started with id b4286f0787bdaea5
+LOCAL 2024-02-11 19:51:09 INFO  LocalApp:36 - LocalAppEnv created
+LOCAL 2024-02-11 19:51:12 INFO  S3Handler:24 - S3 bucket sarcasm-analysis-bucket-b4286f0787bdaea5 created
+LOCAL 2024-02-11 19:51:13 INFO  SQSHandler:19 - Queue localToManagerQueue-b4286f0787bdaea5 created
+LOCAL 2024-02-11 19:51:13 INFO  SQSHandler:19 - Queue managerToLocalQueue-b4286f0787bdaea5 created

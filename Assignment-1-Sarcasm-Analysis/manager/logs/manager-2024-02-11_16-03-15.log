@@ -1,0 +1,32 @@
+LOCAL 2024-02-11 16:03:15 INFO  Manager:19 - Manager started
+LOCAL 2024-02-11 16:03:17 INFO  Manager:22 - Queue managerToWorkerQueue created
+LOCAL 2024-02-11 16:03:17 INFO  Manager:22 - Queue workerToManagerQueue created
+LOCAL 2024-02-11 16:03:17 INFO  Manager:59 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 16:03:17 INFO  Manager:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-944e4d4e1712b4bd
+LOCAL 2024-02-11 16:03:21 INFO  Manager:59 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 16:03:24 INFO  Manager:59 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 16:03:27 INFO  Manager:59 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 16:03:30 INFO  Manager:59 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 16:03:33 INFO  Manager:59 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 16:03:37 INFO  Manager:59 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 16:03:37 INFO  Manager:67 - Received 0 requests
+LOCAL 2024-02-11 16:03:37 INFO  Manager:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-944e4d4e1712b4bd
+LOCAL 2024-02-11 16:03:40 INFO  Manager:59 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 16:03:43 INFO  Manager:59 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 16:03:46 INFO  Manager:59 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 16:03:49 INFO  Manager:59 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 16:03:52 INFO  Manager:59 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 16:03:56 INFO  Manager:59 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 16:03:57 INFO  Manager:67 - Received 0 requests
+LOCAL 2024-02-11 16:03:57 INFO  Manager:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-944e4d4e1712b4bd
+LOCAL 2024-02-11 16:03:59 INFO  Manager:59 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 16:04:02 INFO  Manager:59 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 16:04:05 INFO  Manager:59 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 16:04:08 INFO  Manager:59 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 16:04:11 INFO  Manager:59 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 16:04:15 INFO  Manager:59 - Polling tasks from 2 local app queues
+LOCAL 2024-02-11 16:04:18 INFO  Manager:67 - Received 0 requests
+LOCAL 2024-02-11 16:04:18 INFO  Manager:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-944e4d4e1712b4bd
+LOCAL 2024-02-11 16:04:18 INFO  Manager:59 - Polling tasks from 2 local app queues
+LOCAL 2024-02-11 16:04:21 INFO  Manager:59 - Polling tasks from 2 local app queues
+LOCAL 2024-02-11 16:04:24 INFO  Manager:59 - Polling tasks from 2 local app queues

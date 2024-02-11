@@ -1,3 +1,4 @@
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import software.amazon.awssdk.services.sqs.SqsClient;
 import software.amazon.awssdk.services.sqs.model.*;
@@ -7,11 +8,7 @@ import java.util.List;
 public class SQSHandler {
 
     private final SqsClient sqs = SqsClient.builder().region(AWSConfig.REGION1).build();
-    final Logger logger;
-
-    public SQSHandler(Logger logger) {
-        this.logger = logger;
-    }
+    private final Logger logger = LogManager.getLogger(SQSHandler.class);
 
     public String createQueue(String queueName) {
         CreateQueueRequest request = CreateQueueRequest.builder()
@@ -77,8 +74,6 @@ public class SQSHandler {
     }
 
     public List<Message> receiveMessages(String queueUrl) {
-        logger.info("Polling messages from " + queueUrl);
-
         ReceiveMessageRequest request = ReceiveMessageRequest.builder()
                 .queueUrl(queueUrl)
                 .maxNumberOfMessages(10)
