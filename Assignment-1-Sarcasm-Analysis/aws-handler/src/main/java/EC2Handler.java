@@ -1,4 +1,4 @@
-import org.slf4j.Logger;
+import org.apache.logging.log4j.Logger;
 import software.amazon.awssdk.services.ec2.Ec2Client;
 import software.amazon.awssdk.services.ec2.model.Tag;
 import software.amazon.awssdk.services.ec2.model.*;
@@ -6,7 +6,7 @@ import software.amazon.awssdk.services.ec2.model.*;
 import java.util.Base64;
 
 public class EC2Handler {
-    private final Ec2Client ec2 = Ec2Client.builder().region(AWSConfig.REGION).build();
+    private final Ec2Client ec2 = Ec2Client.builder().region(AWSConfig.REGION1).build();
     final Logger logger;
 
     public EC2Handler(Logger logger) {
@@ -14,7 +14,7 @@ public class EC2Handler {
     }
 
     public void createEC2Instance(String script, String typeTagValue, String nameTagValue, InstanceType instanceType) {
-        Ec2Client ec2 = Ec2Client.builder().region(AWSConfig.REGION).build();
+        Ec2Client ec2 = Ec2Client.builder().region(AWSConfig.REGION1).build();
         RunInstancesRequest runRequest = RunInstancesRequest.builder()
                 .instanceType(instanceType)
                 .imageId(AWSConfig.AMI_ID)
@@ -33,10 +33,10 @@ public class EC2Handler {
 
         try {
             ec2.createTags(tagRequest);
-            logger.info("[INFO] Successfully started EC2 instance " + instanceId + " based on AMI " + AWSConfig.AMI_ID);
+            logger.info("Successfully started EC2 instance " + instanceId + " based on AMI " + AWSConfig.AMI_ID);
 
         } catch (Ec2Exception e) {
-            logger.error("[ERROR] " + e.getMessage());
+            logger.error(e.getMessage());
             System.exit(1);
         }
     }
@@ -68,7 +68,7 @@ public class EC2Handler {
                         if (!instance.state().name().equals(InstanceStateName.TERMINATED) &&
                                 !instance.state().name().equals(InstanceStateName.SHUTTING_DOWN)) {
                             isManagerExists = true;
-                            logger.info("[INFO] Manager instance " + instance.instanceId() + " is " + instance.state().name());
+                            logger.info("Manager instance " + instance.instanceId() + " is " + instance.state().name());
                             if (!instance.state().name().equals(InstanceStateName.RUNNING) &&
                                     !instance.state().name().equals(InstanceStateName.PENDING)) {
                                 // Start the manager
@@ -81,19 +81,19 @@ public class EC2Handler {
             }
         }
         if (!isManagerExists) {
-            logger.info("[INFO] Manager instance does not exist");
+            logger.info("Manager instance does not exist");
             createManagerInstance();
         }
     }
 
     private void createManagerInstance() {
-        logger.info("[INFO] Creating manager instance");
+        logger.info("Creating manager instance");
         createEC2Instance(AWSConfig.MANAGER_INSTANCE_SCRIPT, AWSConfig.MANAGER_TYPE_TAG_VALUE,
                 AWSConfig.MANAGER_NAME_TAG_VALUE, AWSConfig.INSTANCE_TYPE);
     }
 
     public void createWorkerInstance() {
-        logger.info("[INFO] Creating worker instance");
+        logger.info("Creating worker instance");
         createEC2Instance(AWSConfig.WORKER_INSTANCE_SCRIPT, AWSConfig.WORKER_TYPE_TAG_VALUE,
                 AWSConfig.WORKER_NAME_TAG_VALUE, AWSConfig.INSTANCE_TYPE);
     }
@@ -112,12 +112,12 @@ public class EC2Handler {
                 }
             }
         }
-        logger.info("[INFO] Active workers: " + activeWorkers);
+        logger.info("Active workers: " + activeWorkers);
         return activeWorkers;
     }
 
     public void terminateEC2Instance(String instanceId) {
-        logger.info("[INFO] Terminating EC2 instance " + instanceId);
+        logger.info("Terminating EC2 instance " + instanceId);
         TerminateInstancesRequest request = TerminateInstancesRequest.builder()
                 .instanceIds(instanceId)
                 .build();
@@ -125,7 +125,7 @@ public class EC2Handler {
     }
 
     public void terminateAllWorkers() {
-        logger.info("[INFO] Terminating all workers");
+        logger.info("Terminating all workers");
         for (Reservation reservation : ec2.describeInstances().reservations()) {
             for (Instance instance : reservation.instances()) {
                 for (Tag tag : instance.tags()) {
@@ -141,7 +141,7 @@ public class EC2Handler {
     }
 
     public void terminateManager() {
-        logger.info("[INFO] Terminating manager");
+        logger.info("Terminating manager");
         for (Reservation reservation : ec2.describeInstances().reservations()) {
             for (Instance instance : reservation.instances()) {
                 for (Tag tag : instance.tags()) {

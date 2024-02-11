@@ -4,32 +4,35 @@ import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class LocalAppTask implements Runnable {
-    private final AWS aws = AWS.getInstance();
+    private final AWS aws;
     private final String outputFilePath;
     private final String summaryFileName;
     private final String bucketName;
     private final Logger logger;
+    private static final String taskId = UUID.randomUUID().toString().replace(AWSConfig.DEFAULT_DELIMITER, "").substring(28);
 
     public LocalAppTask(String outputFilePath, String summaryFileName, String bucketName, Logger logger) {
         this.outputFilePath = outputFilePath;
         this.summaryFileName = summaryFileName;
         this.bucketName = bucketName;
         this.logger = logger;
+        this.aws = new AWS(logger);
     }
 
     @Override
     public void run() {
-        logger.info("[INFO] LocalAppTask started");
+        logger.info("LocalAppTask " + taskId + " started");
         try {
             InputStream summaryFile = aws.s3.downloadFileFromS3(bucketName, summaryFileName);
             String summaryText = new BufferedReader(
                     new InputStreamReader(summaryFile)).lines().collect(Collectors.joining(""));
             String[] summaryContent = summaryText.split(AWSConfig.SUMMARY_DELIMITER);
 
-            logger.info("[INFO] Summary file downloaded from S3");
+            logger.info("LocalAppTask " + taskId + " received summary file from S3");
 
             StringBuilder htmlContent = new StringBuilder();
 
@@ -60,8 +63,6 @@ public class LocalAppTask implements Runnable {
                         <th>Sarcasm</th>
                       </tr>""");
 
-            logger.info("[INFO] Creating HTML content for summary file");
-
             for (String content : summaryContent) {
                 // <review_id>::<review_rating>::<review_link>::<sentiment>::<entities>
                 String[] reviewContent = content.split(AWSConfig.MESSAGE_DELIMITER, -1);
@@ -83,7 +84,7 @@ public class LocalAppTask implements Runnable {
                         formattedEntities,
                         isSarcastic ? "Yes" : "No"));
 
-                logger.info("[INFO] Review added to HTML content");
+                logger.info("LocalAppTask " + taskId + " added review to summary");
             }
 
             htmlContent.append("</table></body></html>");
@@ -92,10 +93,10 @@ public class LocalAppTask implements Runnable {
             htmlFile.write(htmlContent.toString());
             htmlFile.close();
 
-            logger.info("[INFO] Summary file created at " + outputFilePath + ".html");
+            logger.info("LocalAppTask " + taskId + " created summary HTML file at " + outputFilePath + ".html");
 
         } catch (Exception e) {
-            logger.error("[ERROR] " + e.getMessage());
+            logger.error(e.getMessage());
         }
     }
 

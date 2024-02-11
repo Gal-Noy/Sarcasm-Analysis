@@ -1,5 +1,4 @@
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.Logger;
 import software.amazon.awssdk.services.sqs.SqsClient;
 import software.amazon.awssdk.services.sqs.model.*;
 
@@ -7,7 +6,7 @@ import java.util.List;
 
 public class SQSHandler {
 
-    private final SqsClient sqs = SqsClient.builder().region(AWSConfig.REGION).build();
+    private final SqsClient sqs = SqsClient.builder().region(AWSConfig.REGION1).build();
     final Logger logger;
 
     public SQSHandler(Logger logger) {
@@ -20,7 +19,7 @@ public class SQSHandler {
                 .build();
         sqs.createQueue(request);
 
-        logger.info("[INFO] Queue " + queueName + " created");
+        logger.info("Queue " + queueName + " created");
 
         return getQueueUrl(queueName);
     }
@@ -44,7 +43,7 @@ public class SQSHandler {
             return listQueuesResponse.queueUrls();
         }
         catch (SqsException e) {
-            logger.error("[ERROR] " + e.getMessage());
+            logger.error(e.getMessage());
             System.exit(1);
         }
         return null;
@@ -56,7 +55,16 @@ public class SQSHandler {
                 .build();
         sqs.deleteQueue(request);
 
-        logger.info("[INFO] Queue " + queueUrl + " deleted");
+        logger.info("Queue " + queueUrl + " deleted");
+    }
+
+    public void deleteAllQueues() {
+        ListQueuesRequest listQueuesRequest = ListQueuesRequest
+                .builder().queueNamePrefix("").build();
+        ListQueuesResponse listQueuesResponse = sqs.listQueues(listQueuesRequest);
+        for (String queueUrl : listQueuesResponse.queueUrls()) {
+            deleteQueue(queueUrl);
+        }
     }
 
     public void sendMessage(String queueUrl, String message) {
@@ -65,11 +73,11 @@ public class SQSHandler {
                 .messageBody(message)
                 .build());
 
-        logger.info("[INFO] Sent message to " + queueUrl);
+        logger.info("Sent message to " + queueUrl);
     }
 
     public List<Message> receiveMessages(String queueUrl) {
-        logger.info("[INFO] Polling messages from " + queueUrl);
+        logger.info("Polling messages from " + queueUrl);
 
         ReceiveMessageRequest request = ReceiveMessageRequest.builder()
                 .queueUrl(queueUrl)
@@ -87,6 +95,6 @@ public class SQSHandler {
                 .build();
         sqs.deleteMessage(request);
 
-        logger.info("[INFO] Deleted message from " + queueUrl);
+        logger.info("Deleted message from " + queueUrl);
     }
 }

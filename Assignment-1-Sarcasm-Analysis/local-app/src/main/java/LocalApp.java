@@ -2,7 +2,6 @@
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
-import software.amazon.awssdk.services.s3.model.CSVOutput;
 import software.amazon.awssdk.services.sqs.model.Message;
 
 import java.io.File;
@@ -13,23 +12,23 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class LocalApp {
-    private static final AWS aws = AWS.getInstance();
     private static final String localAppId = UUID.randomUUID().toString().replace(AWSConfig.DEFAULT_DELIMITER, "").substring(0, 16);
     private static final Logger logger = LogManager.getLogger(LocalApp.class);
+    private static final AWS aws = new AWS(logger);
 
     public static void main(String[] args) {
         int argsLen = args.length;
         if (argsLen < 3 || (argsLen % 2 != 0 && args[argsLen - 1].equals(AWSConfig.TERMINATE_TASK))
                 || Integer.parseInt(args[argsLen - 1]) == 0) {
-            logger.error("[ERROR] Usage: LocalApp <input_file1> ... <input_fileN> <output_file1> ... <output_fileN> <n> [terminate]");
+            logger.error("Usage: LocalApp <input_file1> ... <input_fileN> <output_file1> ... <output_fileN> <n> [terminate]");
             return;
         }
 
-        logger.info("[INFO] LocalApp started with id " + localAppId);
+        logger.info("LocalApp started with id " + localAppId);
 
         LocalAppEnv env = new LocalAppEnv(args);
 
-        logger.info("[INFO] LocalAppEnv created");
+        logger.info("LocalAppEnv created");
 
         String bucketName = AWSConfig.BUCKET_NAME + AWSConfig.DEFAULT_DELIMITER + localAppId;
         aws.s3.createS3BucketIfNotExists(bucketName);
@@ -47,7 +46,7 @@ public class LocalApp {
         receiveResponsesFromManager(env, bucketName, managerToLocalQueueUrl);
 
         if (env.terminate) {
-            logger.info("[INFO] Sending terminate message to manager");
+            logger.info("Sending terminate message to manager");
 
             // <local_app_id>::terminate
             aws.sqs.sendMessage(localToManagerQueueUrl,
@@ -63,7 +62,7 @@ public class LocalApp {
         aws.s3.emptyS3Bucket(bucketName);
         aws.s3.deleteS3Bucket(bucketName);
 
-        logger.info("[INFO] LocalApp finished");
+        logger.info("LocalApp finished");
     }
 
     private static void sendTasksToManager(LocalAppEnv env, String bucketName, String localToManagerQueueUrl) {
@@ -78,14 +77,14 @@ public class LocalApp {
                     Integer.toString(inputIndex),
                     env.reviewsPerWorker + ""));
 
-            logger.info("[INFO] Sent task to manager: " + inputFile.getName() + " for inputIndex " + inputIndex + " with " + env.reviewsPerWorker + " reviews per worker");
+            logger.info("Sent task to manager: " + inputFile.getName() + " for inputIndex " + inputIndex + " with " + env.reviewsPerWorker + " reviews per worker");
         }
     }
 
     private static void receiveResponsesFromManager(LocalAppEnv env, String bucketName, String managerToLocalQueueUrl) {
         int filesLeftToProcess = env.numberOfFiles;
         while (filesLeftToProcess > 0) {
-            logger.info("[INFO] Polling for responses from manager");
+            logger.info("Polling for responses from manager");
             List<Message> responses = aws.sqs.receiveMessages(managerToLocalQueueUrl);
             for (Message response : responses) { // response for each input file
                 String responseBody = response.body();
@@ -97,7 +96,7 @@ public class LocalApp {
                         inputIndex = responseContent[3];
 
                 if (receivedLocalAppId.equals(localAppId)) {
-                    logger.info("[INFO] Received response from manager: " + responseBody);
+                    logger.info("Received response from manager: " + responseBody);
 
                     if (status.equals(AWSConfig.RESPONSE_STATUS_DONE)) {
                         Future<?> localAppTask = env.executor.submit(new LocalAppTask(
@@ -110,7 +109,7 @@ public class LocalApp {
                         try {
                             localAppTask.get();
                         } catch (Exception e) {
-                            logger.error("[ERROR] " + e.getMessage());
+                            logger.error(e.getMessage());
                         }
 
                         aws.s3.deleteFileFromS3(bucketName, summaryFileName);
@@ -124,7 +123,7 @@ public class LocalApp {
     }
 
     private static void waitForExecutorToFinish(ThreadPoolExecutor executor) {
-        logger.info("[INFO] Waiting for executor to finish");
+        logger.info("Waiting for executor to finish");
 
         while (true) {
             try {
@@ -132,7 +131,7 @@ public class LocalApp {
                     break;
                 }
             } catch (InterruptedException e) {
-                logger.error("[ERROR] " + e.getMessage());
+                logger.error(e.getMessage());
             }
         }
     }

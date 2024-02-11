@@ -1,14 +1,14 @@
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import org.apache.logging.log4j.Logger;
 public class AWS {
-    private static final AWS instance = new AWS();
-    public static AWS getInstance() {
-        return instance;
-    }
-    final Logger logger = LoggerFactory.getLogger(AWS.class);
+    private Logger logger;
+    public EC2Handler ec2;
+    public S3Handler s3;
+    public SQSHandler sqs;
 
-    public final EC2Handler ec2 = new EC2Handler(logger);
-    public final S3Handler s3 = new S3Handler(logger);
-    public final SQSHandler sqs = new SQSHandler(logger);
+    public AWS(Logger logger) {
+        this.logger = logger;
+        this.ec2 = new EC2Handler(logger);
+        this.s3 = new S3Handler(logger);
+        this.sqs = new SQSHandler(logger);
+    }
 }

@@ -1,0 +1,393 @@
+LOCAL 2024-02-11 09:59:01 INFO  Manager:20 - Manager started
+LOCAL 2024-02-11 09:59:02 INFO  Manager:22 - Queue managerToWorkerQueue-a38ee0a2af3c459c created
+LOCAL 2024-02-11 09:59:02 INFO  Manager:22 - Queue workerToManagerQueue-a38ee0a2af3c459c created
+LOCAL 2024-02-11 09:59:03 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:03 INFO  Manager:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:03 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:03 INFO  Manager:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:03 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:03 INFO  Manager:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:03 INFO  Manager:67 - Received 1 requests from local app a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:03 INFO  Manager:102 - Received request: a38ee0a2af3c459c::analyze::test-input1.txt::0::20
+LOCAL 2024-02-11 09:59:03 INFO  Manager:59 - Downloading file test-input1.txt from S3 bucket sarcasm-analysis-bucket-a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:04 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:04 INFO  Manager:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:04 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:04 INFO  Manager:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:04 INFO  Manager:128 - Parsed 20 reviews from input file test-input1.txt
+LOCAL 2024-02-11 09:59:04 INFO  Manager:172 - Assigning workers
+LOCAL 2024-02-11 09:59:04 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:04 INFO  Manager:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:04 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:04 INFO  Manager:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:04 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:04 INFO  Manager:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:04 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:04 INFO  Manager:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:04 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:04 INFO  Manager:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:05 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:05 INFO  Manager:115 - Active workers: 0
+LOCAL 2024-02-11 09:59:05 INFO  Manager:96 - Creating worker instance
+LOCAL 2024-02-11 09:59:05 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:05 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:05 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:05 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:05 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:05 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:06 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:06 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:06 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:06 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:06 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:06 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:07 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:07 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:07 INFO  Manager:36 - Successfully started EC2 instance i-045e3fd5e271e2b0a based on AMI ami-00e95a9222311e8ed
+LOCAL 2024-02-11 09:59:07 INFO  Manager:184 - Workers assigned: 1
+LOCAL 2024-02-11 09:59:07 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:07 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:07 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:07 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:07 INFO  Manager:98 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:07 INFO  Manager:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:07 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:08 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:08 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:08 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:08 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:08 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:08 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:09 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:09 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:09 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:09 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:09 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:09 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:09 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:10 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:10 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:10 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:10 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:10 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:10 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:11 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:11 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:11 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:11 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:11 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:11 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:11 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:12 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:12 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:12 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:12 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:12 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:12 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:12 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:13 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:13 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:13 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:13 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:13 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:13 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:14 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:14 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:14 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:14 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:14 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:14 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:14 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:15 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:15 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:15 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:15 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:15 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:15 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:16 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:16 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:16 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:16 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:17 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:17 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:17 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:17 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:17 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:18 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:18 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:18 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:18 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:18 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:18 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:18 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:19 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:19 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:19 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:19 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:19 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:19 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:20 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:20 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:20 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:20 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:20 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:20 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:20 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:21 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:21 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:21 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:21 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:21 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:21 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:21 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:22 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:22 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:22 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:22 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:22 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:22 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:23 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:23 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:23 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:23 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:23 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:23 INFO  Manager:67 - Received 0 requests from local app a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:23 INFO  Manager:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:23 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:23 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:23 INFO  Manager:67 - Received 0 requests from local app a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:23 INFO  Manager:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:24 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:24 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:24 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:24 INFO  Manager:67 - Received 0 requests from local app a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:24 INFO  Manager:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:24 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:24 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:24 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:24 INFO  Manager:67 - Received 0 requests from local app a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:24 INFO  Manager:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:24 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:24 INFO  Manager:67 - Received 0 requests from local app a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:24 INFO  Manager:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:25 INFO  Manager:67 - Received 0 requests from local app a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:25 INFO  Manager:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:25 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:25 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:25 INFO  Manager:67 - Received 0 requests from local app a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:25 INFO  Manager:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:25 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:25 INFO  Manager:67 - Received 0 requests from local app a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:25 INFO  Manager:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:25 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:25 INFO  Manager:67 - Received 0 requests from local app a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:25 INFO  Manager:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:25 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:25 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:25 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:26 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:26 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:26 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:26 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:26 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:26 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:27 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:27 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:27 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:27 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:27 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:27 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:27 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:28 INFO  Manager:67 - Received 0 requests from local app a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:28 INFO  Manager:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:28 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:28 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:28 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:28 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:28 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:29 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:29 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:29 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:29 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:29 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:30 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:30 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:30 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:30 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:30 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:30 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:31 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:31 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:31 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:31 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:31 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:31 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:31 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:32 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:32 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:32 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:32 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:32 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:32 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:32 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:33 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:33 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:33 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:33 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:33 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:33 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:34 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:34 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:34 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:34 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:34 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:34 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:34 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:35 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:35 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:35 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:35 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:35 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:35 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:36 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:36 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:36 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:36 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:36 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:36 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:36 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:37 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:37 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:37 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:37 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:37 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:37 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:37 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:38 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:38 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:38 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:38 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:38 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:38 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:39 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:39 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:39 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:39 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:39 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:39 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:39 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:40 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:40 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:40 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:40 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:40 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:40 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:41 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:41 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:41 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:41 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:42 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:42 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:42 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:42 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:42 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:43 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:43 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:43 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:43 INFO  Manager:67 - Received 0 requests from local app a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:43 INFO  Manager:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:43 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:44 INFO  Manager:67 - Received 0 requests from local app a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:44 INFO  Manager:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:44 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:44 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:44 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:44 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:44 INFO  Manager:67 - Received 0 requests from local app a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:44 INFO  Manager:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:44 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:44 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:44 INFO  Manager:67 - Received 0 requests from local app a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:44 INFO  Manager:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:45 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:45 INFO  Manager:67 - Received 0 requests from local app a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:45 INFO  Manager:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:45 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:45 INFO  Manager:67 - Received 0 requests from local app a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:45 INFO  Manager:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:45 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:45 INFO  Manager:67 - Received 0 requests from local app a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:45 INFO  Manager:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:45 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:45 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:45 INFO  Manager:67 - Received 0 requests from local app a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:45 INFO  Manager:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:45 INFO  Manager:67 - Received 0 requests from local app a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:45 INFO  Manager:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:45 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:45 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:46 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:46 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:46 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:46 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:46 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:46 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:47 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:47 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:47 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:47 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:47 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:47 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:47 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:48 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:48 INFO  Manager:67 - Received 0 requests from local app a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:48 INFO  Manager:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-a38ee0a2af3c459c
+LOCAL 2024-02-11 09:59:48 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:48 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:48 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:48 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:48 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:49 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:49 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:49 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:49 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:49 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:49 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:49 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:50 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:50 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:50 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:50 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:50 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:50 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:51 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:51 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:51 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:51 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:51 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:51 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:51 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:52 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:52 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:52 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:52 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:52 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:52 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:53 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:53 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:53 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:53 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:53 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:53 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:53 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:54 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:54 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:54 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:54 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:54 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:55 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:55 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:55 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:55 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:55 INFO  Manager:49 - Polling tasks from 1 local app queues
+LOCAL 2024-02-11 09:59:56 INFO  Manager:49 - Polling tasks from 1 local app queues

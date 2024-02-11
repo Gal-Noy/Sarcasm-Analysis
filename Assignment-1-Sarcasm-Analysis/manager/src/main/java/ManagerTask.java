@@ -1,22 +1,26 @@
-import org.slf4j.Logger;
+import org.apache.logging.log4j.Logger;
+
 import software.amazon.awssdk.services.sqs.model.Message;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 public class ManagerTask implements Runnable {
-    private final AWS aws = AWS.getInstance();
+    private final AWS aws;
     private final String localAppId;
     private final String inputIndex;
     private final Map<String, Review> requestReviews;
     private final String bucketName;
     private int tasksSent = 0;
     private int tasksCompleted = 0;
-    private Map<String, String> reviewsSentiment = new HashMap<>();
-    private Map<String, String> reviewsEntities = new HashMap<>();
+    private final Map<String, String> reviewsSentiment;
+    private final Map<String, String> reviewsEntities;
     private final StringBuilder summaryMessage;
     private final Logger logger;
+    private final String taskId = UUID.randomUUID().toString().replace(AWSConfig.DEFAULT_DELIMITER, "").substring(0, 8);
+
 
     public ManagerTask(String localAppId, String inputIndex, Map<String, Review> requestReviews, String bucketName, Logger logger) {
         this.localAppId = localAppId;
@@ -27,27 +31,30 @@ public class ManagerTask implements Runnable {
         this.reviewsEntities = new HashMap<>();
         this.summaryMessage = new StringBuilder();
         this.logger = logger;
+        this.aws = new AWS(logger);
     }
+
 
     @Override
     public void run() {
-        logger.info("[INFO] ManagerTask started for localAppId " + localAppId);
+        logger.info("ManagerTask started for local app " + localAppId + " for inputIndex " + inputIndex);
 
         sendTasksToWorkers();
 
-        logger.info("[INFO] All tasks sent to workers");
+        logger.info("ManagerTask " + taskId + " sent tasks to workers for local app " + localAppId + " for inputIndex " + inputIndex);
 
         receiveResponsesFromWorkers();
 
-        logger.info("[INFO] All responses received from workers");
+        logger.info("ManagerTask " + taskId + " received all responses from workers for local app " + localAppId + " for inputIndex " + inputIndex);
 
         handleSummary();
 
-        logger.info("[INFO] Summary handled, ManagerTask finished for localAppId " + localAppId);
+        logger.info("ManagerTask " + taskId + " finished summary for local app " + localAppId + " for inputIndex " + inputIndex);
+        logger.info("ManagerTask finished for local app " + localAppId + " for inputIndex " + inputIndex);
     }
 
     private void sendTasksToWorkers() {
-        logger.info("[INFO] Sending tasks to workers for local app " + localAppId);
+        logger.info("ManagerTask " + taskId + " sending tasks to workers for local app " + localAppId + " for inputIndex " + inputIndex);
 
         String managerToWorkerQueueUrl = aws.sqs.getQueueUrl(
                 AWSConfig.MANAGER_TO_WORKER_QUEUE_NAME + AWSConfig.DEFAULT_DELIMITER + localAppId
@@ -66,12 +73,13 @@ public class ManagerTask implements Runnable {
 
             tasksSent += 2;
 
-            logger.info("[INFO] Sent total " + tasksSent + " tasks to workers for local app " + localAppId + " for inputIndex " + inputIndex + " for reviewId " + reviewId);
+            logger.info("ManagerTask " + taskId + " sent tasks for reviewId " + reviewId + " for local app " + localAppId + " for inputIndex " + inputIndex);
+            logger.info("ManagerTask " + taskId + " sent total tasks " + tasksSent + " to workers for local app " + localAppId + " for inputIndex " + inputIndex);
         }
     }
 
     private void receiveResponsesFromWorkers() {
-        logger.info("[INFO] Receiving responses from workers for local app " + localAppId);
+        logger.info("ManagerTask " + taskId + " receiving responses from workers for local app " + localAppId + " for inputIndex " + inputIndex);
 
         String workerToManagerQueueUrl = aws.sqs.getQueueUrl(
                 AWSConfig.WORKER_TO_MANAGER_QUEUE_NAME + AWSConfig.DEFAULT_DELIMITER + localAppId
@@ -89,7 +97,7 @@ public class ManagerTask implements Runnable {
 
                 // Check if response is for this task
                 if (localAppId.equals(this.localAppId) && inputIndex.equals(this.inputIndex)) {
-                    logger.info("[INFO] Received response for local app " + localAppId + " for inputIndex " + inputIndex + " for reviewId " + reviewId + " for taskType " + taskType);
+                    logger.info("ManagerTask " + taskId + " received response for reviewId " + reviewId + " for inputIndex " + inputIndex + " for taskType " + taskType + " with taskResult " + taskResult);
 
                     int reviewRating = requestReviews.get(reviewId).getRating();
                     String reviewLink = requestReviews.get(reviewId).getLink();
@@ -103,8 +111,6 @@ public class ManagerTask implements Runnable {
                     }
 
                     if (reviewsSentiment.containsKey(reviewId) && reviewsEntities.containsKey(reviewId)) {
-                        logger.info("[INFO] Received all responses for reviewId " + reviewId + " for inputIndex " + inputIndex);
-
                         String sentiment = reviewsSentiment.get(reviewId);
                         String entities = reviewsEntities.get(reviewId);
 
@@ -116,14 +122,14 @@ public class ManagerTask implements Runnable {
                         summaryMessage.append(String.join(AWSConfig.MESSAGE_DELIMITER,
                                 reviewId, reviewRating + "", reviewLink, sentiment, entities));
 
-                        logger.info("[INFO] Summary message updated for reviewId " + reviewId + " for inputIndex " + inputIndex);
+                        logger.info("ManagerTask " + taskId + " updated summary message for reviewId " + reviewId + " for inputIndex " + inputIndex + " with sentiment " + sentiment + " and entities " + entities);
                     }
 
                 }
                 tasksCompleted++;
                 aws.sqs.deleteMessage(workerToManagerQueueUrl, response);
 
-                logger.info("total tasks completed: " + tasksCompleted + " total tasks sent: " + tasksSent);
+                logger.info("ManagerTask " + taskId + " completed tasks " + tasksCompleted + " out of " + tasksSent + " for local app " + localAppId + " for inputIndex " + inputIndex);
             }
         }
     }
@@ -139,6 +145,6 @@ public class ManagerTask implements Runnable {
         String responseContent = String.join(AWSConfig.MESSAGE_DELIMITER, localAppId, AWSConfig.RESPONSE_STATUS_DONE, summaryFileName, inputIndex);
         aws.sqs.sendMessage(managerToLocalQueueUrl, responseContent);
 
-        logger.info("[INFO] Summary message uploaded to S3 and response sent to local app " + localAppId);
+        logger.info("ManagerTask " + taskId + " uploaded summary file " + summaryFileName + " to S3 and sent response to local app " + localAppId + " for inputIndex " + inputIndex);
     }
 }

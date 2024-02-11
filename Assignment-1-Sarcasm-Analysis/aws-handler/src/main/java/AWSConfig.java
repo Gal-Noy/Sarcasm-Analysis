@@ -4,7 +4,8 @@ import software.amazon.awssdk.services.ec2.model.InstanceType;
 import java.util.UUID;
 
 public class AWSConfig {
-    public static Region REGION = Region.US_EAST_1;
+    public static Region REGION1 = Region.US_EAST_1;
+    public static Region REGION2 = Region.US_WEST_2;
     public static final String ANALYZE_TASK = "analyze";
     public static final String TERMINATE_TASK = "terminate";
     public static final String RESPONSE_STATUS_DONE = "done";
@@ -28,13 +29,11 @@ public class AWSConfig {
 
     public static final String MANAGER_INSTANCE_SCRIPT = "#!/bin/bash\n" +
             "wget https://" + JARS_BUCKET_NAME + ".s3.amazonaws.com/manager.jar\n" +
-            "java -jar manager.jar\n" +
-            "shutdown -h now";
+            "java -jar manager.jar";
 
-    public static String WORKER_INSTANCE_SCRIPT = "#!/bin/bash\n" +
+    public static final String WORKER_INSTANCE_SCRIPT = "#!/bin/bash\n" +
             "wget https://" + JARS_BUCKET_NAME + ".s3.amazonaws.com/worker.jar\n" +
-            "java -jar worker.jar\n" +
-            "shutdown -h now";
+            "java -jar worker.jar";
 
     public static final String TYPE_TAG = "Type";
     public static final String MANAGER_TYPE_TAG_VALUE = "Manager";
@@ -42,7 +41,7 @@ public class AWSConfig {
     public static final String NAME_TAG = "Name";
     public static final String MANAGER_NAME_TAG_VALUE = "sarcasm-analysis-manager";
     public static final String WORKER_NAME_TAG_VALUE = "sarcasm-analysis-worker-"
-            + UUID.randomUUID().toString().replace("-", "").substring(0, 8);
+            + UUID.randomUUID().toString().replace("-", "").substring(28);
 
     // SQS
     public static final String LOCAL_TO_MANAGER_QUEUE_NAME = "localToManagerQueue";
