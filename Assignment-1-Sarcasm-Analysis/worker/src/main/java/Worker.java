@@ -5,6 +5,8 @@ import analysis.SentimentAnalysisHandler;
 import analysis.NamedEntityRecognitionHandler;
 import software.amazon.awssdk.services.sqs.model.Message;
 
+import java.util.List;
+
 
 public class Worker {
     private static final Logger logger = LogManager.getLogger(Worker.class);
@@ -27,23 +29,16 @@ public class Worker {
                 logger.info("Polling tasks from " + AWSConfig.MANAGER_TO_WORKER_QUEUE_NAME);
                 Message task = aws.sqs.receiveSingleMessage(managerToWorkerQueueUrl); // long polling
                 if (task != null) {
-                    Thread extendTaskVisibility = new Thread(new ExtendTaskVisibility(task, managerToWorkerQueueUrl));
-                    extendTaskVisibility.start();
-
+                    Thread extendMessageVisibility = new Thread(new ExtendTaskVisibility(task, managerToWorkerQueueUrl));
+                    extendMessageVisibility.start();
                     String response = processTask(task.body());
-
+                    extendMessageVisibility.interrupt();
                     if (response != null) {
                         aws.sqs.sendMessage(workerToManagerQueueUrl, response);
-                        logger.info("Sent response: " + response);
-                        extendTaskVisibility.interrupt();
                         aws.sqs.deleteMessage(managerToWorkerQueueUrl, task);
-
-                    }
-                    else {
-                        logger.error("Error processing task: " + task.body());
-                        extendTaskVisibility.interrupt();
+                    } else {
                         // Put the task back in the queue
-                        aws.sqs.changeMessageVisibility(managerToWorkerQueueUrl, task, 0);
+                        aws.sqs.changeMessageVisibility(managerToWorkerQueueUrl, task, AWSConfig.RETURN_TASK_TIME);
                     }
                 }
             } catch (Exception e) {
@@ -68,15 +63,13 @@ public class Worker {
                 String sentiment = String.valueOf(sentimentAnalysisHandler.findSentiment(reviewText));
                 response += sentiment; // <task_result>
             }
-
             if (taskType.equals(AWSConfig.ENTITY_RECOGNITION_TASK)) {
                 String entities = String.join(", ", namedEntityRecognitionHandler.findEntities(reviewText));
                 response += entities; // <task_result>
             }
 
             return response;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             logger.error(e.getMessage());
             return null;
         }

@@ -1,0 +1,368 @@
+LOCAL 2024-02-12 15:48:21 INFO  Manager:18 - Manager started
+LOCAL 2024-02-12 15:48:22 INFO  SQSHandler:19 - Queue managerToWorkerQueue created
+LOCAL 2024-02-12 15:48:22 INFO  SQSHandler:19 - Queue workerToManagerQueue created
+LOCAL 2024-02-12 15:48:23 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 15:48:23 INFO  Manager:46 - Polled 1 requests
+LOCAL 2024-02-12 15:48:23 INFO  Manager:60 - Received request: 9f3cda337dd46fdd::analyze::test-input3.txt::0::1
+LOCAL 2024-02-12 15:48:23 INFO  S3Handler:56 - Downloading file 9f3cda337dd46fdd/test-input3.txt from S3 bucket sarcasm-analysis-bucket
+LOCAL 2024-02-12 15:48:24 INFO  Manager:101 - Parsed 1 reviews from input file test-input3.txt
+LOCAL 2024-02-12 15:48:24 INFO  ManagerEnv:22 - Assigning workers
+LOCAL 2024-02-12 15:48:26 INFO  EC2Handler:118 - Active workers: 0
+LOCAL 2024-02-12 15:48:26 INFO  EC2Handler:99 - Creating worker instance
+LOCAL 2024-02-12 15:48:28 INFO  EC2Handler:33 - Successfully started EC2 instance i-045caa793c8868708 based on AMI ami-00e95a9222311e8ed
+LOCAL 2024-02-12 15:48:28 INFO  ManagerTask:38 - ManagerTask started for local app 9f3cda337dd46fdd for inputIndex 0
+LOCAL 2024-02-12 15:48:28 INFO  ManagerTask:58 - Sending tasks to workers for local app 9f3cda337dd46fdd for inputIndex 0
+LOCAL 2024-02-12 15:48:28 INFO  S3Handler:71 - File 9f3cda337dd46fdd/test-input3.txt deleted from S3 bucket sarcasm-analysis-bucket
+LOCAL 2024-02-12 15:48:28 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 15:48:29 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 15:48:29 INFO  ManagerTask:75 - Sent tasks for reviewId RZFIYJTPVUZ94 for local app 9f3cda337dd46fdd for inputIndex 0
+LOCAL 2024-02-12 15:48:29 INFO  ManagerTask:76 - Sent total tasks 2 to workers for local app 9f3cda337dd46fdd for inputIndex 0
+LOCAL 2024-02-12 15:48:29 INFO  ManagerTask:42 - Sent tasks to workers for local app 9f3cda337dd46fdd for inputIndex 0
+LOCAL 2024-02-12 15:48:29 INFO  ManagerTask:81 - Receiving responses from workers for local app 9f3cda337dd46fdd for inputIndex 0
+LOCAL 2024-02-12 15:48:29 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue
+LOCAL 2024-02-12 15:48:29 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 15:48:49 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 15:48:49 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 15:49:09 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 15:49:09 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 15:49:29 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 15:49:29 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 15:49:49 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 15:49:49 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 15:50:10 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 15:50:10 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 15:50:30 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 15:50:30 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 15:50:50 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 15:50:50 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 15:51:10 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 15:51:10 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 15:51:30 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 15:51:30 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 15:51:50 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 15:51:50 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 15:52:10 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 15:52:10 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 15:52:31 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 15:52:31 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 15:52:34 INFO  ManagerTask:97 - Received response for reviewId RZFIYJTPVUZ94 for inputIndex 0 for taskType sentimentAnalysis with taskResult 1
+LOCAL 2024-02-12 15:52:35 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 15:52:35 INFO  ManagerTask:126 - Completed tasks 1 out of 2 for local app 9f3cda337dd46fdd for inputIndex 0
+LOCAL 2024-02-12 15:52:41 INFO  ManagerTask:97 - Received response for reviewId RZFIYJTPVUZ94 for inputIndex 0 for taskType entityRecognition with taskResult Toronto: ORGANIZATION, Star: ORGANIZATION, Lucifer: PERSON, Haribo: ORGANIZATION, Sugar: ORGANIZATION, Free: ORGANIZATION, Gummy: ORGANIZATION, Bears: ORGANIZATION, Pearson: LOCATION, International: LOCATION, Airport: LOCATION, Haribo: PERSON, Haribo: ORGANIZATION, Sugar: ORGANIZATION, Free: ORGANIZATION, Gummy: ORGANIZATION, Bears: ORGANIZATION, KLM: ORGANIZATION, Bugs: PERSON, Bunny: PERSON, Mount: LOCATION, Vesuvius: LOCATION, Pearson: LOCATION, International: LOCATION, Airport: LOCATION
+LOCAL 2024-02-12 15:52:41 INFO  ManagerTask:121 - Updated summary message for reviewId RZFIYJTPVUZ94 for inputIndex 0 with sentiment 1 and entities Toronto: ORGANIZATION, Star: ORGANIZATION, Lucifer: PERSON, Haribo: ORGANIZATION, Sugar: ORGANIZATION, Free: ORGANIZATION, Gummy: ORGANIZATION, Bears: ORGANIZATION, Pearson: LOCATION, International: LOCATION, Airport: LOCATION, Haribo: PERSON, Haribo: ORGANIZATION, Sugar: ORGANIZATION, Free: ORGANIZATION, Gummy: ORGANIZATION, Bears: ORGANIZATION, KLM: ORGANIZATION, Bugs: PERSON, Bunny: PERSON, Mount: LOCATION, Vesuvius: LOCATION, Pearson: LOCATION, International: LOCATION, Airport: LOCATION
+LOCAL 2024-02-12 15:52:42 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 15:52:42 INFO  ManagerTask:126 - Completed tasks 2 out of 2 for local app 9f3cda337dd46fdd for inputIndex 0
+LOCAL 2024-02-12 15:52:42 INFO  ManagerTask:46 - Received all responses from workers for local app 9f3cda337dd46fdd for inputIndex 0
+LOCAL 2024-02-12 15:52:43 INFO  S3Handler:52 - Content uploaded to S3 bucket sarcasm-analysis-bucket with key 9f3cda337dd46fdd/9f3cda337dd46fdd-summary-0
+LOCAL 2024-02-12 15:52:43 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToLocalQueue
+LOCAL 2024-02-12 15:52:43 INFO  ManagerTask:149 - Uploaded summary file 9f3cda337dd46fdd-summary-0 to S3 and sent response to local app 9f3cda337dd46fdd for inputIndex 0
+LOCAL 2024-02-12 15:52:43 INFO  ManagerTask:50 - Finished summary for local app 9f3cda337dd46fdd for inputIndex 0
+LOCAL 2024-02-12 15:52:43 INFO  ManagerEnv:39 - Releasing workers
+LOCAL 2024-02-12 15:52:44 INFO  EC2Handler:118 - Active workers: 0
+LOCAL 2024-02-12 15:52:44 INFO  ManagerTask:54 - ManagerTask finished for local app 9f3cda337dd46fdd for inputIndex 0
+LOCAL 2024-02-12 15:52:51 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 15:52:51 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 15:53:12 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 15:53:12 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 15:53:32 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 15:53:32 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 15:53:46 INFO  Manager:46 - Polled 1 requests
+LOCAL 2024-02-12 15:53:46 INFO  Manager:60 - Received request: 9831814ce736dd77::analyze::test-input3.txt::0::1
+LOCAL 2024-02-12 15:53:46 INFO  S3Handler:56 - Downloading file 9831814ce736dd77/test-input3.txt from S3 bucket sarcasm-analysis-bucket
+LOCAL 2024-02-12 15:53:47 INFO  Manager:101 - Parsed 1 reviews from input file test-input3.txt
+LOCAL 2024-02-12 15:53:47 INFO  ManagerEnv:22 - Assigning workers
+LOCAL 2024-02-12 15:53:48 INFO  EC2Handler:118 - Active workers: 0
+LOCAL 2024-02-12 15:53:48 INFO  EC2Handler:99 - Creating worker instance
+LOCAL 2024-02-12 15:53:50 INFO  EC2Handler:33 - Successfully started EC2 instance i-0dcc0c03e05eca00b based on AMI ami-00e95a9222311e8ed
+LOCAL 2024-02-12 15:53:50 INFO  ManagerTask:38 - ManagerTask started for local app 9831814ce736dd77 for inputIndex 0
+LOCAL 2024-02-12 15:53:50 INFO  ManagerTask:58 - Sending tasks to workers for local app 9831814ce736dd77 for inputIndex 0
+LOCAL 2024-02-12 15:53:50 INFO  S3Handler:71 - File 9831814ce736dd77/test-input3.txt deleted from S3 bucket sarcasm-analysis-bucket
+LOCAL 2024-02-12 15:53:50 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 15:53:51 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 15:53:51 INFO  ManagerTask:75 - Sent tasks for reviewId RZFIYJTPVUZ94 for local app 9831814ce736dd77 for inputIndex 0
+LOCAL 2024-02-12 15:53:51 INFO  ManagerTask:76 - Sent total tasks 2 to workers for local app 9831814ce736dd77 for inputIndex 0
+LOCAL 2024-02-12 15:53:51 INFO  ManagerTask:42 - Sent tasks to workers for local app 9831814ce736dd77 for inputIndex 0
+LOCAL 2024-02-12 15:53:51 INFO  ManagerTask:81 - Receiving responses from workers for local app 9831814ce736dd77 for inputIndex 0
+LOCAL 2024-02-12 15:53:51 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue
+LOCAL 2024-02-12 15:53:51 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 15:54:11 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 15:54:11 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 15:54:31 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 15:54:31 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 15:54:51 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 15:54:51 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 15:55:11 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 15:55:11 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 15:55:32 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 15:55:32 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 15:55:52 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 15:55:52 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 15:56:12 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 15:56:12 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 15:56:32 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 15:56:32 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 15:56:52 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 15:56:52 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 15:57:12 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 15:57:12 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 15:57:32 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 15:57:32 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 15:57:53 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 15:57:53 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 15:58:13 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 15:58:13 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 15:58:33 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 15:58:33 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 15:58:54 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 15:58:54 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 15:59:14 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 15:59:14 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 15:59:34 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 15:59:34 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 15:59:54 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 15:59:54 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:00:14 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 16:00:14 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:00:35 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 16:00:35 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:00:39 INFO  ManagerTask:97 - Received response for reviewId RZFIYJTPVUZ94 for inputIndex 0 for taskType sentimentAnalysis with taskResult 1
+LOCAL 2024-02-12 16:00:39 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 16:00:39 INFO  ManagerTask:126 - Completed tasks 1 out of 2 for local app 9831814ce736dd77 for inputIndex 0
+LOCAL 2024-02-12 16:00:45 INFO  ManagerTask:97 - Received response for reviewId RZFIYJTPVUZ94 for inputIndex 0 for taskType entityRecognition with taskResult Toronto: ORGANIZATION, Star: ORGANIZATION, Lucifer: PERSON, Haribo: ORGANIZATION, Sugar: ORGANIZATION, Free: ORGANIZATION, Gummy: ORGANIZATION, Bears: ORGANIZATION, Pearson: LOCATION, International: LOCATION, Airport: LOCATION, Haribo: PERSON, Haribo: ORGANIZATION, Sugar: ORGANIZATION, Free: ORGANIZATION, Gummy: ORGANIZATION, Bears: ORGANIZATION, KLM: ORGANIZATION, Bugs: PERSON, Bunny: PERSON, Mount: LOCATION, Vesuvius: LOCATION, Pearson: LOCATION, International: LOCATION, Airport: LOCATION
+LOCAL 2024-02-12 16:00:45 INFO  ManagerTask:121 - Updated summary message for reviewId RZFIYJTPVUZ94 for inputIndex 0 with sentiment 1 and entities Toronto: ORGANIZATION, Star: ORGANIZATION, Lucifer: PERSON, Haribo: ORGANIZATION, Sugar: ORGANIZATION, Free: ORGANIZATION, Gummy: ORGANIZATION, Bears: ORGANIZATION, Pearson: LOCATION, International: LOCATION, Airport: LOCATION, Haribo: PERSON, Haribo: ORGANIZATION, Sugar: ORGANIZATION, Free: ORGANIZATION, Gummy: ORGANIZATION, Bears: ORGANIZATION, KLM: ORGANIZATION, Bugs: PERSON, Bunny: PERSON, Mount: LOCATION, Vesuvius: LOCATION, Pearson: LOCATION, International: LOCATION, Airport: LOCATION
+LOCAL 2024-02-12 16:00:45 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 16:00:45 INFO  ManagerTask:126 - Completed tasks 2 out of 2 for local app 9831814ce736dd77 for inputIndex 0
+LOCAL 2024-02-12 16:00:45 INFO  ManagerTask:46 - Received all responses from workers for local app 9831814ce736dd77 for inputIndex 0
+LOCAL 2024-02-12 16:00:47 INFO  S3Handler:52 - Content uploaded to S3 bucket sarcasm-analysis-bucket with key 9831814ce736dd77/9831814ce736dd77-summary-0
+LOCAL 2024-02-12 16:00:47 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToLocalQueue
+LOCAL 2024-02-12 16:00:47 INFO  ManagerTask:149 - Uploaded summary file 9831814ce736dd77-summary-0 to S3 and sent response to local app 9831814ce736dd77 for inputIndex 0
+LOCAL 2024-02-12 16:00:47 INFO  ManagerTask:50 - Finished summary for local app 9831814ce736dd77 for inputIndex 0
+LOCAL 2024-02-12 16:00:47 INFO  ManagerEnv:39 - Releasing workers
+LOCAL 2024-02-12 16:00:48 INFO  EC2Handler:118 - Active workers: 0
+LOCAL 2024-02-12 16:00:48 INFO  ManagerTask:54 - ManagerTask finished for local app 9831814ce736dd77 for inputIndex 0
+LOCAL 2024-02-12 16:00:55 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 16:00:55 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:01:15 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 16:01:15 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:01:35 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 16:01:35 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:01:55 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 16:01:55 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:16 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 16:02:16 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:16 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: afbf3503-f4d6-5b4a-98d0-6b47d3fee5d2)
+LOCAL 2024-02-12 16:02:16 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:16 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 9c592f6f-1026-5d88-b402-712b370ea310)
+LOCAL 2024-02-12 16:02:16 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:16 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 0aaacab4-29f2-5b98-a3c7-94f00eda9500)
+LOCAL 2024-02-12 16:02:16 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:16 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 240b84a4-81ad-5198-91f5-dae0a685df00)
+LOCAL 2024-02-12 16:02:16 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:17 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 24c35987-1ad6-5d17-9e1a-07c33dfe638f)
+LOCAL 2024-02-12 16:02:17 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:17 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 72197e00-d933-5777-8c0e-2044fe1ae9ef)
+LOCAL 2024-02-12 16:02:17 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:17 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 4cee2469-7db2-518e-a6cd-7a2d5a9bbf16)
+LOCAL 2024-02-12 16:02:17 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:17 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 51c4e58b-b475-5dce-9ee0-bbcf935c0356)
+LOCAL 2024-02-12 16:02:17 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:17 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: b367fcfa-63ca-5bde-9fe8-a2be44e32546)
+LOCAL 2024-02-12 16:02:17 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:17 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 55b5efa4-fcdf-5b49-92eb-b1e0dbf675d1)
+LOCAL 2024-02-12 16:02:17 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:18 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: bc1d522b-3ad0-5188-9962-0c6f1df9bf10)
+LOCAL 2024-02-12 16:02:18 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:18 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 81cb9a1d-975f-546c-9233-c459b0766af4)
+LOCAL 2024-02-12 16:02:18 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:18 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: ad43e740-42c7-573a-b9f5-b90465ed99a2)
+LOCAL 2024-02-12 16:02:18 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:18 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 99882a97-ce92-5c6c-8b83-74d3e9b8b2f4)
+LOCAL 2024-02-12 16:02:18 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:18 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: d9ea5abc-5ec9-58b0-bd65-04f879e3c628)
+LOCAL 2024-02-12 16:02:18 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:18 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 14d77160-d71a-5ef7-ae98-2f24f030606f)
+LOCAL 2024-02-12 16:02:18 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:18 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 6c3a1564-6ade-5c4f-a4b5-4b204df4b2d7)
+LOCAL 2024-02-12 16:02:18 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:19 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: cb532822-9b0b-51d1-ac83-7666bc210f49)
+LOCAL 2024-02-12 16:02:19 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:19 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: b8d5e8e5-74da-568a-b89d-b6a153f04812)
+LOCAL 2024-02-12 16:02:19 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:19 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 3a9b5791-1623-514f-b821-09d531080fd7)
+LOCAL 2024-02-12 16:02:19 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:19 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 7c12c9a0-2fd9-5d14-a3aa-97e408f2938c)
+LOCAL 2024-02-12 16:02:19 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:19 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 5392d835-909e-5191-8bc7-8671b7b54f09)
+LOCAL 2024-02-12 16:02:19 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:19 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 4dbd3807-c57b-52f6-bbfd-6643e250dc6e)
+LOCAL 2024-02-12 16:02:19 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:19 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 9d31d4e4-259a-5029-870b-8aa002b18eb1)
+LOCAL 2024-02-12 16:02:19 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:20 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: e5e72c1d-690c-5b8e-a22d-72594e275516)
+LOCAL 2024-02-12 16:02:20 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:20 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 906ad353-3c7f-5087-9f82-8d171b54de1f)
+LOCAL 2024-02-12 16:02:20 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:20 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: bffa5653-f7ec-5631-83da-0817d0c088a9)
+LOCAL 2024-02-12 16:02:20 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:20 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: cb414671-c342-5103-af96-1835e46e0f9b)
+LOCAL 2024-02-12 16:02:20 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:20 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: f4a2e3cc-83d3-5e50-b8e3-bd88a4ffa0c8)
+LOCAL 2024-02-12 16:02:20 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:20 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: ec0928cc-0f12-50dc-80bc-7688283e2e44)
+LOCAL 2024-02-12 16:02:20 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:20 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: d28782ac-6f03-5d75-a004-dce8482f13ed)
+LOCAL 2024-02-12 16:02:20 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:21 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 9cd9db21-ff9f-5ad1-9637-8565d8b31449)
+LOCAL 2024-02-12 16:02:21 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:21 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 5b4f2f2e-da22-5efb-879d-716afd0e0063)
+LOCAL 2024-02-12 16:02:21 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:21 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 2a49ede5-1afc-5ad5-abb8-b3a13dd1544d)
+LOCAL 2024-02-12 16:02:21 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:21 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 0d12c12c-d4fc-5fc0-8201-9f68f3d10158)
+LOCAL 2024-02-12 16:02:21 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:21 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 187022e1-f551-5765-bd9f-7ca5d27c59fd)
+LOCAL 2024-02-12 16:02:21 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:21 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 1f7e568d-e9ce-59f0-aa04-08c9cee32768)
+LOCAL 2024-02-12 16:02:21 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:22 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 793233bc-e3cf-5343-a38d-6df8c4e20ddb)
+LOCAL 2024-02-12 16:02:22 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:22 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 307f4ba5-d73f-5631-aaf5-15e1f01268a9)
+LOCAL 2024-02-12 16:02:22 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:22 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 8a1948b6-3ecc-505e-a8fb-16f219e2cec6)
+LOCAL 2024-02-12 16:02:22 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:22 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: fdbc9b7a-174f-5382-bd4e-c53e3061dd1a)
+LOCAL 2024-02-12 16:02:22 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:22 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: e709cd80-3395-5604-81cd-93c414bb789c)
+LOCAL 2024-02-12 16:02:22 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:22 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: a003f526-264e-58e2-a9cf-ab620160b67a)
+LOCAL 2024-02-12 16:02:22 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:22 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 3f03fe46-fd45-5938-afcd-a002da6bd7a0)
+LOCAL 2024-02-12 16:02:22 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:23 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 103c038d-7db6-503a-a6ec-5dc95a98fea2)
+LOCAL 2024-02-12 16:02:23 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:23 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: efb8acd1-4980-5b74-9de3-f2956eaef5ec)
+LOCAL 2024-02-12 16:02:23 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:23 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 5048687b-6e84-5d44-82ac-363f49ab23dc)
+LOCAL 2024-02-12 16:02:23 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:23 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: a2d20297-62f8-5eb4-bb13-5cd345d7002c)
+LOCAL 2024-02-12 16:02:23 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:23 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 66916a71-66af-522c-a898-343541807cb4)
+LOCAL 2024-02-12 16:02:23 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:23 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 1ca6874a-39bc-5f1c-9802-d90e1e93f184)
+LOCAL 2024-02-12 16:02:23 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:23 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 5feabde7-1567-5ef1-b9e5-e3a332484069)
+LOCAL 2024-02-12 16:02:23 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:24 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 9351484b-5268-5421-9d63-160f75471ab9)
+LOCAL 2024-02-12 16:02:24 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:24 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: d4525187-84ac-5a2e-aa25-0fc3a383b4b6)
+LOCAL 2024-02-12 16:02:24 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:24 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: fa40709a-b4d3-5809-b66b-2ede93e3d691)
+LOCAL 2024-02-12 16:02:24 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:24 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 9f70203e-c638-5937-b15b-7e7ae108e7af)
+LOCAL 2024-02-12 16:02:24 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:24 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 618531a3-e871-5b00-9916-6fe7cf41c598)
+LOCAL 2024-02-12 16:02:24 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:24 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: ebc6f720-a3bb-5578-be9e-a964848babe0)
+LOCAL 2024-02-12 16:02:24 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:25 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 885a608e-1e40-5eab-b589-3eca39700033)
+LOCAL 2024-02-12 16:02:25 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:25 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: c365e297-15b8-51ef-9213-bcd332884f77)
+LOCAL 2024-02-12 16:02:25 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:25 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: e6ddf814-3340-5f23-a36e-a650147191bb)
+LOCAL 2024-02-12 16:02:25 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:25 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: eec2aafd-14eb-50f8-a4c1-f4b933daae60)
+LOCAL 2024-02-12 16:02:25 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:25 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: d2ef63e9-b119-56d8-9435-3dad96280840)
+LOCAL 2024-02-12 16:02:25 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:25 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 6bf03812-351a-507c-8142-6656122bcee4)
+LOCAL 2024-02-12 16:02:25 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:25 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 81e128cb-6de1-5ee7-94bc-768f4ad0f07f)
+LOCAL 2024-02-12 16:02:25 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:26 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 26911feb-a8ed-5885-ab01-41af8fdc261d)
+LOCAL 2024-02-12 16:02:26 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:26 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 201cb035-3910-5fbc-81d1-ee711e217124)
+LOCAL 2024-02-12 16:02:26 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:26 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 942a32ca-c32d-5008-91d9-6c8ee41f1e90)
+LOCAL 2024-02-12 16:02:26 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:26 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 4781e8c5-367a-5b3b-a05f-b681114835a3)
+LOCAL 2024-02-12 16:02:26 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:26 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 0a7e9a4c-6627-5650-8a39-c4084115a8c8)
+LOCAL 2024-02-12 16:02:26 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:26 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 202a08a9-fd4a-5b53-88b3-56edda78e5cb)
+LOCAL 2024-02-12 16:02:26 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:26 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: dc2b348c-0573-5544-9330-6ac82241abdc)
+LOCAL 2024-02-12 16:02:26 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:27 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 6097b302-dfe8-5d80-8648-ed46f8da5318)
+LOCAL 2024-02-12 16:02:27 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:27 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 12aa473f-0397-5343-a350-197b24a5addb)
+LOCAL 2024-02-12 16:02:27 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:27 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 707b687b-4aec-52c6-89f5-363f6ddf4c5e)
+LOCAL 2024-02-12 16:02:27 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:27 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: c9048496-7857-5fa9-8bc3-dad25f646131)
+LOCAL 2024-02-12 16:02:27 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:27 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: a1c893b9-2bf4-526d-b678-cdfd0cc71cf5)
+LOCAL 2024-02-12 16:02:27 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:27 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 2ca5a690-87f6-54de-a803-f8d4a0c52a46)
+LOCAL 2024-02-12 16:02:27 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:27 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 4e8f7b61-6feb-5efa-8235-252548d88062)
+LOCAL 2024-02-12 16:02:27 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:28 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 2a0577d9-868f-53f4-abe5-299da1bced6c)
+LOCAL 2024-02-12 16:02:28 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:28 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: cbeb8aeb-8c94-5b23-8c3e-d4afaba0fa01)
+LOCAL 2024-02-12 16:02:28 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:29 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: dfd778b6-b300-5a1f-a114-26f29434eb3d)
+LOCAL 2024-02-12 16:02:29 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:29 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 592c9797-b434-5dd9-89a6-c9d39300dcfb)
+LOCAL 2024-02-12 16:02:29 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:29 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: befbe96c-a61e-5136-9fa6-b728812b9014)
+LOCAL 2024-02-12 16:02:29 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:29 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 8820dce9-dcb4-5d77-ae16-82adfb817c55)
+LOCAL 2024-02-12 16:02:29 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:29 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 4bb2046f-ae88-5766-b5d0-5a2b89bd2644)
+LOCAL 2024-02-12 16:02:29 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:29 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: ea3adad8-ff17-5e97-a131-849cd8224fb5)
+LOCAL 2024-02-12 16:02:29 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:29 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: d4de4c46-4a68-593b-9f78-12026d5df819)
+LOCAL 2024-02-12 16:02:29 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:30 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: a7849519-3170-515d-995f-cb5d1645a07f)
+LOCAL 2024-02-12 16:02:30 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:30 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 17f1dd3a-17ca-5823-85eb-837e30ff1901)
+LOCAL 2024-02-12 16:02:30 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:30 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 98bfbc05-6861-504d-a4b3-e2414f57416f)
+LOCAL 2024-02-12 16:02:30 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:30 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 85b6c610-be0c-5b26-8dc1-9854993aaa04)
+LOCAL 2024-02-12 16:02:30 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:30 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: b20675dc-fc06-52eb-9c61-2b98db3003c9)
+LOCAL 2024-02-12 16:02:30 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:30 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: a390acba-4238-5d65-901c-f2fe650e5c47)
+LOCAL 2024-02-12 16:02:30 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:31 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: f3c84de7-47ab-5cec-b0c8-13a3609dadce)
+LOCAL 2024-02-12 16:02:31 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:31 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 0b6d622b-81d6-591e-bfba-3c6fa6e0283c)
+LOCAL 2024-02-12 16:02:31 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:31 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 22d50569-7fbf-516e-99e6-5b2d5888604c)
+LOCAL 2024-02-12 16:02:31 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:31 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 2e642253-f8b8-58b8-84b7-7c17df8fd99a)
+LOCAL 2024-02-12 16:02:31 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:31 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 478df45d-e56a-570d-8a1c-aa19c25de62f)
+LOCAL 2024-02-12 16:02:31 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:31 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: a2b78fb6-2880-5307-9ca0-d1f20fb71225)
+LOCAL 2024-02-12 16:02:31 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:31 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: ac1d12f5-66ec-5cc2-a1f2-4cb141db3de0)
+LOCAL 2024-02-12 16:02:31 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:32 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: ec8aa839-cddd-5463-bf87-f67deaea7541)
+LOCAL 2024-02-12 16:02:32 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:32 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 45cf1e9a-cbc3-578a-bf66-40deecf466a8)
+LOCAL 2024-02-12 16:02:32 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:32 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 3e70a239-8e88-56ec-ac5e-fc7da9b027ce)
+LOCAL 2024-02-12 16:02:32 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:32 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 91ceef66-017c-5274-b29f-b1222644a356)
+LOCAL 2024-02-12 16:02:32 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:32 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 63afada5-3a07-5f72-97d1-f3e11d3fce50)
+LOCAL 2024-02-12 16:02:32 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:32 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: ee7baeb7-6066-52ed-a465-f0f3475e53cf)
+LOCAL 2024-02-12 16:02:32 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:33 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 736dc7cb-1aa3-549c-9192-998f3d9b45be)
+LOCAL 2024-02-12 16:02:33 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 16:02:33 ERROR Manager:52 - The specified queue does not exist. (Service: Sqs, Status Code: 400, Request ID: 17a1b1d0-36dc-519b-a76c-ef9411e440b9)
+LOCAL 2024-02-12 16:02:33 INFO  Manager:41 - Polling requests from localToManagerQueue

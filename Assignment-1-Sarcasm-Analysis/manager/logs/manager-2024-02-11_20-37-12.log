@@ -1,9 +1,0 @@
-LOCAL 2024-02-11 20:37:13 INFO  Manager:19 - Manager started
-LOCAL 2024-02-11 20:37:13 INFO  Manager:23 - ManagerEnv created
-LOCAL 2024-02-11 20:37:14 INFO  SQSHandler:19 - Queue managerToWorkerQueue created
-LOCAL 2024-02-11 20:37:15 INFO  SQSHandler:19 - Queue workerToManagerQueue created
-LOCAL 2024-02-11 20:37:15 INFO  Manager:51 - Polling tasks from 0 local app queues
-LOCAL 2024-02-11 20:37:18 INFO  Manager:51 - Polling tasks from 0 local app queues
-LOCAL 2024-02-11 20:37:21 INFO  Manager:51 - Polling tasks from 0 local app queues
-LOCAL 2024-02-11 20:37:24 INFO  Manager:51 - Polling tasks from 0 local app queues
-LOCAL 2024-02-11 20:37:28 INFO  Manager:51 - Polling tasks from 0 local app queues

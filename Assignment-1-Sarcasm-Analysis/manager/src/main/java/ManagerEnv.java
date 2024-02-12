@@ -32,8 +32,6 @@ public class ManagerEnv {
             }
             workers += workersToCreate;
         }
-
-        logger.info("Assigned workers, current amount: " + workers);
         return workersToCreate;
     }
 
@@ -45,8 +43,6 @@ public class ManagerEnv {
             aws.ec2.terminateWorkerInstance();
         }
         workers -= workersToRelease;
-
-        logger.info("Released workers, current amount: " + workers);
     }
 
 }

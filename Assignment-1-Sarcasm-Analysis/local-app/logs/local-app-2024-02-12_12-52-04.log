@@ -1,0 +1,4 @@
+LOCAL 2024-02-12 12:52:04 INFO  LocalApp:32 - LocalApp started with id 9960fbacaf634853
+LOCAL 2024-02-12 12:52:04 INFO  LocalApp:35 - LocalAppEnv created
+LOCAL 2024-02-12 12:52:07 INFO  S3Handler:24 - S3 bucket sarcasm-analysis-bucket created
+LOCAL 2024-02-12 12:52:08 ERROR LocalApp:43 - Error creating S3 bucket or SQS queues: You must wait 60 seconds after deleting a queue before you can create another with the same name. (Service: Sqs, Status Code: 400, Request ID: 3c7fdeac-3d84-58c0-bcc2-80efc7130601)

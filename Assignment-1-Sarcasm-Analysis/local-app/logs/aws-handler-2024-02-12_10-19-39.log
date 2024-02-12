@@ -1,3 +1,0 @@
-LOCAL 2024-02-12 10:19:40 INFO  LocalApp:32 - LocalApp started with id 8bd7ee5cacfbf2e7
-LOCAL 2024-02-12 10:19:40 INFO  LocalApp:36 - LocalAppEnv created
-LOCAL 2024-02-12 10:19:42 INFO  S3Handler:24 - S3 bucket sarcasm-analysis-bucket-8bd7ee5cacfbf2e7 created

@@ -1,0 +1,25 @@
+LOCAL 2024-02-12 13:47:18 INFO  LocalApp:32 - LocalApp started with id be9d306daeeefd39
+LOCAL 2024-02-12 13:47:18 INFO  LocalApp:35 - LocalAppEnv created
+LOCAL 2024-02-12 13:47:20 ERROR S3Handler:27 - Your previous request to create the named bucket succeeded and you already own it. (Service: S3, Status Code: 409, Request ID: 2W46RKK99FEHBENX, Extended Request ID: WLerb99iw0UaRgzvmH09E1k9BDcdgFjn4qnY88Zf4eORbh2R1mEnbII/SV1GxUTDRmuGdsEdNn0=)
+LOCAL 2024-02-12 13:47:21 INFO  SQSHandler:19 - Queue localToManagerQueue created
+LOCAL 2024-02-12 13:47:21 INFO  SQSHandler:19 - Queue managerToLocalQueue created
+LOCAL 2024-02-12 13:47:22 INFO  S3Handler:42 - File input2.txt uploaded to S3 bucket sarcasm-analysis-bucket
+LOCAL 2024-02-12 13:47:23 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue
+LOCAL 2024-02-12 13:47:23 INFO  LocalApp:80 - Sent task to manager: input2.txt for inputIndex 0 with 100 reviews per worker
+LOCAL 2024-02-12 13:47:24 INFO  EC2Handler:68 - Manager instance i-0e5d895af25092136 is running
+LOCAL 2024-02-12 13:47:24 INFO  LocalApp:87 - Polling for responses from manager
+LOCAL 2024-02-12 13:47:44 INFO  LocalApp:87 - Polling for responses from manager
+LOCAL 2024-02-12 13:48:04 INFO  LocalApp:87 - Polling for responses from manager
+LOCAL 2024-02-12 13:48:24 INFO  LocalApp:87 - Polling for responses from manager
+LOCAL 2024-02-12 13:48:44 INFO  LocalApp:87 - Polling for responses from manager
+LOCAL 2024-02-12 13:49:05 INFO  LocalApp:87 - Polling for responses from manager
+LOCAL 2024-02-12 13:49:25 INFO  LocalApp:87 - Polling for responses from manager
+LOCAL 2024-02-12 13:49:45 INFO  LocalApp:87 - Polling for responses from manager
+LOCAL 2024-02-12 13:50:05 INFO  LocalApp:87 - Polling for responses from manager
+LOCAL 2024-02-12 13:50:25 INFO  LocalApp:87 - Polling for responses from manager
+LOCAL 2024-02-12 13:50:45 INFO  LocalApp:87 - Polling for responses from manager
+LOCAL 2024-02-12 13:51:06 INFO  LocalApp:87 - Polling for responses from manager
+LOCAL 2024-02-12 13:51:26 INFO  LocalApp:87 - Polling for responses from manager
+LOCAL 2024-02-12 13:51:46 INFO  LocalApp:87 - Polling for responses from manager
+LOCAL 2024-02-12 13:52:07 INFO  LocalApp:87 - Polling for responses from manager
+LOCAL 2024-02-12 13:52:27 INFO  LocalApp:87 - Polling for responses from manager

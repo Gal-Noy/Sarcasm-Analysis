@@ -1,0 +1,21 @@
+LOCAL 2024-02-12 13:09:14 INFO  LocalApp:32 - LocalApp started with id be6fa4b6b062b3a7
+LOCAL 2024-02-12 13:09:14 INFO  LocalApp:35 - LocalAppEnv created
+LOCAL 2024-02-12 13:09:16 ERROR S3Handler:27 - Your previous request to create the named bucket succeeded and you already own it. (Service: S3, Status Code: 409, Request ID: DF9VBXANTFK8C3XS, Extended Request ID: D7tRWqXt+GsINZxk2QiAaKRDNYWKOKiCgRYZMBei5c1J1dcmEhbOrp3V5sGG0ezWpBfYDWZcggQ=)
+LOCAL 2024-02-12 13:09:17 INFO  SQSHandler:19 - Queue localToManagerQueue created
+LOCAL 2024-02-12 13:09:17 INFO  SQSHandler:19 - Queue managerToLocalQueue created
+LOCAL 2024-02-12 13:09:18 INFO  S3Handler:42 - File input2.txt uploaded to S3 bucket sarcasm-analysis-bucket
+LOCAL 2024-02-12 13:09:18 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue
+LOCAL 2024-02-12 13:09:18 INFO  LocalApp:80 - Sent task to manager: input2.txt for inputIndex 0 with 200 reviews per worker
+LOCAL 2024-02-12 13:09:21 INFO  EC2Handler:68 - Manager instance i-06b02c170c32cee18 is running
+LOCAL 2024-02-12 13:09:21 INFO  LocalApp:87 - Polling for responses from manager
+LOCAL 2024-02-12 13:09:41 INFO  LocalApp:87 - Polling for responses from manager
+LOCAL 2024-02-12 13:10:02 INFO  LocalApp:87 - Polling for responses from manager
+LOCAL 2024-02-12 13:10:22 INFO  LocalApp:87 - Polling for responses from manager
+LOCAL 2024-02-12 13:10:42 INFO  LocalApp:87 - Polling for responses from manager
+LOCAL 2024-02-12 13:11:02 INFO  LocalApp:87 - Polling for responses from manager
+LOCAL 2024-02-12 13:11:22 INFO  LocalApp:87 - Polling for responses from manager
+LOCAL 2024-02-12 13:11:42 INFO  LocalApp:87 - Polling for responses from manager
+LOCAL 2024-02-12 13:12:03 INFO  LocalApp:87 - Polling for responses from manager
+LOCAL 2024-02-12 13:12:23 INFO  LocalApp:87 - Polling for responses from manager
+LOCAL 2024-02-12 13:12:43 INFO  LocalApp:87 - Polling for responses from manager
+LOCAL 2024-02-12 13:13:03 INFO  LocalApp:87 - Polling for responses from manager

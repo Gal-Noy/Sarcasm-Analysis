@@ -83,6 +83,7 @@ public class ManagerTask implements Runnable {
         String workerToManagerQueueUrl = aws.sqs.getQueueUrl(AWSConfig.WORKER_TO_MANAGER_QUEUE_NAME);
 
         while (tasksCompleted < tasksSent) {
+            logger.info("Polling responses from " + AWSConfig.WORKER_TO_MANAGER_QUEUE_NAME);
             List<Message> responses = aws.sqs.receiveMessages(workerToManagerQueueUrl); // long polling
 
             for (Message response : responses) {
@@ -128,7 +129,7 @@ public class ManagerTask implements Runnable {
                 else {
                     // Put back in queue
                     logger.info("Putting back not relevant response in workerToManager queue");
-                    aws.sqs.changeMessageVisibility(workerToManagerQueueUrl, response, 0);
+                    aws.sqs.changeMessageVisibility(workerToManagerQueueUrl, response, AWSConfig.RETURN_TASK_TIME);
                 }
             }
         }

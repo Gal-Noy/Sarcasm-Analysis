@@ -40,11 +40,12 @@ public class LocalAppTask implements Runnable {
                     .append("<style>table {font-family: arial, sans-serif;border-collapse: collapse;}")
                     .append("td, th {border: 1px solid #dddddd;text-align: left;padding: 8px;}")
                     .append("tr:nth-child(even) {background-color: #dddddd;}</style></head>")
-                    .append("<body><table><tr><th>Review Link</th><th>Entities</th><th>Sarcasm</th></tr>");
+                    .append("<body><table><tr><th>Review No.</th><th>Review Link</th><th>Entities</th><th>Sarcasm</th></tr>");
 
-            for (String content : summaryContent) {
+            for (int reviewIndex = 0; reviewIndex < summaryContent.length; reviewIndex++) {
+                String review = summaryContent[reviewIndex];
                 // <review_id>::<review_rating>::<review_link>::<sentiment>::<entities>
-                String[] reviewContent = content.split(AWSConfig.MESSAGE_DELIMITER, -1);
+                String[] reviewContent = review.split(AWSConfig.MESSAGE_DELIMITER, -1);
                 String reviewId = reviewContent[0], reviewRating = reviewContent[1],
                         reviewLink = reviewContent[2], sentiment = reviewContent[3],
                         entities = reviewContent[4];
@@ -54,13 +55,13 @@ public class LocalAppTask implements Runnable {
                 boolean isSarcastic = isSarcasticReview(Integer.parseInt(reviewRating));
 
                 htmlContent.append("<tr>")
+                        .append(String.format("<td>%d</td>", reviewIndex + 1))
                         .append(String.format("<td><a href=\"%s\" style=\"color:%s\">Review Link</a><br></td>", reviewLink, colorCode))
                         .append(String.format("<td>%s</td>", formattedEntities))
                         .append(String.format("<td>%s</td>", isSarcastic ? "Yes" : "No"))
                         .append("</tr>");
-
-                logger.info("Added review " + reviewId + " to summary");
             }
+            logger.info("Added " + summaryContent.length + " reviews to summary");
 
             htmlContent.append("</table></body></html>");
 

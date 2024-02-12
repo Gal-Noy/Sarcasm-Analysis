@@ -51,6 +51,7 @@ public class AWSConfig {
     public static final String WORKER_TO_MANAGER_QUEUE_NAME = "workerToManagerQueue";
     public static final int LONG_POLLING_TIME = 20;
     public static final int VISIBILITY_TIMEOUT = 60;
+    public static final int RETURN_TASK_TIME = 1;
 
 
 }

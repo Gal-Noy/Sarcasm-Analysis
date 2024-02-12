@@ -100,10 +100,6 @@ public class Manager {
 
             logger.info("Parsed " + requestReviews.size() + " reviews from input file " + inputFileName);
 
-            // No longer needed
-            aws.s3.deleteObjectFromS3(AWSConfig.BUCKET_NAME,
-                    localAppId + AWSConfig.BUCKET_KEY_DELIMITER + inputFileName);
-
             int workersNeeded = (int) Math.ceil((double) 2 * requestReviews.size() / reviewsPerWorker);
             int workersCreated = env.assignWorkers(workersNeeded);
 
@@ -114,6 +110,9 @@ public class Manager {
                     requestReviews,
                     workersCreated));
 
+            // No longer needed
+            aws.s3.deleteObjectFromS3(AWSConfig.BUCKET_NAME,
+                    localAppId + AWSConfig.BUCKET_KEY_DELIMITER + inputFileName);
             aws.sqs.deleteMessage(queueUrl, request);
         }
     }

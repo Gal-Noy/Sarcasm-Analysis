@@ -1,5 +1,0 @@
-LOCAL 2024-02-11 16:08:05 INFO  Manager:19 - Manager started
-LOCAL 2024-02-11 16:08:06 INFO  Manager:22 - Queue managerToWorkerQueue created
-LOCAL 2024-02-11 16:08:06 INFO  Manager:22 - Queue workerToManagerQueue created
-LOCAL 2024-02-11 16:08:06 INFO  Manager:59 - Polling tasks from 1 local app queues
-LOCAL 2024-02-11 16:08:06 INFO  Manager:80 - Polling messages from https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-b63592fbe23e1b6c

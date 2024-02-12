@@ -1,5 +1,0 @@
-LOCAL 2024-02-12 10:11:09 INFO  Manager:20 - Manager started
-LOCAL 2024-02-12 10:11:10 INFO  SQSHandler:19 - Queue managerToWorkerQueue created
-LOCAL 2024-02-12 10:11:10 INFO  SQSHandler:19 - Queue workerToManagerQueue created
-LOCAL 2024-02-12 10:11:30 INFO  Manager:43 - Polled 0 requests
-LOCAL 2024-02-12 10:11:50 INFO  Manager:43 - Polled 0 requests

@@ -1,0 +1,10 @@
+LOCAL 2024-02-12 16:16:38 INFO  LocalApp:37 - LocalApp started with id 95447b9b918b3e67
+LOCAL 2024-02-12 16:16:38 INFO  LocalApp:40 - LocalAppEnv created
+LOCAL 2024-02-12 16:16:40 INFO  S3Handler:24 - S3 bucket sarcasm-analysis-bucket created
+LOCAL 2024-02-12 16:16:41 INFO  SQSHandler:19 - Queue localToManagerQueue created
+LOCAL 2024-02-12 16:16:41 INFO  SQSHandler:19 - Queue managerToLocalQueue created
+LOCAL 2024-02-12 16:16:42 INFO  S3Handler:42 - File input3.txt uploaded to S3 bucket sarcasm-analysis-bucket
+LOCAL 2024-02-12 16:16:42 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue
+LOCAL 2024-02-12 16:16:42 INFO  LocalApp:82 - Sent task to manager: input3.txt for inputIndex 0 with 100 reviews per worker
+LOCAL 2024-02-12 16:16:43 INFO  EC2Handler:87 - Manager instance does not exist
+LOCAL 2024-02-12 16:16:43 INFO  EC2Handler:93 - Creating manager instance

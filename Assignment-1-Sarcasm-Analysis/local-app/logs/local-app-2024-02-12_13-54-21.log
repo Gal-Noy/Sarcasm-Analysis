@@ -1,0 +1,23 @@
+LOCAL 2024-02-12 13:54:22 INFO  LocalApp:32 - LocalApp started with id 9dfc4f5809019ac1
+LOCAL 2024-02-12 13:54:22 INFO  LocalApp:35 - LocalAppEnv created
+LOCAL 2024-02-12 13:54:24 INFO  S3Handler:24 - S3 bucket sarcasm-analysis-bucket created
+LOCAL 2024-02-12 13:54:25 INFO  SQSHandler:19 - Queue localToManagerQueue created
+LOCAL 2024-02-12 13:54:25 INFO  SQSHandler:19 - Queue managerToLocalQueue created
+LOCAL 2024-02-12 13:54:26 INFO  S3Handler:42 - File input2.txt uploaded to S3 bucket sarcasm-analysis-bucket
+LOCAL 2024-02-12 13:54:27 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue
+LOCAL 2024-02-12 13:54:27 INFO  LocalApp:80 - Sent task to manager: input2.txt for inputIndex 0 with 130 reviews per worker
+LOCAL 2024-02-12 13:54:28 INFO  EC2Handler:87 - Manager instance does not exist
+LOCAL 2024-02-12 13:54:28 INFO  EC2Handler:93 - Creating manager instance
+LOCAL 2024-02-12 13:54:30 INFO  EC2Handler:33 - Successfully started EC2 instance i-002594b1ed4dc2a82 based on AMI ami-00e95a9222311e8ed
+LOCAL 2024-02-12 13:54:30 INFO  LocalApp:87 - Polling for responses from manager
+LOCAL 2024-02-12 13:54:50 INFO  LocalApp:87 - Polling for responses from manager
+LOCAL 2024-02-12 13:55:11 INFO  LocalApp:87 - Polling for responses from manager
+LOCAL 2024-02-12 13:55:31 INFO  LocalApp:87 - Polling for responses from manager
+LOCAL 2024-02-12 13:55:51 INFO  LocalApp:87 - Polling for responses from manager
+LOCAL 2024-02-12 13:56:11 INFO  LocalApp:87 - Polling for responses from manager
+LOCAL 2024-02-12 13:56:31 INFO  LocalApp:87 - Polling for responses from manager
+LOCAL 2024-02-12 13:56:51 INFO  LocalApp:87 - Polling for responses from manager
+LOCAL 2024-02-12 13:57:11 INFO  LocalApp:87 - Polling for responses from manager
+LOCAL 2024-02-12 13:57:32 INFO  LocalApp:87 - Polling for responses from manager
+LOCAL 2024-02-12 13:57:52 INFO  LocalApp:87 - Polling for responses from manager
+LOCAL 2024-02-12 13:58:12 INFO  LocalApp:87 - Polling for responses from manager

@@ -18,10 +18,21 @@ public class LocalApp {
 
     public static void main(String[] args) {
         int argsLen = args.length;
+
+        if (argsLen == 1 && args[0].equals(AWSConfig.TERMINATE_TASK)) {
+            terminateManager();
+            return;
+        }
         if (argsLen < 3 || (argsLen % 2 != 0 && args[argsLen - 1].equals(AWSConfig.TERMINATE_TASK))) {
             logger.error("Usage: LocalApp <input_file1> ... <input_fileN> <output_file1> ... <output_fileN> <n> [terminate]");
             return;
         }
+
+//        if (argsLen % 2 == 0) {
+//            aws.sqs.deleteAllQueues();
+//            aws.s3.emptyAndDeleteAllBuckets();
+//            return;
+//        }
 
         logger.info("LocalApp started with id " + localAppId);
 
@@ -40,15 +51,12 @@ public class LocalApp {
 
         sendTasksToManager(env, localToManagerQueueUrl);
 
-        aws.ec2.runManager();
+        startManager();
 
         receiveResponsesFromManager(env, managerToLocalQueueUrl);
 
         if (env.terminate) {
-            logger.info("Sending terminate message to manager");
-            // <local_app_id>::terminate
-            aws.sqs.sendMessage(localToManagerQueueUrl,
-                    String.join(AWSConfig.MESSAGE_DELIMITER, localAppId, AWSConfig.TERMINATE_TASK));
+            terminateManager();
         }
 
         waitForExecutorToFinish(env.executor);
@@ -104,19 +112,17 @@ public class LocalApp {
                         } catch (Exception e) {
                             logger.error(e.getMessage());
                         }
-                    }
-                    else {
+                    } else {
                         String errorMessage = responseContent[4];
                         logger.error("Error response from manager: " + errorMessage);
                     }
 
                     filesLeftToProcess--;
                     aws.sqs.deleteMessage(managerToLocalQueueUrl, response);
-                }
-                else {
+                } else {
                     // Put back in queue
                     logger.info("Putting back not relevant response in managerToLocal queue");
-                    aws.sqs.changeMessageVisibility(managerToLocalQueueUrl, response, 0);
+                    aws.sqs.changeMessageVisibility(managerToLocalQueueUrl, response, AWSConfig.RETURN_TASK_TIME);
                 }
             }
         }
@@ -135,6 +141,25 @@ public class LocalApp {
             } catch (InterruptedException e) {
                 logger.error(e.getMessage());
             }
+        }
+    }
+    private static void startManager() {
+        try {
+            aws.ec2.runManager();
+        }
+        catch (Exception e) {
+            logger.error("Error running manager: " + e.getMessage());
+            System.exit(1);
+        }
+    }
+    private static void terminateManager() {
+        logger.info("Sending terminate message to manager");
+        try {
+            String localToManagerQueueUrl = aws.sqs.getQueueUrl(AWSConfig.LOCAL_TO_MANAGER_QUEUE_NAME);
+            aws.sqs.sendMessage(localToManagerQueueUrl, String.join(AWSConfig.MESSAGE_DELIMITER,
+                    localAppId, AWSConfig.TERMINATE_TASK));
+        } catch (Exception e) {
+            logger.error("Error sending terminate message to manager: " + e.getMessage());
         }
     }
 
