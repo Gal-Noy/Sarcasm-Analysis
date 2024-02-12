@@ -1,0 +1,4 @@
+LOCAL 2024-02-12 09:22:16 INFO  Worker:17 - Worker started
+LOCAL 2024-02-12 09:22:17 INFO  Worker:25 - Polling tasks from managerToWorkerQueue
+LOCAL 2024-02-12 09:22:51 ERROR Worker:39 - Index: 0
+LOCAL 2024-02-12 09:22:51 INFO  Worker:25 - Polling tasks from managerToWorkerQueue

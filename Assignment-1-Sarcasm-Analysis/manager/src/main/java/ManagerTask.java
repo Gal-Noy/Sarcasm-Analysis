@@ -51,7 +51,7 @@ public class ManagerTask implements Runnable {
 
         logger.info("Finished summary for local app " + localAppId + " for inputIndex " + inputIndex);
 
-        env.releaseWorkers(workersToRelease);
+//        env.releaseWorkers(workersToRelease);
 
         logger.info("ManagerTask finished for local app " + localAppId + " for inputIndex " + inputIndex);
     }

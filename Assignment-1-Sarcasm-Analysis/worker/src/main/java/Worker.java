@@ -21,32 +21,36 @@ public class Worker {
 
     private static void handleTasksFromManager() {
         String managerToWorkerQueueUrl = aws.sqs.getQueueUrl(AWSConfig.MANAGER_TO_WORKER_QUEUE_NAME);
+        logger.info("Polling tasks from " + AWSConfig.MANAGER_TO_WORKER_QUEUE_NAME);
         while (true) {
-            logger.info("Polling tasks from " + AWSConfig.MANAGER_TO_WORKER_QUEUE_NAME);
             try {
-                List<Message> tasks = aws.sqs.receiveMessages(managerToWorkerQueueUrl); // long polling
-                if (!tasks.isEmpty()) {
-                    processAndResponseTasks(tasks, managerToWorkerQueueUrl);
-                }
-                else {
+                Message task = aws.sqs.receiveSingleMessage(managerToWorkerQueueUrl); // long polling
+                if (task != null) {
+                    Thread extendTaskVisibility = new Thread(new ExtendTaskVisibility(task, managerToWorkerQueueUrl));
+                    extendTaskVisibility.start();
+
+                    processAndResponseTask(task, managerToWorkerQueueUrl);
+
+                    extendTaskVisibility.interrupt();
+                } else {
                     Thread.sleep(3000);
                 }
             } catch (Exception e) {
+                logger.error(e.getMessage());
                 continue; // The queue was deleted by the manager due to local app termination
             }
         }
     }
 
-    private static void processAndResponseTasks(List<Message> tasks, String queueUrl) {
-        for (Message task : tasks) {
-            try {
-                String response = getTaskResponse(task.body());
-                aws.sqs.sendMessage(AWSConfig.WORKER_TO_MANAGER_QUEUE_NAME, response);
-            } catch (RuntimeException e) {
-                logger.error(e.getMessage());
-            } finally {
-                aws.sqs.deleteMessage(queueUrl, task);
-            }
+
+    private static void processAndResponseTask(Message task, String queueUrl) {
+        try {
+            String response = getTaskResponse(task.body());
+            aws.sqs.sendMessage(AWSConfig.WORKER_TO_MANAGER_QUEUE_NAME, response);
+        } catch (RuntimeException e) {
+            logger.error(e.getMessage());
+        } finally {
+            aws.sqs.deleteMessage(queueUrl, task);
         }
     }
 

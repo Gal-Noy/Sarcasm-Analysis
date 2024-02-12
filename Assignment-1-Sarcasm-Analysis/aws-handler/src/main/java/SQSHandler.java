@@ -77,10 +77,30 @@ public class SQSHandler {
         ReceiveMessageRequest request = ReceiveMessageRequest.builder()
                 .queueUrl(queueUrl)
                 .maxNumberOfMessages(10)
-                .waitTimeSeconds(20) // long polling
-                .visibilityTimeout(60) // prevents the same message from being delivered to multiple workers
+                .waitTimeSeconds(AWSConfig.LONG_POLLING_TIME) // long polling
+                .visibilityTimeout(AWSConfig.VISIBILITY_TIMEOUT) // prevents the same message from being delivered to multiple workers
                 .build();
         return sqs.receiveMessage(request).messages();
+    }
+
+    public Message receiveSingleMessage(String queueUrl) {
+        ReceiveMessageRequest request = ReceiveMessageRequest.builder()
+                .queueUrl(queueUrl)
+                .maxNumberOfMessages(1)
+                .waitTimeSeconds(AWSConfig.LONG_POLLING_TIME) // long polling
+                .visibilityTimeout(AWSConfig.VISIBILITY_TIMEOUT) // prevents the same message from being delivered to multiple workers
+                .build();
+        List<Message> messages = sqs.receiveMessage(request).messages();
+        return messages.isEmpty() ? null : messages.get(0);
+    }
+
+    public void extendMessageVisibility(String queueUrl, Message message) {
+        ChangeMessageVisibilityRequest request = ChangeMessageVisibilityRequest.builder()
+                .queueUrl(queueUrl)
+                .receiptHandle(message.receiptHandle())
+                .visibilityTimeout(AWSConfig.VISIBILITY_TIMEOUT)
+                .build();
+        sqs.changeMessageVisibility(request);
     }
 
     public void deleteMessage(String queueUrl, Message message) {

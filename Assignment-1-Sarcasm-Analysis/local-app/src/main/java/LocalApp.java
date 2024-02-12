@@ -46,7 +46,7 @@ public class LocalApp {
 
         sendTasksToManager(env, bucketName, localToManagerQueueUrl);
 
-        aws.ec2.runManager();
+//        aws.ec2.runManager();
 
         receiveResponsesFromManager(env, bucketName, managerToLocalQueueUrl);
 
@@ -94,7 +94,7 @@ public class LocalApp {
             for (Message response : responses) { // response for each input file
                 String responseBody = response.body();
                 // <local_app_id>::<response_status>::<summary_file_name>::<input_index>
-                String[] responseContent = responseBody.split(AWSConfig.MESSAGE_DELIMITER);
+                String[] responseContent = responseBody.split(AWSConfig.MESSAGE_DELIMITER, -1);
                 String receivedLocalAppId = responseContent[0],
                         status = responseContent[1], // done or error
                         summaryFileName = responseContent[2],
@@ -117,8 +117,9 @@ public class LocalApp {
                         }
 
                         aws.s3.deleteFileFromS3(bucketName, summaryFileName);
-                        filesLeftToProcess--;
                     }
+
+                    filesLeftToProcess--;
                     aws.sqs.deleteMessage(managerToLocalQueueUrl, response);
                 }
             }

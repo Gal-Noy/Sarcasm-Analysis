@@ -1,0 +1,80 @@
+LOCAL 2024-02-12 09:26:09 INFO  LocalApp:32 - LocalApp started with id 8b84784f80d26a73
+LOCAL 2024-02-12 09:26:09 INFO  LocalApp:36 - LocalAppEnv created
+LOCAL 2024-02-12 09:26:11 INFO  S3Handler:24 - S3 bucket sarcasm-analysis-bucket-8b84784f80d26a73 created
+LOCAL 2024-02-12 09:26:12 INFO  SQSHandler:19 - Queue localToManagerQueue-8b84784f80d26a73 created
+LOCAL 2024-02-12 09:26:12 INFO  SQSHandler:19 - Queue managerToLocalQueue-8b84784f80d26a73 created
+LOCAL 2024-02-12 09:26:13 INFO  S3Handler:42 - File test-input1.txt uploaded to S3 bucket sarcasm-analysis-bucket-8b84784f80d26a73
+LOCAL 2024-02-12 09:26:13 INFO  SQSHandler:73 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-8b84784f80d26a73
+LOCAL 2024-02-12 09:26:13 INFO  LocalApp:85 - Sent task to manager: test-input1.txt for inputIndex 0 with 20 reviews per worker
+LOCAL 2024-02-12 09:26:14 INFO  S3Handler:42 - File test-input2.txt uploaded to S3 bucket sarcasm-analysis-bucket-8b84784f80d26a73
+LOCAL 2024-02-12 09:26:14 INFO  SQSHandler:73 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-8b84784f80d26a73
+LOCAL 2024-02-12 09:26:14 INFO  LocalApp:85 - Sent task to manager: test-input2.txt for inputIndex 1 with 20 reviews per worker
+LOCAL 2024-02-12 09:26:15 INFO  EC2Handler:68 - Manager instance i-049be6caeb64f71c1 is running
+LOCAL 2024-02-12 09:26:15 INFO  LocalApp:92 - Polling for responses from manager
+LOCAL 2024-02-12 09:26:35 INFO  LocalApp:92 - Polling for responses from manager
+LOCAL 2024-02-12 09:26:55 INFO  LocalApp:92 - Polling for responses from manager
+LOCAL 2024-02-12 09:27:15 INFO  LocalApp:92 - Polling for responses from manager
+LOCAL 2024-02-12 09:27:35 INFO  LocalApp:92 - Polling for responses from manager
+LOCAL 2024-02-12 09:27:42 INFO  LocalApp:104 - Received response from manager: 8b84784f80d26a73::done::8b84784f80d26a73-summary-0::0
+LOCAL 2024-02-12 09:27:42 INFO  LocalApp:26 - LocalAppTask started
+LOCAL 2024-02-12 09:27:42 INFO  S3Handler:56 - Downloading file 8b84784f80d26a73-summary-0 from S3 bucket sarcasm-analysis-bucket-8b84784f80d26a73
+LOCAL 2024-02-12 09:27:43 INFO  LocalApp:33 - Received summary file from S3
+LOCAL 2024-02-12 09:27:43 INFO  LocalApp:60 - Added review R3DHV2T9Q991V7 to summary
+LOCAL 2024-02-12 09:27:43 INFO  LocalApp:60 - Added review RGMH5ROASTBS8 to summary
+LOCAL 2024-02-12 09:27:43 INFO  LocalApp:60 - Added review R33DK4T6EHUIHX to summary
+LOCAL 2024-02-12 09:27:43 INFO  LocalApp:60 - Added review R14D3WP6J91DCU to summary
+LOCAL 2024-02-12 09:27:43 INFO  LocalApp:60 - Added review RSO743RDYVWTZ to summary
+LOCAL 2024-02-12 09:27:43 INFO  LocalApp:60 - Added review R367OTNJ8I36FS to summary
+LOCAL 2024-02-12 09:27:43 INFO  LocalApp:60 - Added review RJ62XWHGDIF7 to summary
+LOCAL 2024-02-12 09:27:43 INFO  LocalApp:60 - Added review R3GCFAIUL8BI3Y to summary
+LOCAL 2024-02-12 09:27:43 INFO  LocalApp:60 - Added review R3P2KOXRF7Z400 to summary
+LOCAL 2024-02-12 09:27:43 INFO  LocalApp:60 - Added review R1RUXYHCSZSHJ0 to summary
+LOCAL 2024-02-12 09:27:43 INFO  LocalApp:60 - Added review R1L8O7RM8DD6J3 to summary
+LOCAL 2024-02-12 09:27:43 INFO  LocalApp:60 - Added review R8OWCLDI0GGL0 to summary
+LOCAL 2024-02-12 09:27:43 INFO  LocalApp:60 - Added review R33SW6AMDKTSB8 to summary
+LOCAL 2024-02-12 09:27:43 INFO  LocalApp:60 - Added review RB9QK3F6SUQPU to summary
+LOCAL 2024-02-12 09:27:43 INFO  LocalApp:60 - Added review R3V239ZPPF0XY3 to summary
+LOCAL 2024-02-12 09:27:43 INFO  LocalApp:60 - Added review RW6ORU2M3C461 to summary
+LOCAL 2024-02-12 09:27:43 INFO  LocalApp:60 - Added review R1IKZK5S0DCKZ0 to summary
+LOCAL 2024-02-12 09:27:43 INFO  LocalApp:60 - Added review R3R9QKZ61DMKGF to summary
+LOCAL 2024-02-12 09:27:43 INFO  LocalApp:60 - Added review R3DHV2T9Q991V7 to summary
+LOCAL 2024-02-12 09:27:43 INFO  LocalApp:60 - Added review RJ62XWHGDIF7 to summary
+LOCAL 2024-02-12 09:27:43 INFO  LocalApp:69 - Created summary HTML file at output1.html
+LOCAL 2024-02-12 09:27:44 INFO  S3Handler:71 - File 8b84784f80d26a73-summary-0 deleted from S3 bucket sarcasm-analysis-bucket-8b84784f80d26a73
+LOCAL 2024-02-12 09:27:44 INFO  SQSHandler:113 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/managerToLocalQueue-8b84784f80d26a73
+LOCAL 2024-02-12 09:27:44 INFO  LocalApp:92 - Polling for responses from manager
+LOCAL 2024-02-12 09:27:44 INFO  LocalApp:104 - Received response from manager: 8b84784f80d26a73::done::8b84784f80d26a73-summary-1::1
+LOCAL 2024-02-12 09:27:44 INFO  LocalApp:26 - LocalAppTask started
+LOCAL 2024-02-12 09:27:44 INFO  S3Handler:56 - Downloading file 8b84784f80d26a73-summary-1 from S3 bucket sarcasm-analysis-bucket-8b84784f80d26a73
+LOCAL 2024-02-12 09:27:44 INFO  LocalApp:33 - Received summary file from S3
+LOCAL 2024-02-12 09:27:44 INFO  LocalApp:60 - Added review R2VXY3WQWH9Z0F to summary
+LOCAL 2024-02-12 09:27:44 INFO  LocalApp:60 - Added review R3PLCGYS9LYRHZ to summary
+LOCAL 2024-02-12 09:27:44 INFO  LocalApp:60 - Added review R1CKE9Q64Z7CZC to summary
+LOCAL 2024-02-12 09:27:44 INFO  LocalApp:60 - Added review R2OJAJRDONJ956 to summary
+LOCAL 2024-02-12 09:27:44 INFO  LocalApp:60 - Added review RJ1ACTUJ9GHIA to summary
+LOCAL 2024-02-12 09:27:44 INFO  LocalApp:60 - Added review R1266STJW192AU to summary
+LOCAL 2024-02-12 09:27:44 INFO  LocalApp:60 - Added review RP1Q8KK6ZJAK0 to summary
+LOCAL 2024-02-12 09:27:44 INFO  LocalApp:60 - Added review R2I4MYU1IT5IJ to summary
+LOCAL 2024-02-12 09:27:44 INFO  LocalApp:60 - Added review RTCQYW9LFP4NU to summary
+LOCAL 2024-02-12 09:27:44 INFO  LocalApp:60 - Added review RPURVNKU8YWTS to summary
+LOCAL 2024-02-12 09:27:44 INFO  LocalApp:60 - Added review R248WNDI9KORMN to summary
+LOCAL 2024-02-12 09:27:44 INFO  LocalApp:60 - Added review R82DFHHKNJGR0 to summary
+LOCAL 2024-02-12 09:27:44 INFO  LocalApp:60 - Added review R1JDXB8Y4TO3MT to summary
+LOCAL 2024-02-12 09:27:44 INFO  LocalApp:60 - Added review R2IZ8JCDKDN7YL to summary
+LOCAL 2024-02-12 09:27:44 INFO  LocalApp:60 - Added review RGAST6Q7TRKA4 to summary
+LOCAL 2024-02-12 09:27:44 INFO  LocalApp:60 - Added review R11CRDLQ8ID6MM to summary
+LOCAL 2024-02-12 09:27:44 INFO  LocalApp:60 - Added review R35P822BAW0TEW to summary
+LOCAL 2024-02-12 09:27:44 INFO  LocalApp:60 - Added review RJ1ACTUJ9GHIA to summary
+LOCAL 2024-02-12 09:27:44 INFO  LocalApp:60 - Added review R386EPGNDYSO6 to summary
+LOCAL 2024-02-12 09:27:44 INFO  LocalApp:60 - Added review RJ1ACTUJ9GHIA to summary
+LOCAL 2024-02-12 09:27:44 INFO  LocalApp:69 - Created summary HTML file at output2.html
+LOCAL 2024-02-12 09:27:44 INFO  S3Handler:71 - File 8b84784f80d26a73-summary-1 deleted from S3 bucket sarcasm-analysis-bucket-8b84784f80d26a73
+LOCAL 2024-02-12 09:27:44 INFO  SQSHandler:113 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/managerToLocalQueue-8b84784f80d26a73
+LOCAL 2024-02-12 09:27:44 INFO  LocalApp:54 - Sending terminate message to manager
+LOCAL 2024-02-12 09:27:45 INFO  SQSHandler:73 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-8b84784f80d26a73
+LOCAL 2024-02-12 09:27:45 INFO  LocalApp:131 - Waiting for executor to finish
+LOCAL 2024-02-12 09:27:45 INFO  SQSHandler:55 - Queue https://sqs.us-east-1.amazonaws.com/767398090493/managerToLocalQueue-8b84784f80d26a73 deleted
+LOCAL 2024-02-12 09:27:45 INFO  SQSHandler:55 - Queue https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue-8b84784f80d26a73 deleted
+LOCAL 2024-02-12 09:27:46 INFO  S3Handler:86 - S3 bucket sarcasm-analysis-bucket-8b84784f80d26a73 emptied
+LOCAL 2024-02-12 09:27:46 INFO  S3Handler:95 - S3 bucket sarcasm-analysis-bucket-8b84784f80d26a73 deleted
+LOCAL 2024-02-12 09:27:46 INFO  LocalApp:70 - LocalApp finished

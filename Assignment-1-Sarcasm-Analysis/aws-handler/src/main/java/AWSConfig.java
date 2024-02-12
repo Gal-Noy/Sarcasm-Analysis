@@ -46,6 +46,8 @@ public class AWSConfig {
     public static final String MANAGER_TO_LOCAL_QUEUE_NAME = "managerToLocalQueue";
     public static final String MANAGER_TO_WORKER_QUEUE_NAME = "managerToWorkerQueue";
     public static final String WORKER_TO_MANAGER_QUEUE_NAME = "workerToManagerQueue";
+    public static final int LONG_POLLING_TIME = 20;
+    public static final int VISIBILITY_TIMEOUT = 60;
 
 
 }
