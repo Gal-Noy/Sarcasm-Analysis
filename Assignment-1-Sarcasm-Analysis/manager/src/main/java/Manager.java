@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Future;
-import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class Manager {
@@ -19,60 +17,35 @@ public class Manager {
     public static void main(String[] args) {
         logger.info("Manager started");
 
-        aws.sqs.createQueue(AWSConfig.MANAGER_TO_WORKER_QUEUE_NAME);
-        aws.sqs.createQueue(AWSConfig.WORKER_TO_MANAGER_QUEUE_NAME);
+        aws.sqs.createQueueIfNotExist(AWSConfig.MANAGER_TO_WORKER_QUEUE_NAME);
+        aws.sqs.createQueueIfNotExist(AWSConfig.WORKER_TO_MANAGER_QUEUE_NAME);
 
-        while (!env.isTerminated) {
-            try {
-                pollTasksFromLocalApps();
-                Thread.sleep(5000); // Check for new local app queues every 3 seconds
-            } catch (Exception e) {
-                logger.error(e.getMessage());
-            }
-        }
+        handleRequestsFromLocalApps(aws.sqs.getQueueUrl(AWSConfig.LOCAL_TO_MANAGER_QUEUE_NAME));
 
-        handleTermination();
-        env.executor.shutdown();
-        waitForExecutorToFinish();
+        waitForExecutorToFinish(); // Wait for all tasks to finish summary responses
 
-        aws.sqs.deleteQueue(aws.sqs.getQueueUrl(AWSConfig.MANAGER_TO_WORKER_QUEUE_NAME));
-        aws.sqs.deleteQueue(aws.sqs.getQueueUrl(AWSConfig.WORKER_TO_MANAGER_QUEUE_NAME));
-
+        aws.ec2.terminateAllWorkers();
+        aws.sqs.deleteAllQueues();
         aws.ec2.terminateManager();
 
         logger.info("Manager finished");
     }
 
-    private static void pollTasksFromLocalApps() {
-        List<String> localToManagerQueues = aws.sqs.getAllQueuesByPrefix(AWSConfig.LOCAL_TO_MANAGER_QUEUE_NAME);
-        logger.info("Polling tasks from " + localToManagerQueues.size() + " local app queues");
+    private static void handleRequestsFromLocalApps(String localToManagerQueueUrl) {
+        while (!env.isTerminated) {
+            try {
+                logger.info("Polling requests from " + AWSConfig.LOCAL_TO_MANAGER_QUEUE_NAME);
 
-        for (String queueUrl : localToManagerQueues) {
-            if (!env.polledQueues.contains(queueUrl)) {
-                env.polledQueues.add(queueUrl);
+                List<Message> requests = aws.sqs.receiveMessages(localToManagerQueueUrl); // long polling
+                int requestsSize = requests.size();
 
-                Future<?> future = env.executor.submit(() -> {
-                    logger.info("Started polling from " + aws.sqs.getLocalAppNameFromQueueUrl(queueUrl));
-                    while (!env.isTerminated) { // For each local app queue, there is a thread long polling for tasks
-                        try {
-                            List<Message> requests = aws.sqs.receiveMessages(queueUrl); // long polling
-                            logger.info("Received " + requests.size() + " requests");
-                            if (!requests.isEmpty() && !env.isTerminated) {
-                                // In this method, another thread is created for each request (ManagerTask)
-                                handleQueueTasks(requests, queueUrl);
-                            }
-                        } catch (IOException e) {
-                            logger.error(e.getMessage());
-                        } catch (Exception e) {
-                            // Queue is deleted when local app terminates
-//                            env.polledQueues.remove(queueUrl);
-                            break;
-                        }
-                    }
-                    logger.info("Stopped polling from " + aws.sqs.getLocalAppNameFromQueueUrl(queueUrl));
-                });
+                logger.info("Polled " + requestsSize + " requests");
 
-                env.pendingQueuePollers.add(future);
+                if (requestsSize > 0) {
+                    handleQueueTasks(requests, localToManagerQueueUrl);
+                }
+            } catch (Exception e) {
+                logger.error(e.getMessage());
             }
         }
     }
@@ -88,11 +61,9 @@ public class Manager {
 
             if (requestType.equals(AWSConfig.TERMINATE_TASK)) {
                 logger.info("Termination request received from local app " + localAppId);
-
                 env.isTerminated = true;
                 env.terminatingLocalAppId = localAppId;
                 aws.sqs.deleteMessage(queueUrl, request);
-
                 // Continue to serve the local app that requested termination
                 continue;
             }
@@ -104,9 +75,10 @@ public class Manager {
                 logger.info("Ignoring request from local app " + localAppId + " because manager is terminating");
                 aws.sqs.deleteMessage(queueUrl, request);
 
-                // <local_app_id>::error::<>::<input_index>
-                aws.sqs.sendMessage(AWSConfig.MANAGER_TO_LOCAL_QUEUE_NAME + AWSConfig.DEFAULT_DELIMITER + localAppId,
-                        String.join(AWSConfig.MESSAGE_DELIMITER, localAppId, AWSConfig.RESPONSE_STATUS_ERROR, "", inputIndex));
+                // <local_app_id>::error::<>::<input_index>::<error_message>
+                aws.sqs.sendMessage(AWSConfig.MANAGER_TO_LOCAL_QUEUE_NAME,
+                        String.join(AWSConfig.MESSAGE_DELIMITER, localAppId, AWSConfig.RESPONSE_STATUS_ERROR,
+                                "", inputIndex, "Manager is terminating"));
                 continue;
             }
 
@@ -115,16 +87,17 @@ public class Manager {
                 logger.error("Error parsing input file " + inputFileName);
                 aws.sqs.deleteMessage(queueUrl, request);
 
-                // <local_app_id>::error::<>::<input_index>
-                aws.sqs.sendMessage(AWSConfig.MANAGER_TO_LOCAL_QUEUE_NAME + AWSConfig.DEFAULT_DELIMITER + localAppId,
-                        String.join(AWSConfig.MESSAGE_DELIMITER, localAppId, AWSConfig.RESPONSE_STATUS_ERROR, "", inputIndex));
+                // <local_app_id>::error::<>::<input_index>::<error_message>
+                aws.sqs.sendMessage(AWSConfig.MANAGER_TO_LOCAL_QUEUE_NAME,
+                        String.join(AWSConfig.MESSAGE_DELIMITER, localAppId, AWSConfig.RESPONSE_STATUS_ERROR,
+                                "", inputIndex, "Error parsing input file " + inputFileName));
                 continue;
             }
 
             logger.info("Parsed " + requestReviews.size() + " reviews from input file " + inputFileName);
 
             int workersNeeded = (int) Math.ceil((double) 2 * requestReviews.size() / reviewsPerWorker);
-//            env.assignWorkers(workersNeeded);
+            env.assignWorkers(workersNeeded);
 
             // Task for each input file, to send tasks to workers, receive responses and handle summary
             env.executor.execute(new ManagerTask(
@@ -136,21 +109,6 @@ public class Manager {
 
             aws.sqs.deleteMessage(queueUrl, request);
         }
-    }
-
-    private static void handleTermination() {
-        // Main thread waits for all queue pollers to finish
-        for (Future<?> pendingQueuePoller : env.pendingQueuePollers) {
-            try {
-                pendingQueuePoller.get();
-            } catch (Exception e) {
-                System.err.println(e.getMessage());
-            }
-        }
-
-        logger.info("All local app queues are removed");
-
-        aws.ec2.terminateAllWorkers();
     }
 
     private static Map<String, Review> getRequestReviews(String inputFileName, String bucketName) throws IOException {
@@ -165,10 +123,11 @@ public class Manager {
     }
 
     private static void waitForExecutorToFinish() {
+        env.executor.shutdown();
         while (true) {
             try {
                 if (env.executor.awaitTermination(1, TimeUnit.SECONDS)) {
-                    logger.info("Executor terminated");
+                    logger.info("Executor finished");
                     break;
                 }
             } catch (InterruptedException e) {

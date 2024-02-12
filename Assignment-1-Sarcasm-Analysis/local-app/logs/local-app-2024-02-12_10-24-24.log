@@ -1,0 +1,2 @@
+LOCAL 2024-02-12 10:24:25 INFO  SQSHandler:58 - Queue https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue deleted
+LOCAL 2024-02-12 10:24:25 INFO  SQSHandler:58 - Queue https://sqs.us-east-1.amazonaws.com/767398090493/managerToLocalQueue deleted

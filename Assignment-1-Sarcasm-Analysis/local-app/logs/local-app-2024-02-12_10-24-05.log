@@ -1,0 +1,10 @@
+LOCAL 2024-02-12 10:24:07 INFO  S3Handler:86 - S3 bucket sarcasm-analysis-bucket-86e6370f28f1ebed emptied
+LOCAL 2024-02-12 10:24:08 INFO  S3Handler:95 - S3 bucket sarcasm-analysis-bucket-86e6370f28f1ebed deleted
+LOCAL 2024-02-12 10:24:09 INFO  S3Handler:86 - S3 bucket sarcasm-analysis-bucket-8b1ed52b1f45928f emptied
+LOCAL 2024-02-12 10:24:09 INFO  S3Handler:95 - S3 bucket sarcasm-analysis-bucket-8b1ed52b1f45928f deleted
+LOCAL 2024-02-12 10:24:10 INFO  S3Handler:86 - S3 bucket sarcasm-analysis-bucket-8bd7ee5cacfbf2e7 emptied
+LOCAL 2024-02-12 10:24:11 INFO  S3Handler:95 - S3 bucket sarcasm-analysis-bucket-8bd7ee5cacfbf2e7 deleted
+LOCAL 2024-02-12 10:24:12 INFO  S3Handler:86 - S3 bucket sarcasm-analysis-bucket-94323d99e4c25f65 emptied
+LOCAL 2024-02-12 10:24:13 INFO  S3Handler:95 - S3 bucket sarcasm-analysis-bucket-94323d99e4c25f65 deleted
+LOCAL 2024-02-12 10:24:14 INFO  S3Handler:86 - S3 bucket sarcasm-analysis-bucket-b9510524bf6ee4c1 emptied
+LOCAL 2024-02-12 10:24:15 INFO  S3Handler:95 - S3 bucket sarcasm-analysis-bucket-b9510524bf6ee4c1 deleted

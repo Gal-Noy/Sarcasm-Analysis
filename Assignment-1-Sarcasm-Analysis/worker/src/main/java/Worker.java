@@ -5,7 +5,6 @@ import analysis.SentimentAnalysisHandler;
 import analysis.NamedEntityRecognitionHandler;
 import software.amazon.awssdk.services.sqs.model.Message;
 
-import java.util.List;
 
 public class Worker {
     private static final Logger logger = LogManager.getLogger(Worker.class);
@@ -21,64 +20,65 @@ public class Worker {
 
     private static void handleTasksFromManager() {
         String managerToWorkerQueueUrl = aws.sqs.getQueueUrl(AWSConfig.MANAGER_TO_WORKER_QUEUE_NAME);
-        logger.info("Polling tasks from " + AWSConfig.MANAGER_TO_WORKER_QUEUE_NAME);
+        String workerToManagerQueueUrl = aws.sqs.getQueueUrl(AWSConfig.WORKER_TO_MANAGER_QUEUE_NAME);
+
         while (true) {
             try {
+                logger.info("Polling tasks from " + AWSConfig.MANAGER_TO_WORKER_QUEUE_NAME);
                 Message task = aws.sqs.receiveSingleMessage(managerToWorkerQueueUrl); // long polling
                 if (task != null) {
                     Thread extendTaskVisibility = new Thread(new ExtendTaskVisibility(task, managerToWorkerQueueUrl));
                     extendTaskVisibility.start();
 
-                    processAndResponseTask(task, managerToWorkerQueueUrl);
+                    String response = processTask(task.body());
 
-                    extendTaskVisibility.interrupt();
-                } else {
-                    Thread.sleep(3000);
+                    if (response != null) {
+                        aws.sqs.sendMessage(workerToManagerQueueUrl, response);
+                        logger.info("Sent response: " + response);
+                        extendTaskVisibility.interrupt();
+                        aws.sqs.deleteMessage(managerToWorkerQueueUrl, task);
+
+                    }
+                    else {
+                        logger.error("Error processing task: " + task.body());
+                        extendTaskVisibility.interrupt();
+                        // Put the task back in the queue
+                        aws.sqs.changeMessageVisibility(managerToWorkerQueueUrl, task, 0);
+                    }
                 }
             } catch (Exception e) {
                 logger.error(e.getMessage());
-                continue; // The queue was deleted by the manager due to local app termination
             }
         }
     }
 
-
-    private static void processAndResponseTask(Message task, String queueUrl) {
+    private static String processTask(String taskBody) {
         try {
-            String response = getTaskResponse(task.body());
-            aws.sqs.sendMessage(AWSConfig.WORKER_TO_MANAGER_QUEUE_NAME, response);
-        } catch (RuntimeException e) {
+            // <local_app_id>::<input_index>::<review_id>::<review_text>::<task_type>
+            String[] taskContent = taskBody.split(AWSConfig.MESSAGE_DELIMITER);
+            String localAppId = taskContent[0], inputIndex = taskContent[1],
+                    reviewId = taskContent[2], reviewText = taskContent[3], taskType = taskContent[4];
+
+            logger.info("Received task: " + taskBody + " for localAppId " + localAppId + " for inputIndex " + inputIndex);
+
+            // <local_app_id>::<input_index>::<review_id>::<task_type>::<task_result>
+            String response = String.join(AWSConfig.MESSAGE_DELIMITER, localAppId, inputIndex, reviewId, taskType, "");
+
+            if (taskType.equals(AWSConfig.SENTIMENT_ANALYSIS_TASK)) {
+                String sentiment = String.valueOf(sentimentAnalysisHandler.findSentiment(reviewText));
+                response += sentiment; // <task_result>
+            }
+
+            if (taskType.equals(AWSConfig.ENTITY_RECOGNITION_TASK)) {
+                String entities = String.join(", ", namedEntityRecognitionHandler.findEntities(reviewText));
+                response += entities; // <task_result>
+            }
+
+            return response;
+        }
+        catch (Exception e) {
             logger.error(e.getMessage());
-        } finally {
-            aws.sqs.deleteMessage(queueUrl, task);
+            return null;
         }
-    }
-
-    private static String getTaskResponse(String taskBody) {
-        // <local_app_id>::<input_index>::<review_id>::<review_text>::<task_type>
-        String[] taskContent = taskBody.split(AWSConfig.MESSAGE_DELIMITER);
-        String localAppId = taskContent[0], inputIndex = taskContent[1],
-                reviewId = taskContent[2], reviewText = taskContent[3], taskType = taskContent[4];
-
-        logger.info("Received task: " + taskBody + " for localAppId " + localAppId + " for inputIndex " + inputIndex);
-
-        // <local_app_id>::<input_index>::<review_id>::<task_type>::<task_result>
-        String response = String.join(AWSConfig.MESSAGE_DELIMITER, localAppId, inputIndex, reviewId, taskType, "");
-
-        if (taskType.equals(AWSConfig.SENTIMENT_ANALYSIS_TASK)) {
-            String sentiment = String.valueOf(sentimentAnalysisHandler.findSentiment(reviewText));
-            response += sentiment; // <task_result>
-
-            logger.info("Sentiment analysis result: " + sentiment);
-        }
-
-        if (taskType.equals(AWSConfig.ENTITY_RECOGNITION_TASK)) {
-            String entities = String.join(", ", namedEntityRecognitionHandler.findEntities(reviewText));
-            response += entities; // <task_result>
-
-            logger.info("Named entity recognition result: " + entities);
-        }
-
-        return response;
     }
 }

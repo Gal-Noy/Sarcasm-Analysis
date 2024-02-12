@@ -5,13 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4b4dc6e6-069e-49cd-8d09-ba7a937ac67a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../aws-handler/src/main/java/AWSConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../aws-handler/src/main/java/AWSConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../aws-handler/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../aws-handler/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../aws-handler/src/main/java/SQSHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../aws-handler/src/main/java/SQSHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output1.html" beforeDir="false" afterPath="$PROJECT_DIR$/output1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output2.html" beforeDir="false" afterPath="$PROJECT_DIR$/output2.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/LocalApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/LocalApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../manager/src/main/java/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../manager/src/main/java/Manager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../manager/src/main/java/ManagerEnv.java" beforeDir="false" afterPath="$PROJECT_DIR$/../manager/src/main/java/ManagerEnv.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../manager/src/main/java/ManagerTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/../manager/src/main/java/ManagerTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../worker/logs/worker-2024-02-12_09-38-55.log" beforeDir="false" afterPath="$PROJECT_DIR$/../worker/logs/worker-2024-02-12_09-38-55.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../worker/src/main/java/ExtendTaskVisibility.java" beforeDir="false" afterPath="$PROJECT_DIR$/../worker/src/main/java/ExtendTaskVisibility.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../worker/src/main/java/Worker.java" beforeDir="false" afterPath="$PROJECT_DIR$/../worker/src/main/java/Worker.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -72,7 +76,7 @@
     <configuration name="LocalApp" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="LocalApp" />
       <module name="local-app" />
-      <option name="PROGRAM_PARAMETERS" value="../inputs/test-input1.txt output1 20" />
+      <option name="PROGRAM_PARAMETERS" value="../inputs/input2.txt output2 350" />
       <extension name="software.aws.toolkits.jetbrains.core.execution.JavaAwsConnectionExtension">
         <option name="credential" />
         <option name="region" />

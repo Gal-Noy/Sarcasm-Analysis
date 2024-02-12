@@ -16,8 +16,6 @@ public class ManagerEnv {
     public String terminatingLocalAppId = "";
     public static int workers = 0;
     public ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newCachedThreadPool();
-    public List<Future<?>> pendingQueuePollers = new ArrayList<>(); // To wait for all queue pollers to finish at termination
-    public List<String> polledQueues = new ArrayList<>();
     private static final Logger logger = LogManager.getLogger(ManagerEnv.class);
 
     public void assignWorkers(int workersNeeded) {

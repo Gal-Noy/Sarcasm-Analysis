@@ -32,37 +32,32 @@ public class LocalApp {
         logger.info("LocalApp started with id " + localAppId);
 
         LocalAppEnv env = new LocalAppEnv(args);
-
         logger.info("LocalAppEnv created");
 
         String bucketName = AWSConfig.BUCKET_NAME + AWSConfig.DEFAULT_DELIMITER + localAppId;
         aws.s3.createS3BucketIfNotExists(bucketName);
 
-        String localToManagerQueueName = AWSConfig.LOCAL_TO_MANAGER_QUEUE_NAME + AWSConfig.DEFAULT_DELIMITER + localAppId;
-        String managerToLocalQueueName = AWSConfig.MANAGER_TO_LOCAL_QUEUE_NAME + AWSConfig.DEFAULT_DELIMITER + localAppId;
-
-        String localToManagerQueueUrl = aws.sqs.createQueue(localToManagerQueueName);
-        String managerToLocalQueueUrl = aws.sqs.createQueue(managerToLocalQueueName);
+        String localToManagerQueueUrl, managerToLocalQueueUrl;
+        try {
+            localToManagerQueueUrl = aws.sqs.createQueueIfNotExist(AWSConfig.LOCAL_TO_MANAGER_QUEUE_NAME);
+            managerToLocalQueueUrl = aws.sqs.createQueueIfNotExist(AWSConfig.MANAGER_TO_LOCAL_QUEUE_NAME);
+        } catch (Exception e) {
+            logger.error("Error creating queues: manager deleted them due to termination");
+            return;
+        }
 
         sendTasksToManager(env, bucketName, localToManagerQueueUrl);
-
-//        aws.ec2.runManager();
-
+        aws.ec2.runManager();
         receiveResponsesFromManager(env, bucketName, managerToLocalQueueUrl);
 
         if (env.terminate) {
             logger.info("Sending terminate message to manager");
-
             // <local_app_id>::terminate
             aws.sqs.sendMessage(localToManagerQueueUrl,
                     String.join(AWSConfig.MESSAGE_DELIMITER, localAppId, AWSConfig.TERMINATE_TASK));
         }
 
-        env.executor.shutdown();
         waitForExecutorToFinish(env.executor);
-
-        aws.sqs.deleteQueue(managerToLocalQueueUrl);
-        aws.sqs.deleteQueue(localToManagerQueueUrl);
 
         aws.s3.emptyS3Bucket(bucketName);
         aws.s3.deleteS3Bucket(bucketName);
@@ -118,9 +113,18 @@ public class LocalApp {
 
                         aws.s3.deleteFileFromS3(bucketName, summaryFileName);
                     }
+                    else {
+                        String errorMessage = responseContent[4];
+                        logger.error("Error response from manager: " + errorMessage);
+                    }
 
                     filesLeftToProcess--;
                     aws.sqs.deleteMessage(managerToLocalQueueUrl, response);
+                }
+                else {
+                    // Put back in queue
+                    logger.info("Putting back not relevant response in managerToLocal queue");
+                    aws.sqs.changeMessageVisibility(managerToLocalQueueUrl, response, 0);
                 }
             }
         }
@@ -129,10 +133,11 @@ public class LocalApp {
 
     private static void waitForExecutorToFinish(ThreadPoolExecutor executor) {
         logger.info("Waiting for executor to finish");
-
+        executor.shutdown();
         while (true) {
             try {
                 if (executor.awaitTermination(1, TimeUnit.SECONDS)) {
+                    logger.info("Executor finished");
                     break;
                 }
             } catch (InterruptedException e) {

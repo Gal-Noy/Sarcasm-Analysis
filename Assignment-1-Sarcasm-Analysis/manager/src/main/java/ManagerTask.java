@@ -51,7 +51,7 @@ public class ManagerTask implements Runnable {
 
         logger.info("Finished summary for local app " + localAppId + " for inputIndex " + inputIndex);
 
-//        env.releaseWorkers(workersToRelease);
+        env.releaseWorkers(workersToRelease);
 
         logger.info("ManagerTask finished for local app " + localAppId + " for inputIndex " + inputIndex);
     }
@@ -130,7 +130,7 @@ public class ManagerTask implements Runnable {
                 else {
                     // Put back in queue
                     logger.info("Putting back not relevant response in workerToManager queue");
-                    aws.sqs.sendMessage(workerToManagerQueueUrl, responseBody);
+                    aws.sqs.changeMessageVisibility(workerToManagerQueueUrl, response, 0);
                 }
             }
         }
@@ -141,12 +141,9 @@ public class ManagerTask implements Runnable {
         String summaryFileName = String.join(AWSConfig.DEFAULT_DELIMITER, localAppId, AWSConfig.SUMMARY_FILE_INDICATOR, inputIndex);
         aws.s3.uploadContentToS3(bucketName, summaryFileName, summaryMessage.toString());
 
-        String managerToLocalQueueUrl = aws.sqs.getQueueUrl(
-                AWSConfig.MANAGER_TO_LOCAL_QUEUE_NAME + AWSConfig.DEFAULT_DELIMITER + localAppId
-        );
         // <local_app_id>::<response_status>::<summary_file_name>::<input_index>
         String responseContent = String.join(AWSConfig.MESSAGE_DELIMITER, localAppId, AWSConfig.RESPONSE_STATUS_DONE, summaryFileName, inputIndex);
-        aws.sqs.sendMessage(managerToLocalQueueUrl, responseContent);
+        aws.sqs.sendMessage(aws.sqs.getQueueUrl(AWSConfig.MANAGER_TO_LOCAL_QUEUE_NAME), responseContent);
 
         logger.info("Uploaded summary file " + summaryFileName + " to S3 and sent response to local app " + localAppId + " for inputIndex " + inputIndex);
     }

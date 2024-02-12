@@ -10,15 +10,18 @@ public class SQSHandler {
     private final SqsClient sqs = SqsClient.builder().region(AWSConfig.REGION1).build();
     private final Logger logger = LogManager.getLogger(SQSHandler.class);
 
-    public String createQueue(String queueName) {
-        CreateQueueRequest request = CreateQueueRequest.builder()
-                .queueName(queueName)
-                .build();
-        sqs.createQueue(request);
-
-        logger.info("Queue " + queueName + " created");
-
-        return getQueueUrl(queueName);
+    public String createQueueIfNotExist(String queueName) {
+        try {
+            CreateQueueRequest request = CreateQueueRequest.builder()
+                    .queueName(queueName)
+                    .build();
+            CreateQueueResponse createResult = sqs.createQueue(request);
+            logger.info("Queue " + queueName + " created");
+            return createResult.queueUrl();
+        }
+        catch (QueueNameExistsException e) {
+            return getQueueUrl(queueName);
+        }
     }
 
     public String getQueueUrl(String queueName) {
@@ -94,11 +97,11 @@ public class SQSHandler {
         return messages.isEmpty() ? null : messages.get(0);
     }
 
-    public void extendMessageVisibility(String queueUrl, Message message) {
+    public void changeMessageVisibility(String queueUrl, Message message, int visibilityTimeout) {
         ChangeMessageVisibilityRequest request = ChangeMessageVisibilityRequest.builder()
                 .queueUrl(queueUrl)
                 .receiptHandle(message.receiptHandle())
-                .visibilityTimeout(AWSConfig.VISIBILITY_TIMEOUT)
+                .visibilityTimeout(visibilityTimeout)
                 .build();
         sqs.changeMessageVisibility(request);
     }

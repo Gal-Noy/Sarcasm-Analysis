@@ -15,7 +15,7 @@ public class ExtendTaskVisibility implements Runnable{
         while (true) {
             try {
                 Thread.sleep(AWSConfig.VISIBILITY_TIMEOUT * 1000 / 2);
-                aws.sqs.extendMessageVisibility(queueUrl, task);
+                aws.sqs.changeMessageVisibility(queueUrl, task, 2 * AWSConfig.VISIBILITY_TIMEOUT);
             } catch (InterruptedException e) {
                 break;
             }
