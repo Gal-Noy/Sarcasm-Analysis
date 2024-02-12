@@ -118,7 +118,7 @@ public class Manager {
     }
 
     private static Map<String, Review> getRequestReviews(String inputFileName, String localAppId) throws IOException {
-        InputStream inputFile = aws.s3.downloadFileFromS3(AWSConfig.BUCKET_NAME,
+        InputStream inputFile = aws.s3.downloadObjectFromS3(AWSConfig.BUCKET_NAME,
                 localAppId + AWSConfig.BUCKET_KEY_DELIMITER + inputFileName);
         if (inputFile == null) {
             logger.error("Input file not found: " + inputFileName);

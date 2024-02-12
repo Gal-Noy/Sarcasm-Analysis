@@ -39,7 +39,7 @@ public class S3Handler {
                 .build();
         s3.putObject(objectRequest, RequestBody.fromFile(inputFile));
 
-        logger.info("File " + inputFile.getName() + " uploaded to S3 bucket " + bucketName);
+        logger.info("File " + inputFile.getName() + " uploaded to S3 bucket " + bucketName + " with key " + key);
     }
 
     public void uploadContentToS3(String bucketName, String key, String content) {
@@ -52,8 +52,8 @@ public class S3Handler {
         logger.info("Content uploaded to S3 bucket " + bucketName + " with key " + key);
     }
 
-    public InputStream downloadFileFromS3(String bucketName, String key) {
-        logger.info("Downloading file " + key + " from S3 bucket " + bucketName);
+    public InputStream downloadObjectFromS3(String bucketName, String key) {
+        logger.info("Downloading object " + key + " from S3 bucket " + bucketName);
         GetObjectRequest objectRequest = GetObjectRequest.builder()
                 .bucket(bucketName)
                 .key(key)
@@ -68,7 +68,7 @@ public class S3Handler {
                 .build();
         s3.deleteObject(deleteObjectRequest);
 
-        logger.info("File " + key + " deleted from S3 bucket " + bucketName);
+        logger.info("Object " + key + " deleted from S3 bucket " + bucketName);
     }
 
     public void emptyS3Bucket(String bucketName) {

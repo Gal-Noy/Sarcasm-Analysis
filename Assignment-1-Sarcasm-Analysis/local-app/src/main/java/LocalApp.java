@@ -121,7 +121,7 @@ public class LocalApp {
                     aws.sqs.deleteMessage(managerToLocalQueueUrl, response);
                 } else {
                     // Put back in queue
-                    logger.info("Putting back not relevant response in managerToLocal queue");
+                    logger.info("Putting back irrelevant response in managerToLocal queue");
                     aws.sqs.changeMessageVisibility(managerToLocalQueueUrl, response, AWSConfig.RETURN_TASK_TIME);
                 }
             }

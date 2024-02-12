@@ -26,7 +26,7 @@ public class LocalAppTask implements Runnable {
     public void run() {
         logger.info("LocalAppTask started");
         try {
-            InputStream summaryFile = aws.s3.downloadFileFromS3(AWSConfig.BUCKET_NAME,
+            InputStream summaryFile = aws.s3.downloadObjectFromS3(AWSConfig.BUCKET_NAME,
                     localAppId + AWSConfig.BUCKET_KEY_DELIMITER + summaryFileName);
             String summaryText = new BufferedReader(
                     new InputStreamReader(summaryFile)).lines().collect(Collectors.joining(""));

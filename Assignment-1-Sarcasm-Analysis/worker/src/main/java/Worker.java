@@ -5,8 +5,6 @@ import analysis.SentimentAnalysisHandler;
 import analysis.NamedEntityRecognitionHandler;
 import software.amazon.awssdk.services.sqs.model.Message;
 
-import java.util.List;
-
 
 public class Worker {
     private static final Logger logger = LogManager.getLogger(Worker.class);
