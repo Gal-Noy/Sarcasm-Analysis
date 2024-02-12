@@ -14,7 +14,6 @@ public class ManagerTask implements Runnable {
     private final String localAppId;
     private final String inputIndex;
     private final Map<String, Review> requestReviews;
-    private final String bucketName;
     private int tasksSent = 0;
     private int tasksCompleted = 0;
     private final Map<String, String> reviewsSentiment;
@@ -23,11 +22,10 @@ public class ManagerTask implements Runnable {
     private final Logger logger = LogManager.getLogger(ManagerTask.class);
     private final int workersToRelease;
 
-    public ManagerTask(String localAppId, String inputIndex, Map<String, Review> requestReviews, String bucketName, int workersToRelease) {
+    public ManagerTask(String localAppId, String inputIndex, Map<String, Review> requestReviews, int workersToRelease) {
         this.localAppId = localAppId;
         this.inputIndex = inputIndex;
         this.requestReviews = requestReviews;
-        this.bucketName = bucketName;
         this.reviewsSentiment = new HashMap<>();
         this.reviewsEntities = new HashMap<>();
         this.summaryMessage = new StringBuilder();
@@ -139,7 +137,10 @@ public class ManagerTask implements Runnable {
     private void handleSummary() {
         // <local_app_id>-summary-<input_index>
         String summaryFileName = String.join(AWSConfig.DEFAULT_DELIMITER, localAppId, AWSConfig.SUMMARY_FILE_INDICATOR, inputIndex);
-        aws.s3.uploadContentToS3(bucketName, summaryFileName, summaryMessage.toString());
+
+        aws.s3.uploadContentToS3(AWSConfig.BUCKET_NAME,
+                localAppId + AWSConfig.BUCKET_KEY_DELIMITER + summaryFileName,
+                summaryMessage.toString());
 
         // <local_app_id>::<response_status>::<summary_file_name>::<input_index>
         String responseContent = String.join(AWSConfig.MESSAGE_DELIMITER, localAppId, AWSConfig.RESPONSE_STATUS_DONE, summaryFileName, inputIndex);

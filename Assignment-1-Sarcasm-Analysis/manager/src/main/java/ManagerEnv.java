@@ -18,21 +18,23 @@ public class ManagerEnv {
     public ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newCachedThreadPool();
     private static final Logger logger = LogManager.getLogger(ManagerEnv.class);
 
-    public void assignWorkers(int workersNeeded) {
+    public int assignWorkers(int workersNeeded) {
         logger.info("Assigning workers");
 
         int activeWorkers = aws.ec2.countActiveWorkers();
-        int remainingWorkersCapacity = 18 - activeWorkers;
+        int remainingWorkersCapacity = AWSConfig.MAXIMUM_WORKER_INSTANCES - activeWorkers;
+        int workersToCreate = 0;
 
         if (remainingWorkersCapacity > 0) {
-            int workersToCreate = Math.min(workersNeeded, remainingWorkersCapacity);
+            workersToCreate = Math.min(workersNeeded, remainingWorkersCapacity);
             for (int i = 0; i < workersToCreate; i++) {
                 aws.ec2.createWorkerInstance();
             }
             workers += workersToCreate;
         }
 
-        logger.info("Current workers: " + workers);
+        logger.info("Assigned workers, current amount: " + workers);
+        return workersToCreate;
     }
 
     public void releaseWorkers(int workersToRelease) {
@@ -44,7 +46,7 @@ public class ManagerEnv {
         }
         workers -= workersToRelease;
 
-        logger.info("Current workers: " + workers);
+        logger.info("Released workers, current amount: " + workers);
     }
 
 }

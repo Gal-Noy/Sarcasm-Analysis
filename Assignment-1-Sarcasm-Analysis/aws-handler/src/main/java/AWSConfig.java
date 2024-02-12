@@ -20,6 +20,7 @@ public class AWSConfig {
     // S3
     public static final String BUCKET_NAME = "sarcasm-analysis-bucket";
     public static final String JARS_BUCKET_NAME = "sarcasm-analysis-jars-bucket";
+    public static final String BUCKET_KEY_DELIMITER = "/";
 
     // EC2
     public static final String AMI_ID = "ami-00e95a9222311e8ed";
@@ -41,6 +42,8 @@ public class AWSConfig {
     public static final String NAME_TAG = "Name";
     public static final String MANAGER_NAME_TAG_VALUE = "sarcasm-analysis-manager";
     public static final String WORKER_NAME_TAG_VALUE = "sarcasm-analysis-worker";
+    public static final int MAXIMUM_WORKER_INSTANCES = 18;
+
     // SQS
     public static final String LOCAL_TO_MANAGER_QUEUE_NAME = "localToManagerQueue";
     public static final String MANAGER_TO_LOCAL_QUEUE_NAME = "managerToLocalQueue";

@@ -1,0 +1,423 @@
+LOCAL 2024-02-12 12:18:29 INFO  Manager:18 - Manager started
+LOCAL 2024-02-12 12:18:30 INFO  SQSHandler:19 - Queue managerToWorkerQueue created
+LOCAL 2024-02-12 12:18:31 INFO  SQSHandler:19 - Queue workerToManagerQueue created
+LOCAL 2024-02-12 12:18:31 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 12:18:51 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 12:18:51 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 12:18:54 INFO  Manager:46 - Polled 1 requests
+LOCAL 2024-02-12 12:18:54 INFO  Manager:60 - Received request: 9d9292d5a5c7f49b::analyze::input2.txt::0::200
+LOCAL 2024-02-12 12:18:54 INFO  S3Handler:56 - Downloading file 9d9292d5a5c7f49b/input2.txt from S3 bucket sarcasm-analysis-bucket
+LOCAL 2024-02-12 12:18:56 INFO  Manager:101 - Parsed 490 reviews from input file input2.txt
+LOCAL 2024-02-12 12:18:56 INFO  S3Handler:71 - File 9d9292d5a5c7f49b/input2.txt deleted from S3 bucket sarcasm-analysis-bucket
+LOCAL 2024-02-12 12:18:56 INFO  ManagerEnv:22 - Assigning workers
+LOCAL 2024-02-12 12:18:58 INFO  EC2Handler:118 - Active workers: 0
+LOCAL 2024-02-12 12:18:58 INFO  EC2Handler:99 - Creating worker instance
+LOCAL 2024-02-12 12:19:00 INFO  EC2Handler:33 - Successfully started EC2 instance i-05d0ca29be519a854 based on AMI ami-00e95a9222311e8ed
+LOCAL 2024-02-12 12:19:00 INFO  EC2Handler:99 - Creating worker instance
+LOCAL 2024-02-12 12:19:02 INFO  EC2Handler:33 - Successfully started EC2 instance i-0003910c16de87039 based on AMI ami-00e95a9222311e8ed
+LOCAL 2024-02-12 12:19:02 INFO  EC2Handler:99 - Creating worker instance
+LOCAL 2024-02-12 12:19:04 INFO  EC2Handler:33 - Successfully started EC2 instance i-01284fe7c33d91d87 based on AMI ami-00e95a9222311e8ed
+LOCAL 2024-02-12 12:19:04 INFO  EC2Handler:99 - Creating worker instance
+LOCAL 2024-02-12 12:19:06 INFO  EC2Handler:33 - Successfully started EC2 instance i-0a665211ad9bd2e95 based on AMI ami-00e95a9222311e8ed
+LOCAL 2024-02-12 12:19:06 INFO  EC2Handler:99 - Creating worker instance
+LOCAL 2024-02-12 12:19:08 INFO  EC2Handler:33 - Successfully started EC2 instance i-078048d3f1b7536b1 based on AMI ami-00e95a9222311e8ed
+LOCAL 2024-02-12 12:19:08 INFO  ManagerEnv:36 - Assigned workers, current amount: 5
+LOCAL 2024-02-12 12:19:08 INFO  ManagerTask:38 - ManagerTask started for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:08 INFO  ManagerTask:58 - Sending tasks to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:08 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:08 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:08 INFO  ManagerTask:75 - Sent tasks for reviewId R1LO6KREH0DO7C for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:08 INFO  ManagerTask:76 - Sent total tasks 2 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:08 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:09 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue
+LOCAL 2024-02-12 12:19:09 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 12:19:09 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:09 INFO  ManagerTask:75 - Sent tasks for reviewId RVTO9178ITTWI for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:09 INFO  ManagerTask:76 - Sent total tasks 4 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:09 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:09 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:09 INFO  ManagerTask:75 - Sent tasks for reviewId R183TPGJF3GM74 for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:09 INFO  ManagerTask:76 - Sent total tasks 6 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:09 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:09 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:09 INFO  ManagerTask:75 - Sent tasks for reviewId R3I9BY0ZH5W75E for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:09 INFO  ManagerTask:76 - Sent total tasks 8 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:09 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:09 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:09 INFO  ManagerTask:75 - Sent tasks for reviewId R1ZLTHFSSOGNWB for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:09 INFO  ManagerTask:76 - Sent total tasks 10 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:10 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:10 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:10 INFO  ManagerTask:75 - Sent tasks for reviewId R1WBH7GJ6ZQN0H for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:10 INFO  ManagerTask:76 - Sent total tasks 12 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:10 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:10 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:10 INFO  ManagerTask:75 - Sent tasks for reviewId RYCEFJV10K560 for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:10 INFO  ManagerTask:76 - Sent total tasks 14 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:10 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:10 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:10 INFO  ManagerTask:75 - Sent tasks for reviewId R3P2J84U84FPPC for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:10 INFO  ManagerTask:76 - Sent total tasks 16 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:11 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:11 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:11 INFO  ManagerTask:75 - Sent tasks for reviewId R2NYJVKFJ4NKU5 for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:11 INFO  ManagerTask:76 - Sent total tasks 18 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:11 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:11 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:11 INFO  ManagerTask:75 - Sent tasks for reviewId RQK3XWZASMVG1 for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:11 INFO  ManagerTask:76 - Sent total tasks 20 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:11 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:11 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:11 INFO  ManagerTask:75 - Sent tasks for reviewId R3D8CF7GI13EME for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:11 INFO  ManagerTask:76 - Sent total tasks 22 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:11 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:12 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:12 INFO  ManagerTask:75 - Sent tasks for reviewId RLQ519QM2GOKN for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:12 INFO  ManagerTask:76 - Sent total tasks 24 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:12 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:12 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:12 INFO  ManagerTask:75 - Sent tasks for reviewId R3FZ9XKPAJHGWK for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:12 INFO  ManagerTask:76 - Sent total tasks 26 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:12 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:12 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:12 INFO  ManagerTask:75 - Sent tasks for reviewId R37TIRA7FUBA92 for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:12 INFO  ManagerTask:76 - Sent total tasks 28 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:12 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:12 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:12 INFO  ManagerTask:75 - Sent tasks for reviewId RBPE2D2FFF5ZU for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:12 INFO  ManagerTask:76 - Sent total tasks 30 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:13 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:13 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:13 INFO  ManagerTask:75 - Sent tasks for reviewId R34HMSN4RMOSXX for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:13 INFO  ManagerTask:76 - Sent total tasks 32 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:13 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:13 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:13 INFO  ManagerTask:75 - Sent tasks for reviewId R225MLQF383IP9 for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:13 INFO  ManagerTask:76 - Sent total tasks 34 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:13 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:13 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:13 INFO  ManagerTask:75 - Sent tasks for reviewId R3KNE6FOKATP4E for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:13 INFO  ManagerTask:76 - Sent total tasks 36 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:14 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:14 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:14 INFO  ManagerTask:75 - Sent tasks for reviewId R17DL6RPR3AWZR for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:14 INFO  ManagerTask:76 - Sent total tasks 38 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:14 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:14 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:14 INFO  ManagerTask:75 - Sent tasks for reviewId RPURVNKU8YWTS for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:14 INFO  ManagerTask:76 - Sent total tasks 40 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:14 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:14 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:14 INFO  ManagerTask:75 - Sent tasks for reviewId R2V5LCNVFQH63H for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:14 INFO  ManagerTask:76 - Sent total tasks 42 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:15 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:15 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:15 INFO  ManagerTask:75 - Sent tasks for reviewId R32NA4WE4RRV7O for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:15 INFO  ManagerTask:76 - Sent total tasks 44 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:15 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:15 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:15 INFO  ManagerTask:75 - Sent tasks for reviewId R2XG6L81KSWNXG for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:15 INFO  ManagerTask:76 - Sent total tasks 46 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:15 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:15 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:15 INFO  ManagerTask:75 - Sent tasks for reviewId RYOASE3FEEMQF for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:15 INFO  ManagerTask:76 - Sent total tasks 48 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:15 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:16 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:16 INFO  ManagerTask:75 - Sent tasks for reviewId R1SA1U9TKOD2E2 for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:16 INFO  ManagerTask:76 - Sent total tasks 50 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:16 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:16 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:16 INFO  ManagerTask:75 - Sent tasks for reviewId R1LKVHVCF9WG2D for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:16 INFO  ManagerTask:76 - Sent total tasks 52 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:16 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:16 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:16 INFO  ManagerTask:75 - Sent tasks for reviewId R3O6WOENPE10M7 for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:16 INFO  ManagerTask:76 - Sent total tasks 54 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:16 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:17 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:17 INFO  ManagerTask:75 - Sent tasks for reviewId R3GCQ5GE7CGFVG for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:17 INFO  ManagerTask:76 - Sent total tasks 56 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:17 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:17 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:17 INFO  ManagerTask:75 - Sent tasks for reviewId RYYBXOLNVCSAA for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:17 INFO  ManagerTask:76 - Sent total tasks 58 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:17 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:17 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:17 INFO  ManagerTask:75 - Sent tasks for reviewId R1AC4H1G5X3OM3 for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:17 INFO  ManagerTask:76 - Sent total tasks 60 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:17 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:17 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:17 INFO  ManagerTask:75 - Sent tasks for reviewId RYGBQ4TNO87U7 for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:17 INFO  ManagerTask:76 - Sent total tasks 62 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:18 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:18 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:18 INFO  ManagerTask:75 - Sent tasks for reviewId RZ863ZL7WLRB6 for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:18 INFO  ManagerTask:76 - Sent total tasks 64 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:18 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:18 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:18 INFO  ManagerTask:75 - Sent tasks for reviewId R1L97WS57EGN33 for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:18 INFO  ManagerTask:76 - Sent total tasks 66 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:18 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:18 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:18 INFO  ManagerTask:75 - Sent tasks for reviewId R1M9SJWVZ9I39O for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:18 INFO  ManagerTask:76 - Sent total tasks 68 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:18 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:19 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:19 INFO  ManagerTask:75 - Sent tasks for reviewId R1CDOPSMXKVATP for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:19 INFO  ManagerTask:76 - Sent total tasks 70 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:19 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:19 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:19 INFO  ManagerTask:75 - Sent tasks for reviewId RGV3LWFFHSF39 for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:19 INFO  ManagerTask:76 - Sent total tasks 72 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:19 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:19 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:19 INFO  ManagerTask:75 - Sent tasks for reviewId R3VOO35O3GEQOY for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:19 INFO  ManagerTask:76 - Sent total tasks 74 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:20 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:20 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:20 INFO  ManagerTask:75 - Sent tasks for reviewId R1J9M9CMH91RG for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:20 INFO  ManagerTask:76 - Sent total tasks 76 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:20 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:20 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:20 INFO  ManagerTask:75 - Sent tasks for reviewId R2WSLWOVAUC256 for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:20 INFO  ManagerTask:76 - Sent total tasks 78 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:21 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:21 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:21 INFO  ManagerTask:75 - Sent tasks for reviewId R3HQKX62U50021 for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:21 INFO  ManagerTask:76 - Sent total tasks 80 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:21 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:21 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:21 INFO  ManagerTask:75 - Sent tasks for reviewId R3CFE1BSO8B2NP for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:21 INFO  ManagerTask:76 - Sent total tasks 82 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:21 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:21 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:21 INFO  ManagerTask:75 - Sent tasks for reviewId R2JZUX6LR3YMAX for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:21 INFO  ManagerTask:76 - Sent total tasks 84 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:22 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:22 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:22 INFO  ManagerTask:75 - Sent tasks for reviewId R16NII4O2CTQXH for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:22 INFO  ManagerTask:76 - Sent total tasks 86 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:22 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:22 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:22 INFO  ManagerTask:75 - Sent tasks for reviewId R5GZ92RJSQ5W7 for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:22 INFO  ManagerTask:76 - Sent total tasks 88 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:22 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:22 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:22 INFO  ManagerTask:75 - Sent tasks for reviewId R3BD8T9FKXTM94 for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:22 INFO  ManagerTask:76 - Sent total tasks 90 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:22 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:23 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:23 INFO  ManagerTask:75 - Sent tasks for reviewId R2K2WJL3O0QX60 for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:23 INFO  ManagerTask:76 - Sent total tasks 92 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:23 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:23 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:23 INFO  ManagerTask:75 - Sent tasks for reviewId R3KYA1B58ITTGQ for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:23 INFO  ManagerTask:76 - Sent total tasks 94 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:23 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:23 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:23 INFO  ManagerTask:75 - Sent tasks for reviewId R297KZJPP5KIVI for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:23 INFO  ManagerTask:76 - Sent total tasks 96 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:23 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:24 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:24 INFO  ManagerTask:75 - Sent tasks for reviewId R2TBAXUSYI7CVS for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:24 INFO  ManagerTask:76 - Sent total tasks 98 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:24 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:24 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:24 INFO  ManagerTask:75 - Sent tasks for reviewId R30ERQ2E10KAMM for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:24 INFO  ManagerTask:76 - Sent total tasks 100 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:24 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:24 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:24 INFO  ManagerTask:75 - Sent tasks for reviewId R1PKNUW159WTK5 for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:24 INFO  ManagerTask:76 - Sent total tasks 102 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:24 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:25 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:25 INFO  ManagerTask:75 - Sent tasks for reviewId R18AQ7YXO522HB for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:25 INFO  ManagerTask:76 - Sent total tasks 104 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:25 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:25 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:25 INFO  ManagerTask:75 - Sent tasks for reviewId RFF7D2RYSX90A for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:25 INFO  ManagerTask:76 - Sent total tasks 106 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:25 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:25 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:25 INFO  ManagerTask:75 - Sent tasks for reviewId R2M9GQ7J9AARJF for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:25 INFO  ManagerTask:76 - Sent total tasks 108 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:25 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:26 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:26 INFO  ManagerTask:75 - Sent tasks for reviewId R2V18MFRC0RYAE for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:26 INFO  ManagerTask:76 - Sent total tasks 110 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:26 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:26 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:26 INFO  ManagerTask:75 - Sent tasks for reviewId R2WOZ9H5W3WWDX for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:26 INFO  ManagerTask:76 - Sent total tasks 112 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:26 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:26 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:26 INFO  ManagerTask:75 - Sent tasks for reviewId R38OZTTA0W1INP for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:26 INFO  ManagerTask:76 - Sent total tasks 114 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:26 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:27 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:27 INFO  ManagerTask:75 - Sent tasks for reviewId R1TVO3SSA48O63 for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:27 INFO  ManagerTask:76 - Sent total tasks 116 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:27 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:27 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:27 INFO  ManagerTask:75 - Sent tasks for reviewId R26Y61K9RS9NPV for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:27 INFO  ManagerTask:76 - Sent total tasks 118 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:28 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:28 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:28 INFO  ManagerTask:75 - Sent tasks for reviewId RYA8G58AGZ0FH for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:28 INFO  ManagerTask:76 - Sent total tasks 120 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:28 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:28 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:28 INFO  ManagerTask:75 - Sent tasks for reviewId R1ER3G3LTR7S71 for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:28 INFO  ManagerTask:76 - Sent total tasks 122 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:28 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:28 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:28 INFO  ManagerTask:75 - Sent tasks for reviewId R35TTME01L2RTA for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:28 INFO  ManagerTask:76 - Sent total tasks 124 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:29 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:29 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 12:19:29 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 12:19:29 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:29 INFO  ManagerTask:75 - Sent tasks for reviewId R2X93JXNHREHY8 for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:29 INFO  ManagerTask:76 - Sent total tasks 126 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:29 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:29 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:29 INFO  ManagerTask:75 - Sent tasks for reviewId R5PYX2JUYHA2A for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:29 INFO  ManagerTask:76 - Sent total tasks 128 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:29 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:29 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:29 INFO  ManagerTask:75 - Sent tasks for reviewId RQ8TUZ6IDTMUZ for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:29 INFO  ManagerTask:76 - Sent total tasks 130 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:29 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:30 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:30 INFO  ManagerTask:75 - Sent tasks for reviewId RI5ZCNMM7AQFF for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:30 INFO  ManagerTask:76 - Sent total tasks 132 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:30 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:30 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:30 INFO  ManagerTask:75 - Sent tasks for reviewId R1BTZ4X4HMYMLL for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:30 INFO  ManagerTask:76 - Sent total tasks 134 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:30 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:30 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:30 INFO  ManagerTask:75 - Sent tasks for reviewId R2YVSHU4J58L3A for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:30 INFO  ManagerTask:76 - Sent total tasks 136 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:30 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:31 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:31 INFO  ManagerTask:75 - Sent tasks for reviewId R17W2EKR19FDC1 for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:31 INFO  ManagerTask:76 - Sent total tasks 138 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:31 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:31 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:31 INFO  ManagerTask:75 - Sent tasks for reviewId RNOV1Z9YGYM7H for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:31 INFO  ManagerTask:76 - Sent total tasks 140 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:31 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:31 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:31 INFO  ManagerTask:75 - Sent tasks for reviewId R2JGOBVUZ6RUQW for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:31 INFO  ManagerTask:76 - Sent total tasks 142 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:31 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:32 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:32 INFO  ManagerTask:75 - Sent tasks for reviewId R248WNDI9KORMN for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:32 INFO  ManagerTask:76 - Sent total tasks 144 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:32 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:32 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:32 INFO  ManagerTask:75 - Sent tasks for reviewId R2DLHZH742W51P for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:32 INFO  ManagerTask:76 - Sent total tasks 146 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:32 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:32 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:32 INFO  ManagerTask:75 - Sent tasks for reviewId R2NBB4XZWXXH8E for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:32 INFO  ManagerTask:76 - Sent total tasks 148 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:32 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:33 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:33 INFO  ManagerTask:75 - Sent tasks for reviewId R1TR2RN3Q6017B for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:33 INFO  ManagerTask:76 - Sent total tasks 150 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:33 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:33 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:33 INFO  ManagerTask:75 - Sent tasks for reviewId R1UHFNZH1YH4HW for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:33 INFO  ManagerTask:76 - Sent total tasks 152 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:33 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:33 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:33 INFO  ManagerTask:75 - Sent tasks for reviewId R31CKECGRZINVZ for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:33 INFO  ManagerTask:76 - Sent total tasks 154 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:34 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:34 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:34 INFO  ManagerTask:75 - Sent tasks for reviewId R1NHGQ3COBPL09 for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:34 INFO  ManagerTask:76 - Sent total tasks 156 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:34 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:34 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:34 INFO  ManagerTask:75 - Sent tasks for reviewId RM29R8JV689D4 for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:34 INFO  ManagerTask:76 - Sent total tasks 158 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:34 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:35 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:35 INFO  ManagerTask:75 - Sent tasks for reviewId R19ARZ9IWQW9TZ for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:35 INFO  ManagerTask:76 - Sent total tasks 160 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:35 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:35 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:35 INFO  ManagerTask:75 - Sent tasks for reviewId R1XGKP86XPBJ78 for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:35 INFO  ManagerTask:76 - Sent total tasks 162 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:35 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:35 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:35 INFO  ManagerTask:75 - Sent tasks for reviewId R1YIN6TRBDN6E7 for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:35 INFO  ManagerTask:76 - Sent total tasks 164 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:35 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:35 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:35 INFO  ManagerTask:75 - Sent tasks for reviewId R9NBZ4PQ9JR9K for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:35 INFO  ManagerTask:76 - Sent total tasks 166 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:36 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:36 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:36 INFO  ManagerTask:75 - Sent tasks for reviewId R296GKIHV67WP3 for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:36 INFO  ManagerTask:76 - Sent total tasks 168 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:36 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:36 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:36 INFO  ManagerTask:75 - Sent tasks for reviewId R1ODNMD5CB2CJE for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:36 INFO  ManagerTask:76 - Sent total tasks 170 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:36 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:36 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:36 INFO  ManagerTask:75 - Sent tasks for reviewId R2YYX5Y0UECYHM for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:36 INFO  ManagerTask:76 - Sent total tasks 172 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:37 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:37 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:37 INFO  ManagerTask:75 - Sent tasks for reviewId R3DPJ1Z51D8F97 for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:37 INFO  ManagerTask:76 - Sent total tasks 174 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:37 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:37 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:37 INFO  ManagerTask:75 - Sent tasks for reviewId R198S9JCR8HBTP for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:37 INFO  ManagerTask:76 - Sent total tasks 176 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:37 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:37 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:37 INFO  ManagerTask:75 - Sent tasks for reviewId RP1Q8KK6ZJAK0 for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:37 INFO  ManagerTask:76 - Sent total tasks 178 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:37 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:38 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:38 INFO  ManagerTask:75 - Sent tasks for reviewId R716FIYPFIADE for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:38 INFO  ManagerTask:76 - Sent total tasks 180 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:38 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:38 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:38 INFO  ManagerTask:75 - Sent tasks for reviewId R1UZHYS78G9BJQ for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:38 INFO  ManagerTask:76 - Sent total tasks 182 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:38 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:38 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:38 INFO  ManagerTask:75 - Sent tasks for reviewId R145R0X7OOR111 for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:38 INFO  ManagerTask:76 - Sent total tasks 184 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:38 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:39 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:39 INFO  ManagerTask:75 - Sent tasks for reviewId R2GOJ9HURVXPEL for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:39 INFO  ManagerTask:76 - Sent total tasks 186 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:39 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:39 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:39 INFO  ManagerTask:75 - Sent tasks for reviewId R3VJ2TR1IOIG60 for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:39 INFO  ManagerTask:76 - Sent total tasks 188 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:39 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:39 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:39 INFO  ManagerTask:75 - Sent tasks for reviewId R2IMP0Y4PYSN4H for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:39 INFO  ManagerTask:76 - Sent total tasks 190 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:39 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:40 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:40 INFO  ManagerTask:75 - Sent tasks for reviewId R1X01FR3HZGMMQ for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:40 INFO  ManagerTask:76 - Sent total tasks 192 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:40 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:40 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:40 INFO  ManagerTask:75 - Sent tasks for reviewId R2NDFHW34UATFJ for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:40 INFO  ManagerTask:76 - Sent total tasks 194 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:40 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:40 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:19:40 INFO  ManagerTask:75 - Sent tasks for reviewId R3GB834FUHFBLJ for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:40 INFO  ManagerTask:76 - Sent total tasks 196 to workers for local app 9d9292d5a5c7f49b for inputIndex 0
+LOCAL 2024-02-12 12:19:40 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue

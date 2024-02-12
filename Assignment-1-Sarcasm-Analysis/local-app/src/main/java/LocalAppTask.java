@@ -10,22 +10,24 @@ import java.util.stream.Collectors;
 
 public class LocalAppTask implements Runnable {
     private final AWS aws = AWS.getInstance();
+    private final String localAppId;
     private final String outputFilePath;
     private final String summaryFileName;
-    private final String bucketName;
     private final Logger logger = LogManager.getLogger(LocalApp.class);
 
-    public LocalAppTask(String outputFilePath, String summaryFileName, String bucketName) {
+
+    public LocalAppTask(String localAppId, String outputFilePath, String summaryFileName) {
+        this.localAppId = localAppId;
         this.outputFilePath = outputFilePath;
         this.summaryFileName = summaryFileName;
-        this.bucketName = bucketName;
     }
 
     @Override
     public void run() {
         logger.info("LocalAppTask started");
         try {
-            InputStream summaryFile = aws.s3.downloadFileFromS3(bucketName, summaryFileName);
+            InputStream summaryFile = aws.s3.downloadFileFromS3(AWSConfig.BUCKET_NAME,
+                    localAppId + AWSConfig.BUCKET_KEY_DELIMITER + summaryFileName);
             String summaryText = new BufferedReader(
                     new InputStreamReader(summaryFile)).lines().collect(Collectors.joining(""));
             String[] summaryContent = summaryText.split(AWSConfig.SUMMARY_DELIMITER);

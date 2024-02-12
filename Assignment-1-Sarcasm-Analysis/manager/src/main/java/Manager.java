@@ -25,7 +25,11 @@ public class Manager {
         waitForExecutorToFinish(); // Wait for all tasks to finish summary responses
 
         aws.ec2.terminateAllWorkers();
+
         aws.sqs.deleteAllQueues();
+        aws.s3.emptyS3Bucket(AWSConfig.BUCKET_NAME);
+        aws.s3.deleteS3Bucket(AWSConfig.BUCKET_NAME);
+
         aws.ec2.terminateManager();
 
         logger.info("Manager finished");
@@ -82,7 +86,7 @@ public class Manager {
                 continue;
             }
 
-            Map<String, Review> requestReviews = getRequestReviews(inputFileName, AWSConfig.BUCKET_NAME + AWSConfig.DEFAULT_DELIMITER + localAppId);
+            Map<String, Review> requestReviews = getRequestReviews(inputFileName, localAppId);
             if (requestReviews == null) {
                 logger.error("Error parsing input file " + inputFileName);
                 aws.sqs.deleteMessage(queueUrl, request);
@@ -96,25 +100,27 @@ public class Manager {
 
             logger.info("Parsed " + requestReviews.size() + " reviews from input file " + inputFileName);
 
+            // No longer needed
+            aws.s3.deleteObjectFromS3(AWSConfig.BUCKET_NAME,
+                    localAppId + AWSConfig.BUCKET_KEY_DELIMITER + inputFileName);
+
             int workersNeeded = (int) Math.ceil((double) 2 * requestReviews.size() / reviewsPerWorker);
-            env.assignWorkers(workersNeeded);
+            int workersCreated = env.assignWorkers(workersNeeded);
 
             // Task for each input file, to send tasks to workers, receive responses and handle summary
             env.executor.execute(new ManagerTask(
                     localAppId,
                     inputIndex,
                     requestReviews,
-                    AWSConfig.BUCKET_NAME + AWSConfig.DEFAULT_DELIMITER + localAppId,
-                    workersNeeded));
+                    workersCreated));
 
             aws.sqs.deleteMessage(queueUrl, request);
         }
     }
 
-    private static Map<String, Review> getRequestReviews(String inputFileName, String bucketName) throws IOException {
-        InputStream inputFile = aws.s3.downloadFileFromS3(
-                bucketName,
-                inputFileName);
+    private static Map<String, Review> getRequestReviews(String inputFileName, String localAppId) throws IOException {
+        InputStream inputFile = aws.s3.downloadFileFromS3(AWSConfig.BUCKET_NAME,
+                localAppId + AWSConfig.BUCKET_KEY_DELIMITER + inputFileName);
         if (inputFile == null) {
             logger.error("Input file not found: " + inputFileName);
             return null;

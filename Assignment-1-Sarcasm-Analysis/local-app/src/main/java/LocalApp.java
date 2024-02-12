@@ -23,32 +23,26 @@ public class LocalApp {
             return;
         }
 
-//        if (argsLen % 2 != 0) {
-//            aws.sqs.deleteAllQueues();
-//            aws.s3.emptyAndDeleteAllBuckets();
-//            return;
-//        }
-
         logger.info("LocalApp started with id " + localAppId);
 
         LocalAppEnv env = new LocalAppEnv(args);
         logger.info("LocalAppEnv created");
 
-        String bucketName = AWSConfig.BUCKET_NAME + AWSConfig.DEFAULT_DELIMITER + localAppId;
-        aws.s3.createS3BucketIfNotExists(bucketName);
-
         String localToManagerQueueUrl, managerToLocalQueueUrl;
         try {
+            aws.s3.createS3BucketIfNotExists(AWSConfig.BUCKET_NAME);
             localToManagerQueueUrl = aws.sqs.createQueueIfNotExist(AWSConfig.LOCAL_TO_MANAGER_QUEUE_NAME);
             managerToLocalQueueUrl = aws.sqs.createQueueIfNotExist(AWSConfig.MANAGER_TO_LOCAL_QUEUE_NAME);
         } catch (Exception e) {
-            logger.error("Error creating queues: manager deleted them due to termination");
+            logger.error("Error creating S3 bucket or SQS queues: " + e.getMessage());
             return;
         }
 
-        sendTasksToManager(env, bucketName, localToManagerQueueUrl);
+        sendTasksToManager(env, localToManagerQueueUrl);
+
         aws.ec2.runManager();
-        receiveResponsesFromManager(env, bucketName, managerToLocalQueueUrl);
+
+        receiveResponsesFromManager(env, managerToLocalQueueUrl);
 
         if (env.terminate) {
             logger.info("Sending terminate message to manager");
@@ -59,16 +53,16 @@ public class LocalApp {
 
         waitForExecutorToFinish(env.executor);
 
-        aws.s3.emptyS3Bucket(bucketName);
-        aws.s3.deleteS3Bucket(bucketName);
+        // Delete S3 folder
+        aws.s3.deleteObjectFromS3(AWSConfig.BUCKET_NAME, localAppId + AWSConfig.BUCKET_KEY_DELIMITER);
 
         logger.info("LocalApp finished");
     }
 
-    private static void sendTasksToManager(LocalAppEnv env, String bucketName, String localToManagerQueueUrl) {
+    private static void sendTasksToManager(LocalAppEnv env, String localToManagerQueueUrl) {
         for (int inputIndex = 0; inputIndex < env.inputFilesPaths.length; inputIndex++) {
             File inputFile = new File(env.inputFilesPaths[inputIndex]);
-            aws.s3.uploadFileToS3(bucketName, inputFile);
+            aws.s3.uploadFileToS3(AWSConfig.BUCKET_NAME, localAppId + AWSConfig.BUCKET_KEY_DELIMITER + inputFile.getName(), inputFile);
             // <local_app_id>::analyze::<input_file>::<input_index>::<reviews_per_worker>
             aws.sqs.sendMessage(localToManagerQueueUrl, String.join(AWSConfig.MESSAGE_DELIMITER,
                     localAppId,
@@ -81,7 +75,7 @@ public class LocalApp {
         }
     }
 
-    private static void receiveResponsesFromManager(LocalAppEnv env, String bucketName, String managerToLocalQueueUrl) {
+    private static void receiveResponsesFromManager(LocalAppEnv env, String managerToLocalQueueUrl) {
         int filesLeftToProcess = env.numberOfFiles;
         while (filesLeftToProcess > 0) {
             logger.info("Polling for responses from manager");
@@ -100,9 +94,9 @@ public class LocalApp {
 
                     if (status.equals(AWSConfig.RESPONSE_STATUS_DONE)) {
                         Future<?> localAppTask = env.executor.submit(new LocalAppTask(
+                                localAppId,
                                 env.outputFilesPaths[Integer.parseInt(inputIndex)],
-                                summaryFileName, // S3 bucket key
-                                bucketName));
+                                summaryFileName));
 
                         // Wait for task to finish
                         try {
@@ -110,8 +104,6 @@ public class LocalApp {
                         } catch (Exception e) {
                             logger.error(e.getMessage());
                         }
-
-                        aws.s3.deleteFileFromS3(bucketName, summaryFileName);
                     }
                     else {
                         String errorMessage = responseContent[4];

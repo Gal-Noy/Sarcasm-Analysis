@@ -1,0 +1,12 @@
+LOCAL 2024-02-12 12:21:49 INFO  Manager:18 - Manager started
+LOCAL 2024-02-12 12:21:50 INFO  SQSHandler:19 - Queue managerToWorkerQueue created
+LOCAL 2024-02-12 12:21:51 INFO  SQSHandler:19 - Queue workerToManagerQueue created
+LOCAL 2024-02-12 12:21:51 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 12:21:55 INFO  Manager:46 - Polled 1 requests
+LOCAL 2024-02-12 12:21:55 INFO  Manager:60 - Received request: b0dde748f9fbaf5f::analyze::test-input1.txt::0::10
+LOCAL 2024-02-12 12:21:55 INFO  S3Handler:56 - Downloading file b0dde748f9fbaf5f/test-input1.txt from S3 bucket sarcasm-analysis-bucket
+LOCAL 2024-02-12 12:21:56 INFO  Manager:101 - Parsed 20 reviews from input file test-input1.txt
+LOCAL 2024-02-12 12:21:56 INFO  S3Handler:71 - File b0dde748f9fbaf5f/test-input1.txt deleted from S3 bucket sarcasm-analysis-bucket
+LOCAL 2024-02-12 12:22:00 INFO  ManagerEnv:22 - Assigning workers
+LOCAL 2024-02-12 12:22:02 INFO  EC2Handler:118 - Active workers: 5
+LOCAL 2024-02-12 12:22:13 INFO  EC2Handler:99 - Creating worker instance

@@ -32,10 +32,10 @@ public class S3Handler {
     }
 
 
-    public void uploadFileToS3(String bucketName, File inputFile) {
+    public void uploadFileToS3(String bucketName, String key, File inputFile) {
         PutObjectRequest objectRequest = PutObjectRequest.builder()
                 .bucket(bucketName)
-                .key(inputFile.getName())
+                .key(key)
                 .build();
         s3.putObject(objectRequest, RequestBody.fromFile(inputFile));
 
@@ -61,7 +61,7 @@ public class S3Handler {
         return s3.getObject(objectRequest, ResponseTransformer.toBytes()).asInputStream();
     }
 
-    public void deleteFileFromS3(String bucketName, String key) {
+    public void deleteObjectFromS3(String bucketName, String key) {
         DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder()
                 .bucket(bucketName)
                 .key(key)

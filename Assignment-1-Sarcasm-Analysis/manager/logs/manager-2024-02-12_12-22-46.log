@@ -1,0 +1,273 @@
+LOCAL 2024-02-12 12:22:47 INFO  Manager:18 - Manager started
+LOCAL 2024-02-12 12:22:48 INFO  SQSHandler:19 - Queue managerToWorkerQueue created
+LOCAL 2024-02-12 12:22:48 INFO  SQSHandler:19 - Queue workerToManagerQueue created
+LOCAL 2024-02-12 12:22:48 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 12:22:49 INFO  Manager:46 - Polled 1 requests
+LOCAL 2024-02-12 12:22:49 INFO  Manager:60 - Received request: 9c9889cae2404a2e::analyze::test-input1.txt::0::10
+LOCAL 2024-02-12 12:22:49 INFO  S3Handler:56 - Downloading file 9c9889cae2404a2e/test-input1.txt from S3 bucket sarcasm-analysis-bucket
+LOCAL 2024-02-12 12:22:50 INFO  Manager:101 - Parsed 20 reviews from input file test-input1.txt
+LOCAL 2024-02-12 12:22:50 INFO  S3Handler:71 - File 9c9889cae2404a2e/test-input1.txt deleted from S3 bucket sarcasm-analysis-bucket
+LOCAL 2024-02-12 12:22:52 INFO  ManagerEnv:22 - Assigning workers
+LOCAL 2024-02-12 12:22:55 INFO  EC2Handler:118 - Active workers: 0
+LOCAL 2024-02-12 12:23:00 INFO  EC2Handler:99 - Creating worker instance
+LOCAL 2024-02-12 12:23:02 INFO  EC2Handler:33 - Successfully started EC2 instance i-01c97680b17555e2b based on AMI ami-00e95a9222311e8ed
+LOCAL 2024-02-12 12:23:03 INFO  EC2Handler:99 - Creating worker instance
+LOCAL 2024-02-12 12:23:05 INFO  EC2Handler:33 - Successfully started EC2 instance i-0f9e716c55f4cb1ea based on AMI ami-00e95a9222311e8ed
+LOCAL 2024-02-12 12:23:05 INFO  EC2Handler:99 - Creating worker instance
+LOCAL 2024-02-12 12:23:07 INFO  EC2Handler:33 - Successfully started EC2 instance i-08d74b4143c7ebcae based on AMI ami-00e95a9222311e8ed
+LOCAL 2024-02-12 12:23:07 INFO  EC2Handler:99 - Creating worker instance
+LOCAL 2024-02-12 12:23:09 INFO  EC2Handler:33 - Successfully started EC2 instance i-0adf8af8b862f528e based on AMI ami-00e95a9222311e8ed
+LOCAL 2024-02-12 12:23:09 INFO  ManagerEnv:36 - Assigned workers, current amount: 4
+LOCAL 2024-02-12 12:23:09 INFO  ManagerTask:38 - ManagerTask started for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:09 INFO  ManagerTask:58 - Sending tasks to workers for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:10 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:23:10 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:23:10 INFO  ManagerTask:75 - Sent tasks for reviewId RJ62XWHGDIF7 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:10 INFO  ManagerTask:76 - Sent total tasks 2 to workers for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:10 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue
+LOCAL 2024-02-12 12:23:10 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 12:23:10 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:23:11 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:23:11 INFO  ManagerTask:75 - Sent tasks for reviewId RSO743RDYVWTZ for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:11 INFO  ManagerTask:76 - Sent total tasks 4 to workers for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:11 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:23:11 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:23:11 INFO  ManagerTask:75 - Sent tasks for reviewId R8OWCLDI0GGL0 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:11 INFO  ManagerTask:76 - Sent total tasks 6 to workers for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:11 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:23:11 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:23:11 INFO  ManagerTask:75 - Sent tasks for reviewId R33DK4T6EHUIHX for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:11 INFO  ManagerTask:76 - Sent total tasks 8 to workers for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:11 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:23:12 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:23:12 INFO  ManagerTask:75 - Sent tasks for reviewId R3DHV2T9Q991V7 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:12 INFO  ManagerTask:76 - Sent total tasks 10 to workers for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:12 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:23:12 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:23:12 INFO  ManagerTask:75 - Sent tasks for reviewId R14D3WP6J91DCU for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:12 INFO  ManagerTask:76 - Sent total tasks 12 to workers for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:12 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:23:12 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:23:12 INFO  ManagerTask:75 - Sent tasks for reviewId R3P2KOXRF7Z400 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:12 INFO  ManagerTask:76 - Sent total tasks 14 to workers for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:12 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:23:13 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:23:13 INFO  ManagerTask:75 - Sent tasks for reviewId R1IKZK5S0DCKZ0 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:13 INFO  ManagerTask:76 - Sent total tasks 16 to workers for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:13 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:23:13 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:23:13 INFO  ManagerTask:75 - Sent tasks for reviewId RGMH5ROASTBS8 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:13 INFO  ManagerTask:76 - Sent total tasks 18 to workers for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:13 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:23:13 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:23:13 INFO  ManagerTask:75 - Sent tasks for reviewId R1RUXYHCSZSHJ0 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:13 INFO  ManagerTask:76 - Sent total tasks 20 to workers for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:13 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:23:14 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:23:14 INFO  ManagerTask:75 - Sent tasks for reviewId R3R9QKZ61DMKGF for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:14 INFO  ManagerTask:76 - Sent total tasks 22 to workers for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:14 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:23:14 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:23:14 INFO  ManagerTask:75 - Sent tasks for reviewId R367OTNJ8I36FS for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:14 INFO  ManagerTask:76 - Sent total tasks 24 to workers for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:14 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:23:14 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:23:14 INFO  ManagerTask:75 - Sent tasks for reviewId R3GCFAIUL8BI3Y for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:14 INFO  ManagerTask:76 - Sent total tasks 26 to workers for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:14 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:23:14 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:23:14 INFO  ManagerTask:75 - Sent tasks for reviewId R33SW6AMDKTSB8 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:14 INFO  ManagerTask:76 - Sent total tasks 28 to workers for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:15 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:23:15 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:23:15 INFO  ManagerTask:75 - Sent tasks for reviewId RW6ORU2M3C461 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:15 INFO  ManagerTask:76 - Sent total tasks 30 to workers for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:15 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:23:15 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:23:15 INFO  ManagerTask:75 - Sent tasks for reviewId R1L8O7RM8DD6J3 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:15 INFO  ManagerTask:76 - Sent total tasks 32 to workers for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:15 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:23:15 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:23:15 INFO  ManagerTask:75 - Sent tasks for reviewId R3V239ZPPF0XY3 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:15 INFO  ManagerTask:76 - Sent total tasks 34 to workers for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:16 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:23:16 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:23:16 INFO  ManagerTask:75 - Sent tasks for reviewId R3MRIY8FUDOYHU for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:16 INFO  ManagerTask:76 - Sent total tasks 36 to workers for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:16 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:23:16 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:23:16 INFO  ManagerTask:75 - Sent tasks for reviewId RB9QK3F6SUQPU for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:16 INFO  ManagerTask:76 - Sent total tasks 38 to workers for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:16 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:23:16 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToWorkerQueue
+LOCAL 2024-02-12 12:23:16 INFO  ManagerTask:75 - Sent tasks for reviewId R366N97DLUODS7 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:16 INFO  ManagerTask:76 - Sent total tasks 40 to workers for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:16 INFO  ManagerTask:42 - Sent tasks to workers for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:16 INFO  ManagerTask:81 - Receiving responses from workers for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:23:30 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 12:23:30 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 12:23:50 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 12:23:50 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 12:24:04 INFO  ManagerTask:97 - Received response for reviewId R8OWCLDI0GGL0 for inputIndex 0 for taskType sentimentAnalysis with taskResult 4
+LOCAL 2024-02-12 12:24:05 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 12:24:05 INFO  ManagerTask:126 - Completed tasks 1 out of 40 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:07 INFO  ManagerTask:97 - Received response for reviewId R3P2KOXRF7Z400 for inputIndex 0 for taskType sentimentAnalysis with taskResult 3
+LOCAL 2024-02-12 12:24:07 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 12:24:07 INFO  ManagerTask:126 - Completed tasks 2 out of 40 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:07 INFO  ManagerTask:97 - Received response for reviewId R14D3WP6J91DCU for inputIndex 0 for taskType sentimentAnalysis with taskResult 3
+LOCAL 2024-02-12 12:24:07 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 12:24:07 INFO  ManagerTask:126 - Completed tasks 3 out of 40 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:08 INFO  ManagerTask:97 - Received response for reviewId RGMH5ROASTBS8 for inputIndex 0 for taskType entityRecognition with taskResult 
+LOCAL 2024-02-12 12:24:08 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 12:24:08 INFO  ManagerTask:126 - Completed tasks 4 out of 40 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:08 INFO  ManagerTask:97 - Received response for reviewId RJ62XWHGDIF7 for inputIndex 0 for taskType sentimentAnalysis with taskResult 2
+LOCAL 2024-02-12 12:24:08 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 12:24:08 INFO  ManagerTask:126 - Completed tasks 5 out of 40 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:08 INFO  ManagerTask:97 - Received response for reviewId R3GCFAIUL8BI3Y for inputIndex 0 for taskType sentimentAnalysis with taskResult 4
+LOCAL 2024-02-12 12:24:08 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 12:24:08 INFO  ManagerTask:126 - Completed tasks 6 out of 40 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:10 INFO  ManagerTask:97 - Received response for reviewId R33DK4T6EHUIHX for inputIndex 0 for taskType sentimentAnalysis with taskResult 1
+LOCAL 2024-02-12 12:24:10 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 12:24:10 INFO  ManagerTask:126 - Completed tasks 7 out of 40 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:10 INFO  ManagerTask:97 - Received response for reviewId R367OTNJ8I36FS for inputIndex 0 for taskType sentimentAnalysis with taskResult 3
+LOCAL 2024-02-12 12:24:10 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 12:24:10 INFO  ManagerTask:126 - Completed tasks 8 out of 40 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:10 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 12:24:10 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 12:24:10 INFO  ManagerTask:97 - Received response for reviewId R3DHV2T9Q991V7 for inputIndex 0 for taskType sentimentAnalysis with taskResult 4
+LOCAL 2024-02-12 12:24:11 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 12:24:11 INFO  ManagerTask:126 - Completed tasks 9 out of 40 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:11 INFO  ManagerTask:97 - Received response for reviewId R3V239ZPPF0XY3 for inputIndex 0 for taskType entityRecognition with taskResult 
+LOCAL 2024-02-12 12:24:11 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 12:24:11 INFO  ManagerTask:126 - Completed tasks 10 out of 40 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:11 INFO  ManagerTask:97 - Received response for reviewId RGMH5ROASTBS8 for inputIndex 0 for taskType sentimentAnalysis with taskResult 3
+LOCAL 2024-02-12 12:24:11 INFO  ManagerTask:121 - Updated summary message for reviewId RGMH5ROASTBS8 for inputIndex 0 with sentiment 3 and entities 
+LOCAL 2024-02-12 12:24:11 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 12:24:11 INFO  ManagerTask:126 - Completed tasks 11 out of 40 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:11 INFO  ManagerTask:97 - Received response for reviewId R3R9QKZ61DMKGF for inputIndex 0 for taskType entityRecognition with taskResult 
+LOCAL 2024-02-12 12:24:11 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 12:24:11 INFO  ManagerTask:126 - Completed tasks 12 out of 40 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:11 INFO  ManagerTask:97 - Received response for reviewId R3GCFAIUL8BI3Y for inputIndex 0 for taskType entityRecognition with taskResult 
+LOCAL 2024-02-12 12:24:11 INFO  ManagerTask:121 - Updated summary message for reviewId R3GCFAIUL8BI3Y for inputIndex 0 with sentiment 4 and entities 
+LOCAL 2024-02-12 12:24:12 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 12:24:12 INFO  ManagerTask:126 - Completed tasks 13 out of 40 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:12 INFO  ManagerTask:97 - Received response for reviewId R367OTNJ8I36FS for inputIndex 0 for taskType entityRecognition with taskResult 
+LOCAL 2024-02-12 12:24:12 INFO  ManagerTask:121 - Updated summary message for reviewId R367OTNJ8I36FS for inputIndex 0 with sentiment 3 and entities 
+LOCAL 2024-02-12 12:24:12 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 12:24:12 INFO  ManagerTask:126 - Completed tasks 14 out of 40 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:12 INFO  ManagerTask:97 - Received response for reviewId R33SW6AMDKTSB8 for inputIndex 0 for taskType entityRecognition with taskResult 
+LOCAL 2024-02-12 12:24:12 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 12:24:12 INFO  ManagerTask:126 - Completed tasks 15 out of 40 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:12 INFO  ManagerTask:97 - Received response for reviewId R1RUXYHCSZSHJ0 for inputIndex 0 for taskType sentimentAnalysis with taskResult 2
+LOCAL 2024-02-12 12:24:12 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 12:24:12 INFO  ManagerTask:126 - Completed tasks 16 out of 40 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:12 INFO  ManagerTask:97 - Received response for reviewId R3DHV2T9Q991V7 for inputIndex 0 for taskType entityRecognition with taskResult 
+LOCAL 2024-02-12 12:24:12 INFO  ManagerTask:121 - Updated summary message for reviewId R3DHV2T9Q991V7 for inputIndex 0 with sentiment 4 and entities 
+LOCAL 2024-02-12 12:24:13 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 12:24:13 INFO  ManagerTask:126 - Completed tasks 17 out of 40 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:13 INFO  ManagerTask:97 - Received response for reviewId RSO743RDYVWTZ for inputIndex 0 for taskType sentimentAnalysis with taskResult 2
+LOCAL 2024-02-12 12:24:13 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 12:24:13 INFO  ManagerTask:126 - Completed tasks 18 out of 40 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:13 INFO  ManagerTask:97 - Received response for reviewId RW6ORU2M3C461 for inputIndex 0 for taskType sentimentAnalysis with taskResult 3
+LOCAL 2024-02-12 12:24:14 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 12:24:14 INFO  ManagerTask:126 - Completed tasks 19 out of 40 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:14 INFO  ManagerTask:97 - Received response for reviewId R1L8O7RM8DD6J3 for inputIndex 0 for taskType sentimentAnalysis with taskResult 1
+LOCAL 2024-02-12 12:24:14 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 12:24:14 INFO  ManagerTask:126 - Completed tasks 20 out of 40 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:14 INFO  ManagerTask:97 - Received response for reviewId R8OWCLDI0GGL0 for inputIndex 0 for taskType entityRecognition with taskResult Karen: PERSON, Katz: PERSON
+LOCAL 2024-02-12 12:24:14 INFO  ManagerTask:121 - Updated summary message for reviewId R8OWCLDI0GGL0 for inputIndex 0 with sentiment 4 and entities Karen: PERSON, Katz: PERSON
+LOCAL 2024-02-12 12:24:14 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 12:24:14 INFO  ManagerTask:126 - Completed tasks 21 out of 40 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:14 INFO  ManagerTask:97 - Received response for reviewId R1L8O7RM8DD6J3 for inputIndex 0 for taskType entityRecognition with taskResult 
+LOCAL 2024-02-12 12:24:14 INFO  ManagerTask:121 - Updated summary message for reviewId R1L8O7RM8DD6J3 for inputIndex 0 with sentiment 1 and entities 
+LOCAL 2024-02-12 12:24:14 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 12:24:14 INFO  ManagerTask:126 - Completed tasks 22 out of 40 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:14 INFO  ManagerTask:97 - Received response for reviewId RJ62XWHGDIF7 for inputIndex 0 for taskType entityRecognition with taskResult 
+LOCAL 2024-02-12 12:24:14 INFO  ManagerTask:121 - Updated summary message for reviewId RJ62XWHGDIF7 for inputIndex 0 with sentiment 2 and entities 
+LOCAL 2024-02-12 12:24:14 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 12:24:14 INFO  ManagerTask:126 - Completed tasks 23 out of 40 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:15 INFO  ManagerTask:97 - Received response for reviewId RB9QK3F6SUQPU for inputIndex 0 for taskType entityRecognition with taskResult 
+LOCAL 2024-02-12 12:24:15 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 12:24:15 INFO  ManagerTask:126 - Completed tasks 24 out of 40 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:15 INFO  ManagerTask:97 - Received response for reviewId R33DK4T6EHUIHX for inputIndex 0 for taskType entityRecognition with taskResult 
+LOCAL 2024-02-12 12:24:15 INFO  ManagerTask:121 - Updated summary message for reviewId R33DK4T6EHUIHX for inputIndex 0 with sentiment 1 and entities 
+LOCAL 2024-02-12 12:24:15 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 12:24:15 INFO  ManagerTask:126 - Completed tasks 25 out of 40 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:15 INFO  ManagerTask:97 - Received response for reviewId R3R9QKZ61DMKGF for inputIndex 0 for taskType sentimentAnalysis with taskResult 3
+LOCAL 2024-02-12 12:24:15 INFO  ManagerTask:121 - Updated summary message for reviewId R3R9QKZ61DMKGF for inputIndex 0 with sentiment 3 and entities 
+LOCAL 2024-02-12 12:24:15 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 12:24:15 INFO  ManagerTask:126 - Completed tasks 26 out of 40 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:15 INFO  ManagerTask:97 - Received response for reviewId R33SW6AMDKTSB8 for inputIndex 0 for taskType sentimentAnalysis with taskResult 3
+LOCAL 2024-02-12 12:24:15 INFO  ManagerTask:121 - Updated summary message for reviewId R33SW6AMDKTSB8 for inputIndex 0 with sentiment 3 and entities 
+LOCAL 2024-02-12 12:24:15 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 12:24:15 INFO  ManagerTask:126 - Completed tasks 27 out of 40 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:15 INFO  ManagerTask:97 - Received response for reviewId R366N97DLUODS7 for inputIndex 0 for taskType entityRecognition with taskResult 
+LOCAL 2024-02-12 12:24:15 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 12:24:15 INFO  ManagerTask:126 - Completed tasks 28 out of 40 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:16 INFO  ManagerTask:97 - Received response for reviewId R3MRIY8FUDOYHU for inputIndex 0 for taskType entityRecognition with taskResult Katz: PERSON, Karen: PERSON, Katz: PERSON, Katz: PERSON
+LOCAL 2024-02-12 12:24:16 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 12:24:16 INFO  ManagerTask:126 - Completed tasks 29 out of 40 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:16 INFO  ManagerTask:97 - Received response for reviewId R1IKZK5S0DCKZ0 for inputIndex 0 for taskType entityRecognition with taskResult Karen: PERSON, Katz: PERSON
+LOCAL 2024-02-12 12:24:16 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 12:24:16 INFO  ManagerTask:126 - Completed tasks 30 out of 40 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:16 INFO  ManagerTask:97 - Received response for reviewId R3P2KOXRF7Z400 for inputIndex 0 for taskType entityRecognition with taskResult 
+LOCAL 2024-02-12 12:24:16 INFO  ManagerTask:121 - Updated summary message for reviewId R3P2KOXRF7Z400 for inputIndex 0 with sentiment 3 and entities 
+LOCAL 2024-02-12 12:24:16 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 12:24:16 INFO  ManagerTask:126 - Completed tasks 31 out of 40 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:16 INFO  ManagerTask:97 - Received response for reviewId R3V239ZPPF0XY3 for inputIndex 0 for taskType sentimentAnalysis with taskResult 2
+LOCAL 2024-02-12 12:24:16 INFO  ManagerTask:121 - Updated summary message for reviewId R3V239ZPPF0XY3 for inputIndex 0 with sentiment 2 and entities 
+LOCAL 2024-02-12 12:24:16 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 12:24:16 INFO  ManagerTask:126 - Completed tasks 32 out of 40 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:16 INFO  ManagerTask:97 - Received response for reviewId RB9QK3F6SUQPU for inputIndex 0 for taskType sentimentAnalysis with taskResult 4
+LOCAL 2024-02-12 12:24:16 INFO  ManagerTask:121 - Updated summary message for reviewId RB9QK3F6SUQPU for inputIndex 0 with sentiment 4 and entities 
+LOCAL 2024-02-12 12:24:16 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 12:24:16 INFO  ManagerTask:126 - Completed tasks 33 out of 40 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:17 INFO  ManagerTask:97 - Received response for reviewId R14D3WP6J91DCU for inputIndex 0 for taskType entityRecognition with taskResult 
+LOCAL 2024-02-12 12:24:17 INFO  ManagerTask:121 - Updated summary message for reviewId R14D3WP6J91DCU for inputIndex 0 with sentiment 3 and entities 
+LOCAL 2024-02-12 12:24:17 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 12:24:17 INFO  ManagerTask:126 - Completed tasks 34 out of 40 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:17 INFO  ManagerTask:97 - Received response for reviewId R1RUXYHCSZSHJ0 for inputIndex 0 for taskType entityRecognition with taskResult 
+LOCAL 2024-02-12 12:24:17 INFO  ManagerTask:121 - Updated summary message for reviewId R1RUXYHCSZSHJ0 for inputIndex 0 with sentiment 2 and entities 
+LOCAL 2024-02-12 12:24:17 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 12:24:17 INFO  ManagerTask:126 - Completed tasks 35 out of 40 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:17 INFO  ManagerTask:97 - Received response for reviewId R1IKZK5S0DCKZ0 for inputIndex 0 for taskType sentimentAnalysis with taskResult 3
+LOCAL 2024-02-12 12:24:17 INFO  ManagerTask:121 - Updated summary message for reviewId R1IKZK5S0DCKZ0 for inputIndex 0 with sentiment 3 and entities Karen: PERSON, Katz: PERSON
+LOCAL 2024-02-12 12:24:17 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 12:24:17 INFO  ManagerTask:126 - Completed tasks 36 out of 40 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:17 INFO  ManagerTask:97 - Received response for reviewId RW6ORU2M3C461 for inputIndex 0 for taskType entityRecognition with taskResult 
+LOCAL 2024-02-12 12:24:17 INFO  ManagerTask:121 - Updated summary message for reviewId RW6ORU2M3C461 for inputIndex 0 with sentiment 3 and entities 
+LOCAL 2024-02-12 12:24:17 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 12:24:17 INFO  ManagerTask:126 - Completed tasks 37 out of 40 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:17 INFO  ManagerTask:97 - Received response for reviewId RSO743RDYVWTZ for inputIndex 0 for taskType entityRecognition with taskResult 
+LOCAL 2024-02-12 12:24:17 INFO  ManagerTask:121 - Updated summary message for reviewId RSO743RDYVWTZ for inputIndex 0 with sentiment 2 and entities 
+LOCAL 2024-02-12 12:24:17 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 12:24:17 INFO  ManagerTask:126 - Completed tasks 38 out of 40 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:17 INFO  ManagerTask:97 - Received response for reviewId R366N97DLUODS7 for inputIndex 0 for taskType sentimentAnalysis with taskResult 2
+LOCAL 2024-02-12 12:24:17 INFO  ManagerTask:121 - Updated summary message for reviewId R366N97DLUODS7 for inputIndex 0 with sentiment 2 and entities 
+LOCAL 2024-02-12 12:24:18 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 12:24:18 INFO  ManagerTask:126 - Completed tasks 39 out of 40 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:18 INFO  ManagerTask:97 - Received response for reviewId R3MRIY8FUDOYHU for inputIndex 0 for taskType sentimentAnalysis with taskResult 2
+LOCAL 2024-02-12 12:24:18 INFO  ManagerTask:121 - Updated summary message for reviewId R3MRIY8FUDOYHU for inputIndex 0 with sentiment 2 and entities Katz: PERSON, Karen: PERSON, Katz: PERSON, Katz: PERSON
+LOCAL 2024-02-12 12:24:18 INFO  SQSHandler:116 - Deleted message from https://sqs.us-east-1.amazonaws.com/767398090493/workerToManagerQueue
+LOCAL 2024-02-12 12:24:18 INFO  ManagerTask:126 - Completed tasks 40 out of 40 for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:18 INFO  ManagerTask:46 - Received all responses from workers for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:19 INFO  S3Handler:52 - Content uploaded to S3 bucket sarcasm-analysis-bucket with key 9c9889cae2404a2e/9c9889cae2404a2e-summary-0
+LOCAL 2024-02-12 12:24:19 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/managerToLocalQueue
+LOCAL 2024-02-12 12:24:19 INFO  ManagerTask:149 - Uploaded summary file 9c9889cae2404a2e-summary-0 to S3 and sent response to local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:19 INFO  ManagerTask:50 - Finished summary for local app 9c9889cae2404a2e for inputIndex 0
+LOCAL 2024-02-12 12:24:28 INFO  ManagerEnv:41 - Releasing workers
+LOCAL 2024-02-12 12:24:30 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 12:24:30 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 12:24:31 INFO  EC2Handler:118 - Active workers: 4
+LOCAL 2024-02-12 12:24:35 INFO  EC2Handler:163 - Terminating worker instance
+LOCAL 2024-02-12 12:24:36 INFO  EC2Handler:123 - Terminating EC2 instance i-0adf8af8b862f528e
+LOCAL 2024-02-12 12:24:38 INFO  EC2Handler:163 - Terminating worker instance
+LOCAL 2024-02-12 12:24:39 INFO  EC2Handler:123 - Terminating EC2 instance i-0f9e716c55f4cb1ea
+LOCAL 2024-02-12 12:24:40 INFO  EC2Handler:163 - Terminating worker instance
+LOCAL 2024-02-12 12:24:41 INFO  EC2Handler:123 - Terminating EC2 instance i-08d74b4143c7ebcae
+LOCAL 2024-02-12 12:24:43 INFO  EC2Handler:163 - Terminating worker instance
+LOCAL 2024-02-12 12:24:44 INFO  EC2Handler:123 - Terminating EC2 instance i-01c97680b17555e2b
+LOCAL 2024-02-12 12:25:10 INFO  Manager:46 - Polled 0 requests
+LOCAL 2024-02-12 12:25:10 INFO  Manager:41 - Polling requests from localToManagerQueue
+LOCAL 2024-02-12 12:25:10 INFO  ManagerEnv:49 - Released workers, current amount: 0
+LOCAL 2024-02-12 12:25:10 INFO  ManagerTask:54 - ManagerTask finished for local app 9c9889cae2404a2e for inputIndex 0
