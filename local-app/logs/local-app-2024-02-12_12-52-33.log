@@ -1,4 +1,0 @@
-LOCAL 2024-02-12 12:52:33 INFO  LocalApp:32 - LocalApp started with id 8a01aa7c8c3b2f7f
-LOCAL 2024-02-12 12:52:33 INFO  LocalApp:35 - LocalAppEnv created
-LOCAL 2024-02-12 12:52:35 ERROR S3Handler:27 - Your previous request to create the named bucket succeeded and you already own it. (Service: S3, Status Code: 409, Request ID: MNGK4TNQ9CFVZ8GP, Extended Request ID: pVvndBuXRoYODMDbUpKqxagju04Cwl0RE/gqUqxjEZx3lAHNMvS2gPczMGlcSjtQaTTMwujbslkTg4aRo3TRsA==)
-LOCAL 2024-02-12 12:52:36 ERROR LocalApp:43 - Error creating S3 bucket or SQS queues: You must wait 60 seconds after deleting a queue before you can create another with the same name. (Service: Sqs, Status Code: 400, Request ID: 58c2823d-0526-56cf-996c-dc7eff92da0f)

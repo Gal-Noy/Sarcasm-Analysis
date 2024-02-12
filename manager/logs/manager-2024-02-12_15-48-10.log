@@ -1,3 +1,0 @@
-LOCAL 2024-02-12 15:48:11 INFO  Manager:18 - Manager started
-LOCAL 2024-02-12 15:48:12 INFO  SQSHandler:19 - Queue managerToWorkerQueue created
-LOCAL 2024-02-12 15:48:12 INFO  SQSHandler:19 - Queue workerToManagerQueue created

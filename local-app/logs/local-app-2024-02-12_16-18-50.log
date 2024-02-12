@@ -1,8 +1,0 @@
-LOCAL 2024-02-12 16:18:50 INFO  LocalApp:37 - LocalApp started with id a58f7caa9fbba776
-LOCAL 2024-02-12 16:18:50 INFO  LocalApp:40 - LocalAppEnv created
-LOCAL 2024-02-12 16:18:52 ERROR S3Handler:27 - Your previous request to create the named bucket succeeded and you already own it. (Service: S3, Status Code: 409, Request ID: 69N7YEFTBBK6T8XJ, Extended Request ID: VMx4XWBlPE46BhlU4ZwJVUsVqM8cACt1MyWnehUANvySw0dSqqeKeowCLzotU9iQWM2qQXzW3j8=)
-LOCAL 2024-02-12 16:18:53 INFO  SQSHandler:19 - Queue localToManagerQueue created
-LOCAL 2024-02-12 16:18:53 INFO  SQSHandler:19 - Queue managerToLocalQueue created
-LOCAL 2024-02-12 16:18:54 INFO  S3Handler:42 - File input3.txt uploaded to S3 bucket sarcasm-analysis-bucket
-LOCAL 2024-02-12 16:18:55 INFO  SQSHandler:76 - Sent message to https://sqs.us-east-1.amazonaws.com/767398090493/localToManagerQueue
-LOCAL 2024-02-12 16:18:55 INFO  LocalApp:82 - Sent task to manager: input3.txt for inputIndex 0 with 100 reviews per worker
