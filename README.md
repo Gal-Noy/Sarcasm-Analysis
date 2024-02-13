@@ -13,7 +13,10 @@ The system is composed of three main components:
 To run the application, follow these steps:
 1. **Compile the Code**: Compile the Java code into a JAR file using Maven.
 2. **Run the Local Application**: Execute the following command on your local machine:
-   `java -jar SarcasmAnalysis.jar inputFileName1... inputFileNameN outputFileName1... outputFileNameN n [terminate]`
+   
+   ```
+   java -jar SarcasmAnalysis.jar inputFileName1... inputFileNameN outputFileName1... outputFileNameN n [terminate]
+   ```
 - `inputFileNameI`: Name of the input file containing Amazon reviews.
 - `outputFileNameI`: Name of the output file containing analysis results.
 - `n`: Number of reviews/messages per worker.
