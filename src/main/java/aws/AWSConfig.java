@@ -43,7 +43,7 @@ public class AWSConfig {
     public static final String NAME_TAG = "Name";
     public static final String MANAGER_NAME_TAG_VALUE = "sarcasm-analysis-manager";
     public static final String WORKER_NAME_TAG_VALUE = "sarcasm-analysis-worker";
-    public static final int MAXIMUM_WORKER_INSTANCES = 18;
+    public static final int MAXIMUM_WORKER_INSTANCES = 8;
 
     // SQS
     public static final String LOCAL_TO_MANAGER_QUEUE_NAME = "localToManagerQueue";
